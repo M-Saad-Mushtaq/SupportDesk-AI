@@ -1,0 +1,7 @@
+# Direct dependencies; requirements.txt pins the verified environment.
+fastapi
+uvicorn
+sqlalchemy
+alembic
+pytest
+httpx

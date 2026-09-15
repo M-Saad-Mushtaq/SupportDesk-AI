@@ -1,0 +1,384 @@
+{
+  "tickets": [
+    {
+      "id": "TKT-1042",
+      "subject": "Package delayed before a trip",
+      "preview": "My shoes still haven’t arrived. Can you help before my trip?",
+      "updated": "10:45",
+      "channel": "Web chat",
+      "priority": "Urgent",
+      "status": "Open",
+      "handling": "Needs handover",
+      "customer": {
+        "name": "Sarah Jenkins",
+        "initials": "SJ",
+        "email": "sarah.j@example.com",
+        "location": "Seattle, WA",
+        "since": "October 2022",
+        "tier": "Returning customer"
+      },
+      "order": {
+        "id": "ORD-8492",
+        "placed": "October 22",
+        "delivery": "Delayed",
+        "tracking": "FedEx · TRK-994821",
+        "items": [
+          {
+            "name": "Eco-Knit Runner Shoes",
+            "variant": "Size 9 · Charcoal · Qty 1",
+            "amount": 120
+          },
+          {
+            "name": "Merino Wool Socks",
+            "variant": "Medium · Forest green · Qty 2",
+            "amount": 28.5
+          }
+        ],
+        "timeline": [
+          {
+            "label": "Order packed",
+            "detail": "Oct 22 · Seattle"
+          },
+          {
+            "label": "In transit",
+            "detail": "Oct 23 · Salt Lake City"
+          },
+          {
+            "label": "Weather delay",
+            "detail": "Oct 24 · Denver hub"
+          },
+          {
+            "label": "Estimated delivery",
+            "detail": "Oct 28 · Not yet confirmed"
+          }
+        ]
+      },
+      "messages": [
+        {
+          "id": "s1",
+          "kind": "customer",
+          "time": "10:41",
+          "text": "Hi! My order was supposed to arrive on Thursday, but the tracking hasn’t moved in four days. I need the shoes for my trip this Sunday. Can you help?"
+        },
+        {
+          "id": "s2",
+          "kind": "ai",
+          "time": "10:42",
+          "text": "Hi Sarah, I’m sorry the shoes haven’t arrived in time. The tracking information shows a weather delay at the Denver hub, with an estimated delivery of October 28. That date isn’t confirmed yet.",
+          "sources": [
+            {
+              "title": "Shipping & delivery policy",
+              "section": "§4.2 · Carrier delays",
+              "excerpt": "When a carrier reports a delay, share the latest available delivery estimate. If the estimate does not meet the customer’s needs, ask a support specialist to review the available options."
+            }
+          ]
+        },
+        {
+          "id": "s3",
+          "kind": "customer",
+          "time": "10:44",
+          "text": "Thanks for checking. I’m leaving Sunday morning, so that may be too late. Is there another option?"
+        },
+        {
+          "id": "s4",
+          "kind": "ai",
+          "time": "10:45",
+          "text": "I’ve asked a support specialist to review the delivery options with you. They’ll confirm what is possible before making any changes to your order."
+        }
+      ],
+      "activity": [
+        {
+          "id": "sa1",
+          "title": "Order lookup",
+          "time": "10:42",
+          "input": {
+            "order_id": "ORD-8492"
+          },
+          "result": "Order found. Two line items; total paid $148.50."
+        },
+        {
+          "id": "sa2",
+          "title": "Carrier tracking lookup",
+          "time": "10:42",
+          "input": {
+            "tracking_id": "TRK-994821"
+          },
+          "result": "Weather delay at Denver hub. Estimated arrival October 28; unconfirmed."
+        },
+        {
+          "id": "sa3",
+          "title": "Handover requested",
+          "time": "10:45",
+          "result": "Customer needs an earlier delivery date. A support specialist needs to review the options."
+        }
+      ]
+    },
+    {
+      "id": "TKT-1041",
+      "subject": "Return for faulty headphones",
+      "preview": "The left earcup stopped working. How do I return these?",
+      "updated": "10:31",
+      "channel": "Email",
+      "priority": "Normal",
+      "status": "Open",
+      "handling": "AI handling",
+      "customer": {
+        "name": "Michael Chang",
+        "initials": "MC",
+        "email": "michael.c@example.com",
+        "location": "Austin, TX",
+        "since": "June 2024",
+        "tier": "Returning customer"
+      },
+      "order": {
+        "id": "ORD-9104",
+        "placed": "October 18",
+        "delivery": "Delivered",
+        "tracking": "UPS · TRK-882104",
+        "items": [
+          {
+            "name": "Acoustic Wireless Headphones",
+            "variant": "Graphite · Qty 1",
+            "amount": 89
+          }
+        ],
+        "timeline": [
+          {
+            "label": "Order packed",
+            "detail": "Oct 18 · Dallas"
+          },
+          {
+            "label": "Delivered",
+            "detail": "Oct 21 · Austin"
+          },
+          {
+            "label": "Return requested",
+            "detail": "Oct 27 · Awaiting confirmation"
+          }
+        ]
+      },
+      "messages": [
+        {
+          "id": "m1",
+          "kind": "customer",
+          "time": "10:29",
+          "text": "The left earcup on my new headphones stopped working. I received them last week. Can I return them for a refund?"
+        },
+        {
+          "id": "m2",
+          "kind": "ai",
+          "time": "10:31",
+          "text": "Hi Michael, I’m sorry about the fault. Your order is within the 30-day return window. Could you confirm that you would like a refund, rather than a replacement? No return has been created yet.",
+          "sources": [
+            {
+              "title": "Returns & exchanges",
+              "section": "§2.1 · Faulty items",
+              "excerpt": "Faulty items reported within 30 days of delivery can be reviewed for a refund or replacement. Confirm the customer’s preference before creating a return."
+            }
+          ]
+        }
+      ],
+      "activity": [
+        {
+          "id": "ma1",
+          "title": "Return eligibility lookup",
+          "time": "10:31",
+          "input": {
+            "order_id": "ORD-9104"
+          },
+          "result": "Delivered October 21. Within the sample 30-day return window. No return label created."
+        }
+      ]
+    },
+    {
+      "id": "TKT-1038",
+      "subject": "Shipping to Germany",
+      "preview": "Thanks, that explains the delivery and customs process.",
+      "updated": "10:13",
+      "channel": "Web chat",
+      "priority": "Low",
+      "status": "Resolved",
+      "handling": "AI handling",
+      "customer": {
+        "name": "Elena Rostova",
+        "initials": "ER",
+        "email": "elena.r@example.com",
+        "location": "Berlin, Germany",
+        "since": "September 2025",
+        "tier": "New customer"
+      },
+      "order": {
+        "id": "ORD-9036",
+        "placed": "October 25",
+        "delivery": "In transit",
+        "tracking": "DHL · TRK-770036",
+        "items": [
+          {
+            "name": "Everyday Canvas Tote",
+            "variant": "Natural · Qty 1",
+            "amount": 42
+          }
+        ],
+        "timeline": [
+          {
+            "label": "Order packed",
+            "detail": "Oct 25 · Newark"
+          },
+          {
+            "label": "International transit",
+            "detail": "Oct 26 · Departed origin facility"
+          },
+          {
+            "label": "Estimated delivery",
+            "detail": "Oct 31–Nov 3 · Subject to customs"
+          }
+        ]
+      },
+      "messages": [
+        {
+          "id": "e1",
+          "kind": "customer",
+          "time": "10:08",
+          "text": "Hello, I ordered a canvas tote to Berlin. Does the delivery estimate include time at customs?"
+        },
+        {
+          "id": "e2",
+          "kind": "ai",
+          "time": "10:10",
+          "text": "Hi Elena, your estimated delivery is October 31–November 3. Customs processing may add time to that estimate. If the carrier needs anything from you, they will contact you directly.",
+          "sources": [
+            {
+              "title": "Shipping & delivery policy",
+              "section": "§3.1 · International delivery",
+              "excerpt": "International delivery dates are estimates. Customs processing can extend delivery time; the carrier will notify the recipient if additional information is required."
+            }
+          ]
+        },
+        {
+          "id": "e3",
+          "kind": "customer",
+          "time": "10:13",
+          "text": "Thanks, that explains it. I’ll keep an eye on the tracking."
+        }
+      ],
+      "activity": [
+        {
+          "id": "ea1",
+          "title": "Shipping policy lookup",
+          "time": "10:10",
+          "input": {
+            "order_id": "ORD-9036",
+            "destination": "Germany"
+          },
+          "result": "International shipping policy §3.1 matched. Delivery estimate October 31–November 3."
+        },
+        {
+          "id": "ea2",
+          "title": "Ticket resolved",
+          "time": "10:13",
+          "result": "Customer confirmed their question was answered."
+        }
+      ]
+    },
+    {
+      "id": "TKT-1035",
+      "subject": "Ceramic vase arrived damaged",
+      "preview": "I’d prefer a replacement if you have the same color.",
+      "updated": "09:46",
+      "channel": "Email",
+      "priority": "High",
+      "status": "Pending",
+      "handling": "You are handling",
+      "customer": {
+        "name": "David Miller",
+        "initials": "DM",
+        "email": "david.m@example.com",
+        "location": "Portland, OR",
+        "since": "March 2023",
+        "tier": "Returning customer"
+      },
+      "order": {
+        "id": "ORD-8119",
+        "placed": "October 20",
+        "delivery": "Delivered · Damage reported",
+        "tracking": "FedEx · TRK-663119",
+        "items": [
+          {
+            "name": "Stoneware Ceramic Vase",
+            "variant": "Sand · Large · Qty 1",
+            "amount": 64
+          }
+        ],
+        "timeline": [
+          {
+            "label": "Order packed",
+            "detail": "Oct 20 · Seattle"
+          },
+          {
+            "label": "Delivered",
+            "detail": "Oct 26 · Portland"
+          },
+          {
+            "label": "Damage reported",
+            "detail": "Oct 27 · Replacement review pending"
+          }
+        ]
+      },
+      "messages": [
+        {
+          "id": "d1",
+          "kind": "customer",
+          "time": "09:38",
+          "text": "My vase arrived yesterday with a crack down the side. Can someone help me arrange a replacement?"
+        },
+        {
+          "id": "d2",
+          "kind": "reply",
+          "time": "09:42",
+          "text": "Hi David, I’m sorry your vase arrived damaged. I can review a replacement for you. Would you like the same sand color?"
+        },
+        {
+          "id": "d3",
+          "kind": "customer",
+          "time": "09:46",
+          "text": "Yes please, I’d prefer a replacement in the same color if it’s available."
+        },
+        {
+          "id": "d4",
+          "kind": "note",
+          "time": "09:47",
+          "text": "Check availability of the large sand vase before confirming a replacement. No replacement order created."
+        }
+      ],
+      "activity": [
+        {
+          "id": "da1",
+          "title": "Order lookup",
+          "time": "09:41",
+          "input": {
+            "order_id": "ORD-8119"
+          },
+          "result": "One large sand vase, $64.00. Delivered October 26. Replacement has not been created."
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "company": "LuxeWear",
+    "email": "support@example.com",
+    "timezone": "America/New_York",
+    "days": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri"
+    ],
+    "start": "09:00",
+    "end": "17:00",
+    "tone": "Warm and professional",
+    "escalateDamage": true,
+    "escalateDelivery": true,
+    "escalateOnRequest": true
+  }
+}

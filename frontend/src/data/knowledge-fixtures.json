@@ -1,0 +1,37 @@
+[
+  {
+    "id": "DOC-1",
+    "title": "Shipping & delivery policy",
+    "category": "Shipping",
+    "status": "Ready",
+    "format": "Sample policy",
+    "added": "October 25",
+    "sections": [
+      {
+        "title": "Shipping & delivery policy",
+        "section": "§4.2 · Carrier delays",
+        "excerpt": "When a carrier reports a delay, share the latest available delivery estimate. If the estimate does not meet the customer’s needs, ask a support specialist to review the available options."
+      },
+      {
+        "title": "Shipping & delivery policy",
+        "section": "§3.1 · International delivery",
+        "excerpt": "International delivery dates are estimates. Customs processing can extend delivery time; the carrier will notify the recipient if additional information is required."
+      }
+    ]
+  },
+  {
+    "id": "DOC-2",
+    "title": "Returns & exchanges",
+    "category": "Returns",
+    "status": "Ready",
+    "format": "Sample policy",
+    "added": "October 25",
+    "sections": [
+      {
+        "title": "Returns & exchanges",
+        "section": "§2.1 · Faulty items",
+        "excerpt": "Faulty items reported within 30 days of delivery can be reviewed for a refund or replacement. Confirm the customer’s preference before creating a return."
+      }
+    ]
+  }
+]

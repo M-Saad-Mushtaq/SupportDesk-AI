@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-fixed":"#131b2e","primary-fixed":"#89f5e7","on-surface":"#0b1c30","background":"#f8f9ff","secondary":"#565e74","surface-container-high":"#dce9ff","on-tertiary":"#ffffff","on-primary-fixed-variant":"#005049","on-primary-fixed":"#00201d","surface-variant":"#d3e4fe","on-secondary":"#ffffff","on-primary":"#ffffff","surface-container-low":"#eff4ff","secondary-fixed":"#dae2fd","secondary-container":"#dae2fd","inverse-surface":"#213145","on-tertiary-container":"#fdfcff","on-background":"#0b1c30","on-tertiary-fixed":"#001d31","inverse-on-surface":"#eaf1ff","surface":"#f8f9ff","on-primary-container":"#f4fffc","secondary-fixed-dim":"#bec6e0","error":"#ba1a1a","surface-container-highest":"#d3e4fe","surface-bright":"#f8f9ff","outline":"#6d7a77","surface-dim":"#cbdbf5","on-tertiary-fixed-variant":"#004b73","error-container":"#ffdad6","tertiary-container":"#007bb9","surface-container-lowest":"#ffffff","surface-tint":"#006a61","inverse-primary":"#6bd8cb","on-error":"#ffffff","on-surface-variant":"#3d4947","primary":"#00685f","primary-container":"#008378","primary-fixed-dim":"#6bd8cb","tertiary-fixed-dim":"#93ccff","on-secondary-container":"#5c647a","tertiary":"#006194","tertiary-fixed":"#cce5ff","surface-container":"#e5eeff","outline-variant":"#bcc9c6","on-secondary-fixed-variant":"#3f465c","on-error-container":"#93000a"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-lg":"1.5rem","gutter":"1rem","space-lg":"1rem","space-xs":"0.25rem","margin":"1rem","space-xl":"1.5rem","margin-lg":"2rem","space-md":"0.75rem","space-sm":"0.5rem"},"fontFamily":{"label-md":["Inter"],"label-sm":["Inter"],"body-sm":["Inter"],"label-lg":["Inter"],"display-sm":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"headline-lg":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"]},"fontSize":{"label-md":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"500"}],"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.01em","fontWeight":"400"}],"label-lg":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0em","fontWeight":"500"}],"display-sm":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["1rem",{"lineHeight":"1.5rem","letterSpacing":"0em","fontWeight":"400"}],"body-md":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["1.125rem",{"lineHeight":"1.5rem","letterSpacing":"-0.005em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-[#0f172a] text-[#f8fafc] z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-16 px-gutter flex items-center justify-between bg-[#0b1222]"><div class="flex items-center gap-space-sm"><img alt="SupportDesk AI Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xc24bObm_drTv_HBA3pAGQCpKVRMM2SpxnvdCE2sIjMb11-VnITyNQe4to1QVgov6tGgrEnAgB01cqXeQfTYpRLaR4LzpKQWt_InpjYO9poyFXuH5x8M9GJSiQXSpNLLmq54EhsR42hKNd00ijEPoJyFJ4LC9DXM6WWbfWZ61YdBrFUjWOtjgxyG5zKEqIG4lJJik0O_ACIwuOSb7IbGkDaUcTwRPFRvBGy-lPSrqecsrMlnP_9eIpnw"/><span class="font-headline-sm text-headline-sm tracking-tight text-[#ffffff] font-semibold">SupportDesk AI</span></div><span class="px-space-sm py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold tracking-wide">DEMO</span></div><nav class="flex-1 px-gutter py-gutter space-y-space-xs overflow-y-auto" data-active-classes="bg-[#1e293b] text-[#ffffff] font-medium rounded-lg shadow-sm"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="overview" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-lg text-label-lg">Overview</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="support-inbox" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">inbox</span><span class="font-label-lg text-label-lg">Support Inbox</span></div><span class="px-space-sm py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold">4</span></a><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm transition-colors bg-[#1e293b] text-[#ffffff] font-medium rounded-lg shadow-sm" data-path="knowledge-base" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-label-lg text-label-lg">Knowledge Base</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="agent-activity" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">smart_toy</span><span class="font-label-lg text-label-lg">Agent Activity</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="settings" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-lg text-label-lg">Settings</span></div></a></nav></div><div class="p-gutter bg-[#0b1222] space-y-space-md"><div class="flex items-center justify-between px-space-md py-space-sm rounded-full bg-[#1e293b] text-[#ffffff]"><div class="flex items-center gap-space-xs"><span class="h-2 w-2 rounded-full bg-primary-fixed animate-pulse"></span><span class="font-label-sm text-label-sm font-semibold text-primary-fixed">AI Agent Online</span></div><span class="material-symbols-outlined text-[16px] text-primary-fixed">bolt</span></div><div class="flex items-center justify-between p-space-sm rounded-lg bg-[#1e293b]"><div class="flex items-center gap-space-sm"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-primary-fixed"></span></div><div class="flex flex-col"><span class="font-label-md text-label-md text-[#ffffff] font-medium leading-tight">Alex Morgan</span><span class="font-label-sm text-label-sm text-[#94a3b8]">Lead Support</span></div></div><span class="material-symbols-outlined text-[18px] text-[#94a3b8]">unfold_more</span></div></div></aside><div class="pl-64 min-h-screen flex flex-col bg-background"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><div class="relative flex items-center"><span class="material-symbols-outlined text-on-surface-variant absolute left-space-md text-[18px]">search</span><input class="w-80 h-9 pl-9 pr-space-md rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none" placeholder="Search tickets, customers, or KB articles..." type="text"/></div><div class="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-secondary-container text-on-secondary-container"><span class="material-symbols-outlined text-[14px]">info</span><span class="font-label-sm text-label-sm font-medium">Demo Environment - Mock Data Only</span></div></div><div class="flex items-center gap-space-md"><button class="h-9 px-space-md rounded-lg bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary flex items-center gap-space-xs shadow-[0_1px_8px_rgba(0,0,0,0.04)] transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">play_arrow</span><span class="font-label-md text-label-md font-semibold">Simulate Ticket</span></button><div class="relative flex items-center justify-center"><button class="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container hover:text-on-surface text-on-surface-variant flex items-center justify-center transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><span class="absolute top-1 right-1 h-2 w-2 rounded-full bg-error"></span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 w-full px-gutter pb-gutter flex-1"><div class="flex flex-col w-full gap-space-lg">
+<!-- Breadcrumb & Top Context Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">Corpus Orchestration</span>
+<span class="text-outline">/</span>
+<span class="font-label-sm text-label-sm text-secondary">RAG Pipeline</span>
+<span class="text-outline">/</span>
+<span class="font-label-sm text-label-sm font-medium text-on-surface">Embeddings v4.1</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Knowledge Base &amp; Retrieval Corpus</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+        Vector-indexed policies, FAQ documents, and operational guidelines used by AI agent retrieval-augmented generation (RAG) models to resolve tickets deterministically.
+      </p>
+</div>
+<!-- Global RAG Actions -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="h-9 px-space-md rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface flex items-center gap-space-xs font-label-md text-label-md font-semibold transition-colors" id="openUploadBtn" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">upload_file</span>
+<span>Simulate Upload (Demo)</span>
+</button>
+<button class="h-9 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary flex items-center gap-space-xs font-label-md text-label-md font-semibold shadow-sm transition-all" id="syncVectorBtn" type="button">
+<span class="material-symbols-outlined text-[18px]" id="syncIcon">sync</span>
+<span id="syncText">Sync Vector Index (14,280 chunks)</span>
+</button>
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center gap-space-xs font-label-md text-label-md font-medium transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">archive</span>
+<span>Export Knowledge Pack</span>
+</button>
+</div>
+</div>
+<!-- Telemetry Bar & Vector Engine State -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="space-y-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-secondary font-medium tracking-wide">Total Knowledge Chunks</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">14,280</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">+124 today</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">database</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="space-y-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-secondary font-medium tracking-wide">Vector Dimension &amp; Index</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">1,536d</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">HNSW Cosine</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">hub</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="space-y-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-secondary font-medium tracking-wide">Mean Retrieval Latency</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">32.4 ms</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">99.8% hit rate</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-primary-fixed-dim/30 flex items-center justify-center text-on-primary-fixed-variant">
+<span class="material-symbols-outlined text-[22px]">speed</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="space-y-space-xs">
+<span class="font-label-sm text-label-sm uppercase text-secondary font-medium tracking-wide">Avg Grounded Confidence</span>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">96.8%</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Top 3 citations</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[22px]">verified</span>
+</div>
+</div>
+</div>
+<!-- Search & Filter Controls -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="relative w-full md:w-96 flex items-center">
+<span class="material-symbols-outlined absolute left-space-md text-outline text-[18px]">search</span>
+<input class="w-full h-9 pl-9 pr-space-md rounded-lg bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" id="corpusSearchInput" placeholder="Filter policies, chunk contents, or tags..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm w-full md:w-auto justify-end">
+<!-- Category Filter -->
+<div class="relative inline-flex items-center">
+<span class="font-label-sm text-label-sm text-secondary mr-space-xs">Category:</span>
+<select class="h-9 px-space-md rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none" id="categoryFilter">
+<option value="all">All Categories (5)</option>
+<option value="shipping">Shipping &amp; Delivery</option>
+<option value="returns">Returns &amp; Refunds</option>
+<option value="warranty">Warranty &amp; Repairs</option>
+<option value="pricing">Product &amp; Pricing FAQs</option>
+</select>
+</div>
+<!-- Status Filter -->
+<div class="relative inline-flex items-center">
+<span class="font-label-sm text-label-sm text-secondary mr-space-xs">Status:</span>
+<select class="h-9 px-space-md rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none" id="statusFilter">
+<option value="all">All Statuses</option>
+<option value="indexed">Indexed Only</option>
+<option value="processing">Processing</option>
+<option value="review">Needs Review</option>
+</select>
+</div>
+<button class="h-9 w-9 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Two-Column Primary Split Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT PANEL (60% ~ 7 cols): Document List Table -->
+<div class="lg:col-span-7 flex flex-col bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Panel Header -->
+<div class="p-space-md bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">folder_special</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Indexed Policy Documents</h2>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold">5 Active</span>
+</div>
+<div class="flex items-center gap-space-xs text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span>Click a document row to preview corpus grounding</span>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low text-secondary font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-space-sm px-space-md font-semibold">Document &amp; Format</th>
+<th class="py-space-sm px-space-md font-semibold">Chunk Density</th>
+<th class="py-space-sm px-space-md font-semibold">Status</th>
+<th class="py-space-sm px-space-md font-semibold">Last Vectorized</th>
+<th class="py-space-sm px-space-md text-right font-semibold">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low text-body-sm text-body-sm text-on-surface" id="documentTableBody">
+<!-- Row 1 (Active Preview) -->
+<tr class="doc-row bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer group" data-doc-id="doc-1">
+<td class="py-space-md px-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-space-xs">
+<span class="truncate">Standard Shipping &amp; International Delivery Policy</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">v2.4</span>
+</div>
+<div class="flex items-center gap-space-sm text-secondary font-label-sm text-label-sm mt-0.5">
+<span>PDF • 42 KB</span>
+<span>•</span>
+<span class="text-primary font-medium">Category: Logistics</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md font-bold text-on-surface">38</span>
+<span class="font-body-sm text-body-sm text-secondary">chunks (512 token win)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-space-xs px-2.5 py-0.5 rounded-full bg-[#ecfdf5] text-[#047857] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#047857]"></span>
+<span>Indexed</span>
+</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap font-label-sm text-label-sm text-secondary">
+                2h ago
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-space-xs">
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Preview Document">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Inspect Embeddings">
+<span class="material-symbols-outlined text-[16px]">data_array</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Re-index">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="doc-row hover:bg-surface-container-low transition-colors cursor-pointer group" data-doc-id="doc-2">
+<td class="py-space-md px-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-space-xs">
+<span class="truncate">30-Day Return &amp; Exchange Guidelines</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">2025</span>
+</div>
+<div class="flex items-center gap-space-sm text-secondary font-label-sm text-label-sm mt-0.5">
+<span>DOCX • 28 KB</span>
+<span>•</span>
+<span>Category: Returns &amp; Refunds</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md font-bold text-on-surface">24</span>
+<span class="font-body-sm text-body-sm text-secondary">chunks (512 token win)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-space-xs px-2.5 py-0.5 rounded-full bg-[#ecfdf5] text-[#047857] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#047857]"></span>
+<span>Indexed</span>
+</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap font-label-sm text-label-sm text-secondary">
+                1d ago
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-space-xs">
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Preview Document">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Inspect Embeddings">
+<span class="material-symbols-outlined text-[16px]">data_array</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Re-index">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="doc-row hover:bg-surface-container-low transition-colors cursor-pointer group" data-doc-id="doc-3">
+<td class="py-space-md px-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-space-xs">
+<span class="truncate">Warranty Claims &amp; Defective Goods Protocol</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">v1.1</span>
+</div>
+<div class="flex items-center gap-space-sm text-secondary font-label-sm text-label-sm mt-0.5">
+<span>Markdown • 18 KB</span>
+<span>•</span>
+<span>Category: Warranty &amp; Repairs</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md font-bold text-on-surface">16</span>
+<span class="font-body-sm text-body-sm text-secondary">chunks (512 token win)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-space-xs px-2.5 py-0.5 rounded-full bg-[#ecfdf5] text-[#047857] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#047857]"></span>
+<span>Indexed</span>
+</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap font-label-sm text-label-sm text-secondary">
+                3d ago
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-space-xs">
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Preview Document">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Inspect Embeddings">
+<span class="material-symbols-outlined text-[16px]">data_array</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Re-index">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="doc-row hover:bg-surface-container-low transition-colors cursor-pointer group" data-doc-id="doc-4">
+<td class="py-space-md px-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-space-xs">
+<span class="truncate">Promotional Code &amp; Price Match Policy</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">v3.0</span>
+</div>
+<div class="flex items-center gap-space-sm text-secondary font-label-sm text-label-sm mt-0.5">
+<span>PDF • 15 KB</span>
+<span>•</span>
+<span>Category: Pricing &amp; Promo</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md font-bold text-on-surface">12</span>
+<span class="font-body-sm text-body-sm text-secondary">chunks (512 token win)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-space-xs px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span>Processing</span>
+</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap font-label-sm text-label-sm text-secondary">
+                Just now
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-space-xs">
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Preview Document">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Inspect Embeddings">
+<span class="material-symbols-outlined text-[16px]">data_array</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Re-index">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="doc-row hover:bg-surface-container-low transition-colors cursor-pointer group" data-doc-id="doc-5">
+<td class="py-space-md px-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-error shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+<div class="min-w-0">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-space-xs">
+<span class="truncate">Holiday Carrier Exception Playbook</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm">v1.0</span>
+</div>
+<div class="flex items-center gap-space-sm text-secondary font-label-sm text-label-sm mt-0.5">
+<span>PDF • 32 KB</span>
+<span>•</span>
+<span>Category: Logistics &amp; Holidays</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md font-bold text-on-surface">29</span>
+<span class="font-body-sm text-body-sm text-secondary">chunks (512 token win)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-space-xs px-2.5 py-0.5 rounded-full bg-[#fffbeb] text-[#b45309] font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#b45309]"></span>
+<span>Needs Review</span>
+</span>
+</td>
+<td class="py-space-md px-space-md whitespace-nowrap font-label-sm text-label-sm text-secondary">
+                1w ago
+              </td>
+<td class="py-space-md px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-space-xs">
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Preview Document">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Inspect Embeddings">
+<span class="material-symbols-outlined text-[16px]">data_array</span>
+</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface transition-colors" title="Re-index">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Corpus Vectorization Analytics Sparkline footer -->
+<div class="p-space-md bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Corpus Memory Footprint</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">28.4 MB in RAM</span>
+</div>
+<div class="h-6 w-[1px] bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-semibold">Index Health</span>
+<span class="font-label-md text-label-md font-bold text-primary">Optimal (0 fragmented)</span>
+</div>
+</div>
+<!-- Inline SVG Mini Sparkline chart -->
+<div class="flex items-center gap-space-sm">
+<span class="font-label-sm text-label-sm text-secondary">Embedding distribution:</span>
+<svg class="w-32 h-6 text-primary" fill="none" viewbox="0 0 120 24">
+<path d="M0 18 Q 20 6, 40 14 T 80 4 T 120 12" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path d="M0 18 Q 20 6, 40 14 T 80 4 T 120 12 L 120 24 L 0 24 Z" fill="currentColor" fill-opacity="0.12"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- RIGHT PANEL (40% ~ 5 cols): Live Preview & Retrieval Sandbox -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- Live Document Preview Card -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">auto_stories</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Active Document Preview</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-mono">
+            ID: doc-sh-2024-v24
+          </span>
+</div>
+<!-- Title of loaded document -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0">bookmark</span>
+<span class="font-label-md text-label-md font-bold text-on-surface truncate">
+              Standard Shipping &amp; International Delivery Policy v2.4
+            </span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary shrink-0">Chunk 14/38</span>
+</div>
+<!-- Document Excerpt with Highlighting -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg space-y-space-sm text-body-sm text-body-sm text-on-surface leading-relaxed max-h-56 overflow-y-auto">
+<p class="text-secondary font-label-sm text-label-sm uppercase tracking-wide font-semibold">Parsed Passage &amp; Grounding Token Anchors:</p>
+<div class="p-space-sm rounded bg-surface-container-low">
+<p class="font-semibold text-on-surface">§3.1 Domestic Delivery Timeframes</p>
+<p class="text-on-surface-variant mt-0.5">
+              Standard domestic shipping delivers within 3-5 business days from fulfillment handoff. Express priority shipments arrive within 1-2 business days with Saturday delivery included in metropolitan zip codes.
+            </p>
+</div>
+<!-- Highlighted Target Chunk -->
+<div class="p-space-sm rounded bg-primary/10 transition-all">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+                §4.2 Severe Weather &amp; Carrier Exceptions
+              </span>
+<span class="px-1.5 py-0.5 rounded bg-primary text-on-primary font-label-sm text-label-sm font-mono">Sim. 0.941</span>
+</div>
+<p class="text-on-surface mt-1">
+              Delays caused by severe weather, blizzard warnings, hurricane evacuations, or regional transit halts are categorized as <mark class="bg-primary-fixed text-on-primary-fixed px-1 py-0.5 rounded font-medium">Carrier Force Majeure Exceptions</mark>. In such instances, the standard 48-hour delivery guarantee is suspended. Customers must be provided with real-time tracking links and offered an automated shipping fee refund voucher once transit confirms resumption.
+            </p>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low">
+<p class="font-semibold text-on-surface">§5.0 International Customs &amp; Tariffs</p>
+<p class="text-on-surface-variant mt-0.5">
+              All transatlantic parcels require pre-cleared electronic manifests. Duties and VAT will be calculated at checkout for DDP destinations.
+            </p>
+</div>
+</div>
+</div>
+<!-- Retrieval Test Interactive Box -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Semantic Retrieval Simulator</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-semibold">
+            Zero-Shot Query
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Simulate how SupportDesk AI queries vector embeddings in real time to ground agent draft responses.
+        </p>
+<!-- Query Form -->
+<div class="space-y-space-sm">
+<label class="font-label-sm text-label-sm font-semibold uppercase text-secondary block" for="ragQueryInput">
+            Customer Ticket Query Simulation:
+          </label>
+<div class="flex items-center gap-space-xs">
+<input class="flex-1 h-9 px-space-md rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary" id="ragQueryInput" type="text" value="What happens if FedEx delays an order due to a storm?"/>
+<button class="h-9 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary flex items-center gap-space-xs font-label-md text-label-md font-semibold transition-colors shrink-0" id="runRetrievalBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>Test Retrieval</span>
+</button>
+</div>
+</div>
+<!-- Simulation Output Card -->
+<div class="p-space-md rounded-lg bg-surface-container-low space-y-space-sm" id="retrievalResultContainer">
+<!-- Top Match Banner -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">target</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">Top Vector Match: §4.2 Weather Exceptions</span>
+</div>
+<span class="font-label-sm text-label-sm font-mono font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">
+              Cosine: 0.941
+            </span>
+</div>
+<!-- Synthesized AI Answer Preview -->
+<div class="bg-surface-container-lowest p-space-md rounded-lg space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-semibold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">smart_toy</span>
+                Synthesized Grounded Answer
+              </span>
+<span class="font-label-sm text-label-sm text-secondary">Latency: 28ms</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed" id="synthesizedAnswerText">
+              "Under severe weather conditions, FedEx delays fall under Carrier Force Majeure Exceptions (§4.2). The standard 48-hour delivery guarantee is temporarily waived. We can provide you with live tracking updates and dispatch an automated shipping fee refund voucher once delivery routes resume."
+            </p>
+<!-- Citation chip -->
+<div class="pt-space-xs flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-secondary">Citation:</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px] text-primary">link</span>
+                Standard Shipping v2.4 (Page 4, Ch. 14)
+              </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dropzone Modal / Sandbox Widget -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">cloud_upload</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Document Ingestion Sandbox</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+            In-Browser Only
+          </span>
+</div>
+<!-- Drag & Drop Area -->
+<div class="p-space-lg rounded-xl bg-surface-container-low hover:bg-surface-container flex flex-col items-center justify-center text-center gap-space-xs transition-colors cursor-pointer" id="dropzoneContainer">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-1">
+<span class="material-symbols-outlined text-[28px]">post_add</span>
+</div>
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Drop internal SOP, policy PDF, or FAQ markdown here</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+            Files are tokenized into 512-word vectors in local memory for this demo session. Supports PDF, DOCX, MD, HTML.
+          </p>
+<div class="mt-space-sm flex items-center gap-space-xs">
+<button class="h-8 px-space-md rounded-lg bg-surface-container-highest hover:bg-surface-container text-on-surface font-label-md text-label-md font-semibold transition-colors" id="browseFilesBtn" type="button">
+              Browse Local Files
+            </button>
+<span class="font-label-sm text-label-sm text-secondary">or press paste (Ctrl+V)</span>
+</div>
+<input class="hidden" id="fileInputDummy" type="file"/>
+</div>
+<div class="flex items-center justify-between text-secondary font-label-sm text-label-sm pt-space-xs">
+<span>Max chunk limit: 2,000 tokens</span>
+<span>HNSW cosine metric</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Demo Toast Modal (Hidden by default, triggered by Upload / Sync) -->
+<div class="fixed inset-0 z-50 bg-[#0f172a]/60 backdrop-blur-sm hidden items-center justify-center p-gutter" id="demoModalBackdrop">
+<div class="bg-surface-container-lowest p-space-xl rounded-xl shadow-xl max-w-md w-full space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">model_training</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Policy Ingestion Simulator</h4>
+</div>
+<button class="text-secondary hover:text-on-surface" id="closeModalBtn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="space-y-space-sm text-body-md text-body-md text-on-surface">
+<p>A new document file <strong class="text-primary">"B2B_Wholesale_Agreement_2025.pdf"</strong> was simulated into the vector processing queue.</p>
+<div class="p-space-md rounded-lg bg-surface-container-low space-y-space-xs">
+<div class="flex justify-between font-label-sm text-label-sm text-secondary">
+<span>Embedding Generation (1,536d)</span>
+<span id="modalProgressVal">78%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-primary transition-all duration-300" id="modalProgressBar" style="width: 78%;"></div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary block mt-1">Status: Extracting semantic chunks &amp; metadata headers...</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-colors" id="closeModalActionBtn" type="button">
+          Dismiss
+        </button>
+<button class="h-9 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold transition-colors" id="completeSyncModalBtn" type="button">
+          Commit to Corpus
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Selectors
+    const syncBtn = document.getElementById('syncVectorBtn');
+    const syncIcon = document.getElementById('syncIcon');
+    const syncText = document.getElementById('syncText');
+    const openUploadBtn = document.getElementById('openUploadBtn');
+    const browseFilesBtn = document.getElementById('browseFilesBtn');
+    const dropzone = document.getElementById('dropzoneContainer');
+    const demoModal = document.getElementById('demoModalBackdrop');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const closeModalActionBtn = document.getElementById('closeModalActionBtn');
+    const completeSyncModalBtn = document.getElementById('completeSyncModalBtn');
+    const runRetrievalBtn = document.getElementById('runRetrievalBtn');
+    const ragQueryInput = document.getElementById('ragQueryInput');
+    const docRows = document.querySelectorAll('.doc-row');
+    const synthesizedAnswer = document.getElementById('synthesizedAnswerText');
+    const corpusSearch = document.getElementById('corpusSearchInput');
+
+    // 1. Sync Button State Animation
+    syncBtn?.addEventListener('click', () => {
+      syncIcon.classList.add('animate-spin');
+      syncText.innerText = 'Vectorizing 14,280 chunks...';
+      setTimeout(() => {
+        syncIcon.classList.remove('animate-spin');
+        syncText.innerText = 'Sync Vector Index (14,318 chunks)';
+      }, 1400);
+    });
+
+    // 2. Modal open/close handlers
+    function openDemoModal() {
+      demoModal.classList.remove('hidden');
+      demoModal.classList.add('flex');
+    }
+    function closeDemoModal() {
+      demoModal.classList.add('hidden');
+      demoModal.classList.remove('flex');
+    }
+
+    openUploadBtn?.addEventListener('click', openDemoModal);
+    browseFilesBtn?.addEventListener('click', openDemoModal);
+    dropzone?.addEventListener('click', openDemoModal);
+    closeModalBtn?.addEventListener('click', closeDemoModal);
+    closeModalActionBtn?.addEventListener('click', closeDemoModal);
+    completeSyncModalBtn?.addEventListener('click', closeDemoModal);
+
+    // 3. Document row click highlighting
+    docRows.forEach(row => {
+      row.addEventListener('click', () => {
+        docRows.forEach(r => r.classList.remove('bg-primary/5', 'hover:bg-primary/10'));
+        row.classList.add('bg-primary/5', 'hover:bg-primary/10');
+      });
+    });
+
+    // 4. Interactive Retrieval Simulator
+    runRetrievalBtn?.addEventListener('click', () => {
+      const q = ragQueryInput.value.trim().toLowerCase();
+      runRetrievalBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Retrieving...</span>';
+      
+      setTimeout(() => {
+        runRetrievalBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">bolt</span><span>Test Retrieval</span>';
+        if (q.includes('return') || q.includes('refund')) {
+          synthesizedAnswer.innerText = '"Per the 30-Day Return & Exchange Guidelines 2025 (§2.1), items are eligible for a no-questions-asked refund if initiated within 30 calendar days of delivery. Returns must include the original packaging and pre-paid barcode label."';
+        } else if (q.includes('warranty') || q.includes('broken') || q.includes('defect')) {
+          synthesizedAnswer.innerText = '"Under the Warranty Claims & Defective Goods Protocol (§1.3), defective units reported within 12 months qualify for direct RMA replacement. AI agents can issue an instant return slip upon serial verification."';
+        } else {
+          synthesizedAnswer.innerText = '"Under severe weather conditions, FedEx delays fall under Carrier Force Majeure Exceptions (§4.2). The standard 48-hour delivery guarantee is temporarily waived. We can provide you with live tracking updates and dispatch an automated shipping fee refund voucher once delivery routes resume."';
+        }
+      }, 450);
+    });
+
+    // 5. Corpus Live Table Filter
+    corpusSearch?.addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase();
+      docRows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(term) ? '' : 'none';
+      });
+    });
+
+  })();
+</script></main></div></body></html>

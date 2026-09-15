@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-fixed":"#131b2e","primary-fixed":"#89f5e7","on-surface":"#0b1c30","background":"#f8f9ff","secondary":"#565e74","surface-container-high":"#dce9ff","on-tertiary":"#ffffff","on-primary-fixed-variant":"#005049","on-primary-fixed":"#00201d","surface-variant":"#d3e4fe","on-secondary":"#ffffff","on-primary":"#ffffff","surface-container-low":"#eff4ff","secondary-fixed":"#dae2fd","secondary-container":"#dae2fd","inverse-surface":"#213145","on-tertiary-container":"#fdfcff","on-background":"#0b1c30","on-tertiary-fixed":"#001d31","inverse-on-surface":"#eaf1ff","surface":"#f8f9ff","on-primary-container":"#f4fffc","secondary-fixed-dim":"#bec6e0","error":"#ba1a1a","surface-container-highest":"#d3e4fe","surface-bright":"#f8f9ff","outline":"#6d7a77","surface-dim":"#cbdbf5","on-tertiary-fixed-variant":"#004b73","error-container":"#ffdad6","tertiary-container":"#007bb9","surface-container-lowest":"#ffffff","surface-tint":"#006a61","inverse-primary":"#6bd8cb","on-error":"#ffffff","on-surface-variant":"#3d4947","primary":"#00685f","primary-container":"#008378","primary-fixed-dim":"#6bd8cb","tertiary-fixed-dim":"#93ccff","on-secondary-container":"#5c647a","tertiary":"#006194","tertiary-fixed":"#cce5ff","surface-container":"#e5eeff","outline-variant":"#bcc9c6","on-secondary-fixed-variant":"#3f465c","on-error-container":"#93000a"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-lg":"1.5rem","gutter":"1rem","space-lg":"1rem","space-xs":"0.25rem","margin":"1rem","space-xl":"1.5rem","margin-lg":"2rem","space-md":"0.75rem","space-sm":"0.5rem"},"fontFamily":{"label-md":["Inter"],"label-sm":["Inter"],"body-sm":["Inter"],"label-lg":["Inter"],"display-sm":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"headline-lg":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"]},"fontSize":{"label-md":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"500"}],"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.01em","fontWeight":"400"}],"label-lg":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0em","fontWeight":"500"}],"display-sm":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["1rem",{"lineHeight":"1.5rem","letterSpacing":"0em","fontWeight":"400"}],"body-md":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["1.125rem",{"lineHeight":"1.5rem","letterSpacing":"-0.005em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-[#0f172a] text-[#f8fafc] z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-16 px-gutter flex items-center justify-between bg-[#0b1222]"><div class="flex items-center gap-space-sm"><img alt="SupportDesk AI Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xc24bObm_drTv_HBA3pAGQCpKVRMM2SpxnvdCE2sIjMb11-VnITyNQe4to1QVgov6tGgrEnAgB01cqXeQfTYpRLaR4LzpKQWt_InpjYO9poyFXuH5x8M9GJSiQXSpNLLmq54EhsR42hKNd00ijEPoJyFJ4LC9DXM6WWbfWZ61YdBrFUjWOtjgxyG5zKEqIG4lJJik0O_ACIwuOSb7IbGkDaUcTwRPFRvBGy-lPSrqecsrMlnP_9eIpnw"/><span class="font-headline-sm text-headline-sm tracking-tight text-[#ffffff] font-semibold">SupportDesk AI</span></div><span class="px-space-sm py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold tracking-wide">DEMO</span></div><nav class="flex-1 px-gutter py-gutter space-y-space-xs overflow-y-auto" data-active-classes="bg-[#1e293b] text-[#ffffff] font-medium rounded-lg shadow-sm"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="overview" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-lg text-label-lg">Overview</span></div></a><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm transition-colors bg-[#1e293b] text-[#ffffff] font-medium rounded-lg shadow-sm" data-path="support-inbox" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">inbox</span><span class="font-label-lg text-label-lg">Support Inbox</span></div><span class="px-space-sm py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold">4</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="knowledge-base" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-label-lg text-label-lg">Knowledge Base</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="agent-activity" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">smart_toy</span><span class="font-label-lg text-label-lg">Agent Activity</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="settings" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-lg text-label-lg">Settings</span></div></a></nav></div><div class="p-gutter bg-[#0b1222] space-y-space-md"><div class="flex items-center justify-between px-space-md py-space-sm rounded-full bg-[#1e293b] text-[#ffffff]"><div class="flex items-center gap-space-xs"><span class="h-2 w-2 rounded-full bg-primary-fixed animate-pulse"></span><span class="font-label-sm text-label-sm font-semibold text-primary-fixed">AI Agent Online</span></div><span class="material-symbols-outlined text-[16px] text-primary-fixed">bolt</span></div><div class="flex items-center justify-between p-space-sm rounded-lg bg-[#1e293b]"><div class="flex items-center gap-space-sm"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-primary-fixed"></span></div><div class="flex flex-col"><span class="font-label-md text-label-md text-[#ffffff] font-medium leading-tight">Alex Morgan</span><span class="font-label-sm text-label-sm text-[#94a3b8]">Lead Support</span></div></div><span class="material-symbols-outlined text-[18px] text-[#94a3b8]">unfold_more</span></div></div></aside><div class="pl-64 min-h-screen flex flex-col bg-background"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><div class="relative flex items-center"><span class="material-symbols-outlined text-on-surface-variant absolute left-space-md text-[18px]">search</span><input class="w-80 h-9 pl-9 pr-space-md rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none" placeholder="Search tickets, customers, or KB articles..." type="text"/></div><div class="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-secondary-container text-on-secondary-container"><span class="material-symbols-outlined text-[14px]">info</span><span class="font-label-sm text-label-sm font-medium">Demo Environment - Mock Data Only</span></div></div><div class="flex items-center gap-space-md"><button class="h-9 px-space-md rounded-lg bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary flex items-center gap-space-xs shadow-[0_1px_8px_rgba(0,0,0,0.04)] transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">play_arrow</span><span class="font-label-md text-label-md font-semibold">Simulate Ticket</span></button><div class="relative flex items-center justify-center"><button class="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container hover:text-on-surface text-on-surface-variant flex items-center justify-center transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><span class="absolute top-1 right-1 h-2 w-2 rounded-full bg-error"></span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 w-full px-gutter pb-gutter flex-1"><div class="flex flex-col w-full">
+<div class="fixed bottom-5 right-6 z-50 transform translate-y-12 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-space-sm px-space-lg py-space-md rounded-xl bg-inverse-surface text-inverse-on-surface shadow-xl" id="toast">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+<span class="font-label-md text-label-md font-medium" id="toast-text">Action completed</span>
+</div>
+<div class="flex flex-col xl:flex-row gap-gutter w-full h-[calc(100vh-5.25rem)] overflow-hidden">
+<!-- COLUMN 1: Conversation List (~320px) -->
+<section class="w-full xl:w-80 flex-shrink-0 flex flex-col rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden">
+<!-- Search and Header Toolbar -->
+<div class="p-space-md flex flex-col gap-space-sm bg-surface-container-low/40">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Inbox</span>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold">18</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<button class="w-7 h-7 flex items-center justify-center rounded hover:bg-surface-container-high transition-colors" title="Filter list">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center rounded hover:bg-surface-container-high transition-colors" title="Sort tickets">
+<span class="material-symbols-outlined text-[18px]">swap_vert</span>
+</button>
+</div>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-2.5 text-outline text-[16px]">search</span>
+<input class="w-full h-8 pl-8 pr-space-sm rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" placeholder="Filter tickets..." type="text"/>
+</div>
+<!-- Filter Chips -->
+<div class="flex items-center gap-1.5 overflow-x-auto py-1 no-scrollbar">
+<button class="px-2.5 py-1 rounded-full bg-on-surface text-surface-container-lowest font-label-sm text-label-sm font-semibold whitespace-nowrap shadow-sm">All 18</button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-sm text-label-sm font-medium whitespace-nowrap transition-colors">AI Active 8</button>
+<button class="px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold whitespace-nowrap flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+            Handover 3
+          </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-label-sm text-label-sm font-medium whitespace-nowrap transition-colors">Resolved 7</button>
+</div>
+</div>
+<!-- Ticket Queue List -->
+<div class="flex-1 overflow-y-auto divide-y-0 p-1.5 space-y-1">
+<!-- Ticket 1 (Active) -->
+<article class="group cursor-pointer rounded-lg p-space-md bg-surface-container-low transition-all relative" onclick="selectTicket(1)">
+<div class="absolute left-0 top-2 bottom-2 w-1 bg-primary rounded-r-full"></div>
+<div class="flex items-start justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Sarah Jenkins</span>
+<span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">VIP</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">2m ago</span>
+</div>
+<div class="flex items-center gap-space-xs mb-1.5">
+<span class="px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600 animate-pulse"></span>
+              Handover Needed
+            </span>
+<span class="px-1.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">Urgent</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant ml-auto">chat</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+<span class="font-semibold text-on-surface">#ORD-8492:</span> Package delayed in transit for 5 days. Customer requesting resolution before weekend.
+          </p>
+</article>
+<!-- Ticket 2 -->
+<article class="group cursor-pointer rounded-lg p-space-md hover:bg-surface-container-low/60 transition-all" onclick="selectTicket(2)">
+<div class="flex items-start justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Michael Chang</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">14m ago</span>
+</div>
+<div class="flex items-center gap-space-xs mb-1.5">
+<span class="px-1.5 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">smart_toy</span>
+              AI Handling
+            </span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">Medium</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant ml-auto">mail</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+<span class="font-semibold text-on-surface">#ORD-9104:</span> Initiated automated return label generation for defective acoustic headphones.
+          </p>
+</article>
+<!-- Ticket 3 -->
+<article class="group cursor-pointer rounded-lg p-space-md hover:bg-surface-container-low/60 transition-all" onclick="selectTicket(3)">
+<div class="flex items-start justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Elena Rostova</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">32m ago</span>
+</div>
+<div class="flex items-center gap-space-xs mb-1.5">
+<span class="px-1.5 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">auto_awesome</span>
+              AI Answered
+            </span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">Low</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant ml-auto">chat</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+            Cited Shipping Policy Doc v2.4 (Section 3.1) regarding customs duty thresholds in EU destinations.
+          </p>
+</article>
+<!-- Ticket 4 -->
+<article class="group cursor-pointer rounded-lg p-space-md hover:bg-surface-container-low/60 transition-all" onclick="selectTicket(4)">
+<div class="flex items-start justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface truncate">David Miller</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">1h ago</span>
+</div>
+<div class="flex items-center gap-space-xs mb-1.5">
+<span class="px-1.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">person</span>
+              Alex Morgan
+            </span>
+<span class="px-1.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">High</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant ml-auto">mail</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+            Customer requesting manager escalation regarding damaged ceramic vase received yesterday.
+          </p>
+</article>
+<!-- Ticket 5 -->
+<article class="group cursor-pointer rounded-lg p-space-md hover:bg-surface-container-low/60 transition-all" onclick="selectTicket(5)">
+<div class="flex items-start justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Rachel Adams</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">2h ago</span>
+</div>
+<div class="flex items-center gap-space-xs mb-1.5">
+<span class="px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span>
+              Resolved
+            </span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">Low</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant ml-auto">chat</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+<span class="font-semibold text-on-surface">#ORD-7721:</span> Exchange size completed. Replacement size 8 sent via 2-day delivery.
+          </p>
+</article>
+</div>
+</section>
+<!-- COLUMN 2: Active Conversation & Workspace (Center, Flex-1) -->
+<main class="flex-1 flex flex-col rounded-xl bg-surface-container-lowest shadow-sm overflow-hidden min-w-0">
+<!-- Workspace Header Bar -->
+<header class="p-space-md bg-surface-container-low/40 flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md min-w-0">
+<div class="relative flex-shrink-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Close-up professional portrait of Sarah Jenkins, a customer with warm lighting and a soft neutral background representing a VIP client." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkj5eHyObVxMUtQVuCQYCW1ORmnul0eAZGCTh17Hbl0W2UHhQvPynZpaGH4Nyk7K9FfUdZPoZ1foQspkX19t4Eu6ZTf3Jfgx2NZtEmsyQRzf3W_BZraYGHAqWvqQnZqbVzfO0y_QVAr797dYKS4oEp6GQWezerZF4CfkkaKIkfpVhXZTi0ap-oJzNpw8mcknjyEtAKQmolL5yoESyRBVXIMMrl3QGyaIyea0Uwwn2COUxKpzTkUDbF"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-primary-fixed border-2 border-surface-container-lowest"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate font-semibold">Sarah Jenkins</h2>
+<span class="px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Gold VIP</span>
+<span class="font-body-sm text-body-sm text-outline">|</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Order #ORD-8492</span>
+<span class="font-body-sm text-body-sm text-outline">($148.50)</span>
+</div>
+<div class="flex items-center gap-space-md font-label-sm text-label-sm text-on-surface-variant">
+<span>Channel: Webchat Live</span>
+<span>SLA Target: 10m Remaining</span>
+<span class="text-primary font-medium">Confidence: 91.2%</span>
+</div>
+</div>
+</div>
+<!-- Action Controls -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="h-8 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary flex items-center gap-1.5 shadow-sm transition-colors" id="takeover-btn" onclick="toggleTakeover()">
+<span class="material-symbols-outlined text-[16px]">front_hand</span>
+<span class="font-label-md text-label-md font-semibold">Take Over from AI</span>
+</button>
+<div class="relative">
+<button class="h-8 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center gap-1.5 transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">person</span>
+<span>Alex Morgan</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+</div>
+<div class="relative">
+<button class="h-8 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center gap-1.5 transition-colors font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span>In Progress</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Operational Status Alert Banner -->
+<div class="px-space-md py-2 bg-amber-500/10 text-amber-900 flex items-center justify-between" id="handover-banner">
+<div class="flex items-center gap-space-xs font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-amber-700">warning</span>
+<span class="font-medium">AI paused — handover requested due to SLA threshold breach. Simulated live stream active.</span>
+</div>
+<button class="text-amber-800 hover:text-amber-950 font-label-sm text-label-sm font-semibold" onclick="dismissBanner()">Dismiss</button>
+</div>
+<!-- Message History Canvas -->
+<div class="flex-1 p-space-lg overflow-y-auto space-y-space-md bg-surface/50" id="message-container">
+<!-- Customer Message -->
+<div class="flex items-start gap-space-md max-w-2xl">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0 text-on-secondary-container font-label-md text-label-md font-bold">
+            SJ
+          </div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Sarah Jenkins</span>
+<span class="font-label-sm text-label-sm text-outline">10:41 AM</span>
+</div>
+<div class="p-space-md rounded-xl rounded-tl-none bg-surface-container-low text-on-surface font-body-md text-body-md shadow-sm">
+              My order was supposed to arrive Thursday. The tracking hasn't updated in 4 days, and I need these shoes before my marathon trip this Sunday! Can you tell me where it is?
+            </div>
+</div>
+</div>
+<!-- AI Assistant Action & Response -->
+<div class="flex items-start gap-space-md max-w-2xl">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center flex-shrink-0 text-on-primary-fixed">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1 w-full">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">SupportDesk Agent</span>
+<span class="px-1.5 py-0.2 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">Autonomous</span>
+<span class="font-label-sm text-label-sm text-outline">10:42 AM</span>
+</div>
+<div class="p-space-md rounded-xl rounded-tl-none bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-sm border-l-4 border-primary">
+<p class="mb-space-sm">
+                Hello Sarah, I completely understand your urgency given your upcoming marathon. Let me query the live carrier telemetry for FedEx parcel <strong class="font-semibold text-on-surface">TRK-994821</strong> right away.
+              </p>
+<!-- Expandable Tool Execution Box -->
+<details class="mt-2 rounded-lg bg-surface-container-low p-space-sm text-on-surface-variant font-body-sm text-body-sm group" open="">
+<summary class="cursor-pointer font-label-sm text-label-sm font-semibold flex items-center justify-between text-on-surface list-none">
+<span class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[16px]">data_object</span>
+                    Tool Execution: query_carrier_api (Success · 340ms)
+                  </span>
+<span class="material-symbols-outlined text-[16px] group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-2 font-mono text-[11px] leading-relaxed p-space-sm rounded bg-surface-container-lowest text-on-surface">
+<div class="text-outline">// Input Payload:</div>
+<div class="text-primary-container">{ "tracking_code": "TRK-994821", "carrier": "FedEx", "sla_priority": "high" }</div>
+<div class="text-outline mt-1">// API Response:</div>
+<div class="text-on-surface">{ "status": "Exception - Weather Delay", "last_scan": "Denver Hub", "est_delivery": "Delayed", "carrier_contact": "800-463-3339" }</div>
+</div>
+</details>
+<p class="mt-space-sm">
+                According to the live FedEx telemetry, your package experienced an unexpected weather delay at the Denver Transit Hub. It is currently re-routed but may miss tomorrow's standard window.
+              </p>
+</div>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span>Model: Claude-3.5-Sonnet</span>
+<span>·</span>
+<span>Confidence: 98.4%</span>
+<span>·</span>
+<span class="text-primary hover:underline cursor-pointer">Grounding: FedEx Webhook API</span>
+</div>
+</div>
+</div>
+<!-- Policy Source Citation Card -->
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low text-on-surface-variant max-w-lg ml-11">
+<span class="material-symbols-outlined text-primary text-[18px]">menu_book</span>
+<div class="flex-1 text-label-sm font-label-sm">
+<span class="font-semibold text-on-surface">Knowledge Grounding:</span> Return &amp; Delay Policy §4.2 (Severe Weather Protocols &amp; Overnight Dispatch Exceptions).
+          </div>
+<button class="font-label-sm text-label-sm text-primary font-semibold hover:underline">Inspect</button>
+</div>
+<!-- Internal Note Bubble (Alex M.) -->
+<div class="flex items-start gap-space-md max-w-2xl ml-auto justify-end">
+<div class="flex flex-col items-end gap-1 w-full">
+<div class="flex items-center gap-space-xs">
+<span class="px-1.5 py-0.2 rounded bg-amber-200 text-amber-900 font-label-sm text-label-sm font-bold">INTERNAL NOTE</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Alex Morgan</span>
+<span class="font-label-sm text-label-sm text-outline">10:44 AM</span>
+</div>
+<div class="p-space-md rounded-xl rounded-tr-none bg-amber-50 text-amber-950 font-body-md text-body-md shadow-sm border-r-4 border-amber-500 w-full">
+<p class="font-medium text-amber-900">
+                [Lead Support Check] Reached out to FedEx expedited dispatch team. If Denver hub doesn't clear the manifest by 2:00 PM, I recommend issuing a $15 credit and re-dispatching replacement Eco-Knit Runners via Priority Overnight.
+              </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-on-primary font-label-md text-label-md font-bold">
+            AM
+          </div>
+</div>
+</div>
+<!-- Composer & Canned AI Recommendations -->
+<footer class="p-space-md bg-surface-container-low/40 flex flex-col gap-space-sm">
+<!-- AI Response Suggestion Chips -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 no-scrollbar">
+<span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">arrow_back_ios_new</span>
+            AI Copilot:
+          </span>
+<button class="px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm whitespace-nowrap transition-colors shadow-sm" onclick="insertCanned('Apologize for delay, offer $15 shipping credit, and verify current address.')">
+            Apologize &amp; offer discount
+          </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm whitespace-nowrap transition-colors shadow-sm" onclick="insertCanned('Generate urgent replacement order via Priority Overnight shipping at no charge.')">
+            Generate replacement label
+          </button>
+<button class="px-2.5 py-1 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm whitespace-nowrap transition-colors shadow-sm" onclick="insertCanned('Escalated to carrier logistics supervisor (Ticket #CARRIER-44910).')">
+            Escalate to carrier dispatch
+          </button>
+</div>
+<!-- Composer Main Card -->
+<div class="rounded-xl bg-surface-container-lowest shadow-sm p-space-sm flex flex-col gap-space-xs">
+<!-- Composer Tabs & Tools -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1">
+<button class="px-space-md py-1 rounded font-label-md text-label-md font-semibold bg-primary text-on-primary" id="tab-public" onclick="switchTab('public')">
+                Public Reply
+              </button>
+<button class="px-space-md py-1 rounded font-label-md text-label-md font-medium text-on-surface-variant hover:bg-surface-container" id="tab-internal" onclick="switchTab('internal')">
+                Internal Note
+              </button>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<button class="w-7 h-7 flex items-center justify-center rounded hover:bg-surface-container" title="Bold">
+<span class="material-symbols-outlined text-[16px]">format_bold</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center rounded hover:bg-surface-container" title="Add Attachment">
+<span class="material-symbols-outlined text-[16px]">attach_file</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center rounded hover:bg-surface-container" title="Insert Macro">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+</button>
+</div>
+</div>
+<!-- Text Area Input -->
+<textarea class="w-full p-space-sm bg-transparent text-on-surface placeholder:text-outline font-body-md text-body-md focus:outline-none resize-none" id="reply-input" placeholder="Type your response to Sarah Jenkins or invoke AI copilot with '/'..." rows="3"></textarea>
+<!-- Composer Bottom Action Strip -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">auto_awesome</span>
+<span class="font-label-sm text-label-sm">Press Tab to accept copilot completions</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="h-8 px-space-md rounded-lg text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" onclick="clearComposer()">
+                Discard
+              </button>
+<button class="h-8 px-space-lg rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold flex items-center gap-1.5 shadow-sm transition-colors" onclick="submitReply()">
+<span>Send Reply</span>
+<span class="material-symbols-outlined text-[16px]">send</span>
+</button>
+</div>
+</div>
+</div>
+</footer>
+</main>
+<!-- COLUMN 3: Customer & Context Panel (~340px) -->
+<aside class="w-full xl:w-80 flex-shrink-0 flex flex-col gap-space-md overflow-y-auto">
+<!-- Customer Profile Card -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Customer 360</span>
+<button class="text-primary hover:underline font-label-sm text-label-sm font-semibold">CRM Link</button>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Warm studio photo portrait of customer Sarah Jenkins, soft diffused studio light, subtle gradient background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOdM7Z_EBOG684T3AjzSCZnyFPcNn0LbDK1Sijh9lEvSh1l-4ndzPwyGQZjMTXzpEHw8umrDkzt2MBtFfgXA9X5_wfK7oxw208C0EFRfI0duZWpxROV8HjjPJadKsjqR4phIeV7fepoTUKWeUlovhN928K7iefuG6C5P3qjEfw-k367CJJ4A3wN3k3H9_SurRVDWV7cjvZltw_5mjCi4cBlNibWecVVnvUIlPFL86yXcgHqQSB5NFS"/>
+<span class="absolute -bottom-1 -right-1 px-1 py-0.2 rounded bg-amber-400 text-on-surface font-label-sm text-label-sm font-extrabold">VIP</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface truncate">Sarah Jenkins</h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">sarah.j@example.com</span>
+<span class="font-label-sm text-label-sm text-outline">Member since Oct 2022</span>
+</div>
+</div>
+<!-- Quick Stats Bento -->
+<div class="grid grid-cols-3 gap-space-xs text-center">
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<div class="font-label-sm text-label-sm text-outline">LTV</div>
+<div class="font-label-lg text-label-lg font-bold text-on-surface">$1,240</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<div class="font-label-sm text-label-sm text-outline">Orders</div>
+<div class="font-label-lg text-label-lg font-bold text-on-surface">6</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<div class="font-label-sm text-label-sm text-outline">CSAT</div>
+<div class="font-label-lg text-label-lg font-bold text-primary flex items-center justify-center gap-0.5">
+<span>4.8</span>
+<span class="material-symbols-outlined text-[14px]">star</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Order Details & Tracking Timeline -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">local_shipping</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Active Order</span>
+</div>
+<span class="font-label-sm text-label-sm font-semibold text-primary">#ORD-8492</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="font-medium text-on-surface">Eco-Knit Runner Shoes</span>
+<span class="text-on-surface font-semibold">$120.00</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Size 9 · Charcoal Heather · Qty 1</div>
+<div class="flex items-center justify-between font-label-md text-label-md pt-1 mt-1">
+<span class="font-medium text-on-surface">Merino Wool Socks x2</span>
+<span class="text-on-surface font-semibold">$28.50</span>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Medium · Forest Green</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-outline pt-1 mt-1">
+<span>Total Paid (Visa •••• 4092)</span>
+<span class="font-semibold text-on-surface">$148.50</span>
+</div>
+</div>
+<!-- Tracking Stepper -->
+<div class="mt-space-xs flex flex-col gap-space-sm">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface font-medium">FedEx TRK-994821</span>
+<span class="text-amber-800 font-semibold bg-amber-100 px-1.5 py-0.2 rounded">Delayed</span>
+</div>
+<div class="relative pl-6 space-y-space-md">
+<!-- Line -->
+<div class="absolute left-2.5 top-2 bottom-2 w-0.5 bg-surface-container-high"></div>
+<!-- Step 1 -->
+<div class="relative flex flex-col">
+<div class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-surface-container-lowest"></div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface">Order Placed &amp; Packed</div>
+<div class="font-label-sm text-label-sm text-outline">Oct 22, 09:15 AM · Seattle Depot</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex flex-col">
+<div class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-surface-container-lowest"></div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface">In Transit (FedEx 2-Day)</div>
+<div class="font-label-sm text-label-sm text-outline">Oct 23, 02:40 PM · Salt Lake Facility</div>
+</div>
+<!-- Step 3 (Current issue) -->
+<div class="relative flex flex-col">
+<div class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-surface-container-lowest"></div>
+<div class="font-label-sm text-label-sm font-bold text-amber-800">Weather Exception · Denver Hub</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Winter storm advisory hold</div>
+</div>
+<!-- Step 4 -->
+<div class="relative flex flex-col">
+<div class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-surface-container-highest ring-4 ring-surface-container-lowest"></div>
+<div class="font-label-sm text-label-sm font-medium text-outline">Estimated Delivery</div>
+<div class="font-label-sm text-label-sm text-outline">Oct 28 (Expected Sunday)</div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Telemetry & Sentiment Gauge -->
+<div class="p-space-md rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">AI Diagnostic Telemetry</span>
+<span class="px-1.5 py-0.2 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-bold">Model v4.3</span>
+</div>
+<!-- Sentiment Bar -->
+<div class="space-y-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Customer Sentiment</span>
+<span class="font-semibold text-error">Frustrated (0.35/1.0)</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 35%;"></div>
+</div>
+</div>
+<!-- Confidence Bar -->
+<div class="space-y-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Model Confidence</span>
+<span class="font-semibold text-primary">91.2% (Deterministic)</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 91.2%;"></div>
+</div>
+</div>
+<div class="pt-space-xs space-y-1 font-body-sm text-body-sm text-on-surface-variant">
+<div><strong class="text-on-surface">Intent:</strong> Delivery Delay &amp; Missing Tracking</div>
+<div><strong class="text-on-surface">Suggested Path:</strong> Expedited Replacement + $15 Credit</div>
+</div>
+<!-- Quick Action Automation Buttons -->
+<div class="pt-space-xs flex flex-col gap-space-xs">
+<button class="h-8 w-full px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-between text-label-md font-medium transition-colors" onclick="triggerQuickAction('Issued $15.00 Goodwill Account Credit to Sarah Jenkins.')">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">payments</span>
+              Issue $15 Goodwill Credit
+            </span>
+<span class="font-label-sm text-label-sm text-outline">Apply</span>
+</button>
+<button class="h-8 w-full px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-between text-label-md font-medium transition-colors" onclick="triggerQuickAction('Initiated Priority Overnight replacement order #ORD-8492-R.')">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">autorenew</span>
+              Reship Order (Overnight)
+            </span>
+<span class="font-label-sm text-label-sm text-outline">Create</span>
+</button>
+<button class="h-8 w-full px-space-md rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 flex items-center justify-between text-label-md font-medium transition-colors" onclick="triggerQuickAction('Ticket #ORD-8492 marked as Resolved.')">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+              Mark Resolved
+            </span>
+<span class="font-label-sm text-label-sm text-emerald-700">Close</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+<script>
+    let isHumanTakeover = false;
+    let currentComposerMode = 'public';
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      text.textContent = message;
+      toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+      }, 3200);
+    }
+
+    function toggleTakeover() {
+      isHumanTakeover = !isHumanTakeover;
+      const btn = document.getElementById('takeover-btn');
+      const banner = document.getElementById('handover-banner');
+
+      if (isHumanTakeover) {
+        btn.innerHTML = `
+          <span class="material-symbols-outlined text-[16px]">smart_toy</span>
+          <span class="font-label-md text-label-md font-semibold">Resume AI Copilot</span>
+        `;
+        btn.classList.replace('bg-primary', 'bg-secondary');
+        banner.innerHTML = `
+          <div class="flex items-center gap-space-xs font-body-sm text-body-sm">
+            <span class="material-symbols-outlined text-[18px] text-primary">person</span>
+            <span class="font-medium text-primary">Human Takeover Active — Alex Morgan in control. AI copilot will only provide private suggestions.</span>
+          </div>
+          <button onclick="dismissBanner()" class="text-primary hover:underline font-label-sm text-label-sm font-semibold">Dismiss</button>
+        `;
+        showToast('You took over ticket #ORD-8492 from AI.');
+      } else {
+        btn.innerHTML = `
+          <span class="material-symbols-outlined text-[16px]">front_hand</span>
+          <span class="font-label-md text-label-md font-semibold">Take Over from AI</span>
+        `;
+        btn.classList.replace('bg-secondary', 'bg-primary');
+        banner.innerHTML = `
+          <div class="flex items-center gap-space-xs font-body-sm text-body-sm">
+            <span class="material-symbols-outlined text-[18px] text-amber-700">warning</span>
+            <span class="font-medium text-amber-900">AI paused — handover requested due to SLA threshold breach. Simulated live stream active.</span>
+          </div>
+          <button onclick="dismissBanner()" class="text-amber-800 hover:text-amber-950 font-label-sm text-label-sm font-semibold">Dismiss</button>
+        `;
+        showToast('Autonomous AI handling resumed.');
+      }
+    }
+
+    function dismissBanner() {
+      const banner = document.getElementById('handover-banner');
+      if (banner) banner.style.display = 'none';
+    }
+
+    function switchTab(mode) {
+      currentComposerMode = mode;
+      const pubTab = document.getElementById('tab-public');
+      const intTab = document.getElementById('tab-internal');
+      const input = document.getElementById('reply-input');
+
+      if (mode === 'public') {
+        pubTab.className = "px-space-md py-1 rounded font-label-md text-label-md font-semibold bg-primary text-on-primary";
+        intTab.className = "px-space-md py-1 rounded font-label-md text-label-md font-medium text-on-surface-variant hover:bg-surface-container";
+        input.placeholder = "Type your public response to Sarah Jenkins or invoke AI copilot with '/'...";
+      } else {
+        intTab.className = "px-space-md py-1 rounded font-label-md text-label-md font-semibold bg-amber-200 text-amber-900";
+        pubTab.className = "px-space-md py-1 rounded font-label-md text-label-md font-medium text-on-surface-variant hover:bg-surface-container";
+        input.placeholder = "Type an internal note visible only to support agents and managers...";
+      }
+    }
+
+    function insertCanned(text) {
+      const input = document.getElementById('reply-input');
+      input.value = text;
+      input.focus();
+    }
+
+    function clearComposer() {
+      document.getElementById('reply-input').value = '';
+    }
+
+    function submitReply() {
+      const input = document.getElementById('reply-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('message-container');
+      const timeNow = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      if (currentComposerMode === 'public') {
+        const messageNode = document.createElement('div');
+        messageNode.className = "flex items-start gap-space-md max-w-2xl ml-auto justify-end animate-fadeIn";
+        messageNode.innerHTML = `
+          <div class="flex flex-col items-end gap-1 w-full">
+            <div class="flex items-center gap-space-xs">
+              <span class="font-label-md text-label-md font-semibold text-on-surface">Alex Morgan</span>
+              <span class="font-label-sm text-label-sm text-outline">${timeNow}</span>
+            </div>
+            <div class="p-space-md rounded-xl rounded-tr-none bg-primary text-on-primary font-body-md text-body-md shadow-sm">
+              ${text}
+            </div>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-on-primary font-label-md text-label-md font-bold">
+            AM
+          </div>
+        `;
+        container.appendChild(messageNode);
+        showToast('Public reply sent to Sarah Jenkins.');
+      } else {
+        const noteNode = document.createElement('div');
+        noteNode.className = "flex items-start gap-space-md max-w-2xl ml-auto justify-end animate-fadeIn";
+        noteNode.innerHTML = `
+          <div class="flex flex-col items-end gap-1 w-full">
+            <div class="flex items-center gap-space-xs">
+              <span class="px-1.5 py-0.2 rounded bg-amber-200 text-amber-900 font-label-sm text-label-sm font-bold">INTERNAL NOTE</span>
+              <span class="font-label-md text-label-md font-semibold text-on-surface">Alex Morgan</span>
+              <span class="font-label-sm text-label-sm text-outline">${timeNow}</span>
+            </div>
+            <div class="p-space-md rounded-xl rounded-tr-none bg-amber-50 text-amber-950 font-body-md text-body-md shadow-sm border-r-4 border-amber-500 w-full">
+              <p class="font-medium text-amber-900">${text}</p>
+            </div>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-on-primary font-label-md text-label-md font-bold">
+            AM
+          </div>
+        `;
+        container.appendChild(noteNode);
+        showToast('Internal note saved to ticket timeline.');
+      }
+
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function triggerQuickAction(message) {
+      showToast(message);
+    }
+
+    function selectTicket(index) {
+      showToast(`Loaded ticket stream #${index}`);
+    }
+  </script>
+</div></main></div></body></html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-fixed":"#131b2e","primary-fixed":"#89f5e7","on-surface":"#0b1c30","background":"#f8f9ff","secondary":"#565e74","surface-container-high":"#dce9ff","on-tertiary":"#ffffff","on-primary-fixed-variant":"#005049","on-primary-fixed":"#00201d","surface-variant":"#d3e4fe","on-secondary":"#ffffff","on-primary":"#ffffff","surface-container-low":"#eff4ff","secondary-fixed":"#dae2fd","secondary-container":"#dae2fd","inverse-surface":"#213145","on-tertiary-container":"#fdfcff","on-background":"#0b1c30","on-tertiary-fixed":"#001d31","inverse-on-surface":"#eaf1ff","surface":"#f8f9ff","on-primary-container":"#f4fffc","secondary-fixed-dim":"#bec6e0","error":"#ba1a1a","surface-container-highest":"#d3e4fe","surface-bright":"#f8f9ff","outline":"#6d7a77","surface-dim":"#cbdbf5","on-tertiary-fixed-variant":"#004b73","error-container":"#ffdad6","tertiary-container":"#007bb9","surface-container-lowest":"#ffffff","surface-tint":"#006a61","inverse-primary":"#6bd8cb","on-error":"#ffffff","on-surface-variant":"#3d4947","primary":"#00685f","primary-container":"#008378","primary-fixed-dim":"#6bd8cb","tertiary-fixed-dim":"#93ccff","on-secondary-container":"#5c647a","tertiary":"#006194","tertiary-fixed":"#cce5ff","surface-container":"#e5eeff","outline-variant":"#bcc9c6","on-secondary-fixed-variant":"#3f465c","on-error-container":"#93000a"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-lg":"1.5rem","gutter":"1rem","space-lg":"1rem","space-xs":"0.25rem","margin":"1rem","space-xl":"1.5rem","margin-lg":"2rem","space-md":"0.75rem","space-sm":"0.5rem"},"fontFamily":{"label-md":["Inter"],"label-sm":["Inter"],"body-sm":["Inter"],"label-lg":["Inter"],"display-sm":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"headline-lg":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"]},"fontSize":{"label-md":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"500"}],"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"600"}],"body-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.01em","fontWeight":"400"}],"label-lg":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0em","fontWeight":"500"}],"display-sm":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"600"}],"body-lg":["1rem",{"lineHeight":"1.5rem","letterSpacing":"0em","fontWeight":"400"}],"body-md":["0.875rem",{"lineHeight":"1.25rem","letterSpacing":"0em","fontWeight":"400"}],"headline-lg":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["1.125rem",{"lineHeight":"1.5rem","letterSpacing":"-0.005em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-[#0f172a] text-[#f8fafc] z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-16 px-gutter flex items-center justify-between bg-[#0b1222]"><div class="flex items-center gap-space-sm"><img alt="SupportDesk AI Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xc24bObm_drTv_HBA3pAGQCpKVRMM2SpxnvdCE2sIjMb11-VnITyNQe4to1QVgov6tGgrEnAgB01cqXeQfTYpRLaR4LzpKQWt_InpjYO9poyFXuH5x8M9GJSiQXSpNLLmq54EhsR42hKNd00ijEPoJyFJ4LC9DXM6WWbfWZ61YdBrFUjWOtjgxyG5zKEqIG4lJJik0O_ACIwuOSb7IbGkDaUcTwRPFRvBGy-lPSrqecsrMlnP_9eIpnw"/><span class="font-headline-sm text-headline-sm tracking-tight text-[#ffffff] font-semibold">SupportDesk AI</span></div><span class="px-space-sm py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold tracking-wide">DEMO</span></div><nav class="flex-1 px-gutter py-gutter space-y-space-xs overflow-y-auto" data-active-classes="bg-[#1e293b] text-[#ffffff] font-medium rounded-lg shadow-sm"><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="overview" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-lg text-label-lg">Overview</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="support-inbox" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">inbox</span><span class="font-label-lg text-label-lg">Support Inbox</span></div><span class="px-space-sm py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold">4</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="knowledge-base" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-label-lg text-label-lg">Knowledge Base</span></div></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#ffffff] transition-colors" data-path="agent-activity" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">smart_toy</span><span class="font-label-lg text-label-lg">Agent Activity</span></div></a><a aria-current="page" class="flex items-center justify-between px-space-md py-space-sm transition-colors bg-[#1e293b] text-[#ffffff] font-medium rounded-lg shadow-sm" data-path="settings" href="#"><div class="flex items-center gap-space-md"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-lg text-label-lg">Settings</span></div></a></nav></div><div class="p-gutter bg-[#0b1222] space-y-space-md"><div class="flex items-center justify-between px-space-md py-space-sm rounded-full bg-[#1e293b] text-[#ffffff]"><div class="flex items-center gap-space-xs"><span class="h-2 w-2 rounded-full bg-primary-fixed animate-pulse"></span><span class="font-label-sm text-label-sm font-semibold text-primary-fixed">AI Agent Online</span></div><span class="material-symbols-outlined text-[16px] text-primary-fixed">bolt</span></div><div class="flex items-center justify-between p-space-sm rounded-lg bg-[#1e293b]"><div class="flex items-center gap-space-sm"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-primary-fixed"></span></div><div class="flex flex-col"><span class="font-label-md text-label-md text-[#ffffff] font-medium leading-tight">Alex Morgan</span><span class="font-label-sm text-label-sm text-[#94a3b8]">Lead Support</span></div></div><span class="material-symbols-outlined text-[18px] text-[#94a3b8]">unfold_more</span></div></div></aside><div class="pl-64 min-h-screen flex flex-col bg-background"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-md"><div class="relative flex items-center"><span class="material-symbols-outlined text-on-surface-variant absolute left-space-md text-[18px]">search</span><input class="w-80 h-9 pl-9 pr-space-md rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none" placeholder="Search tickets, customers, or KB articles..." type="text"/></div><div class="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-secondary-container text-on-secondary-container"><span class="material-symbols-outlined text-[14px]">info</span><span class="font-label-sm text-label-sm font-medium">Demo Environment - Mock Data Only</span></div></div><div class="flex items-center gap-space-md"><button class="h-9 px-space-md rounded-lg bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary flex items-center gap-space-xs shadow-[0_1px_8px_rgba(0,0,0,0.04)] transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">play_arrow</span><span class="font-label-md text-label-md font-semibold">Simulate Ticket</span></button><div class="relative flex items-center justify-center"><button class="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container hover:text-on-surface text-on-surface-variant flex items-center justify-center transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><span class="absolute top-1 right-1 h-2 w-2 rounded-full bg-error"></span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 w-full px-gutter pb-gutter flex-1"><div class="flex flex-col w-full">
+<!-- Top Utility Context Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md mb-space-xl">
+<div>
+<div class="flex items-center gap-space-xs text-on-surface-variant mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Control Plane</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">Autonomous Policy</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">Configuration &amp; Guardrails</h1>
+<p class="font-body-md text-body-md text-secondary mt-0.5">Tune agent runtime parameters, decision thresholds, and demo retail webhooks.</p>
+</div>
+<!-- Quick Stats Bar -->
+<div class="flex items-center gap-space-md p-space-sm rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-space-sm px-space-md py-1 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[20px]">shield_person</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Policy Mode</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Strict Guarded</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm px-space-md py-1 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-tertiary text-[20px]">sync</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary">Sync Target</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Sandbox Mock 2.4</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Tab Navigation Strip -->
+<div class="relative mb-space-xl">
+<div class="flex items-center gap-space-xs p-1.5 rounded-xl bg-surface-container-low shadow-sm overflow-x-auto">
+<button class="tab-btn flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md font-semibold shadow-sm transition-all" data-tab="general" type="button">
+<span class="material-symbols-outlined text-[18px]">storefront</span>
+<span>General &amp; Brand Profile</span>
+</button>
+<button class="tab-btn flex items-center gap-space-xs px-space-md py-2 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-all" data-tab="persona" type="button">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+<span>AI Persona &amp; Tone</span>
+</button>
+<button class="tab-btn flex items-center gap-space-xs px-space-md py-2 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-all" data-tab="guardrails" type="button">
+<span class="material-symbols-outlined text-[18px]">emergency_home</span>
+<span>Escalation &amp; Guardrails</span>
+</button>
+<button class="tab-btn flex items-center gap-space-xs px-space-md py-2 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-all" data-tab="integrations" type="button">
+<span class="material-symbols-outlined text-[18px]">hub</span>
+<span>Integrations (Demo)</span>
+</button>
+<button class="tab-btn flex items-center gap-space-xs px-space-md py-2 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container font-label-md text-label-md transition-all" data-tab="team" type="button">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+<span>Team &amp; Permissions</span>
+</button>
+</div>
+</div>
+<!-- Notification Toast Banner -->
+<div class="hidden mb-space-lg p-space-md rounded-xl bg-primary-container text-on-primary-container shadow-sm flex items-center justify-between transition-all duration-300" id="saveBanner">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md font-medium">Preferences saved locally for this browser session. Synthetic edge routing updated.</span>
+</div>
+<button class="text-on-primary-container hover:opacity-75" onclick="document.getElementById('saveBanner').classList.add('hidden')" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Main Settings Container (Tab Panels) -->
+<div class="space-y-space-xl pb-28">
+<!-- TAB 1: General & Brand Profile -->
+<div class="tab-pane active flex flex-col gap-space-lg" id="pane-general">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Section Details Column -->
+<div class="lg:col-span-4 flex flex-col justify-start">
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-space-md">
+<span class="material-symbols-outlined text-[24px]">corporate_fare</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Brand Identity</h2>
+<p class="font-body-md text-body-md text-secondary mt-space-xs">Customer-facing profile, domain routing identifiers, and operational service hours injected into autonomous prompt headers.</p>
+<div class="mt-space-lg pt-space-md bg-surface-container-low rounded-lg p-space-md">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Runtime Verification</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Validated against reverse DNS for incoming customer ticket parsing.</p>
+</div>
+</div>
+</div>
+<!-- Section Inputs Column -->
+<div class="lg:col-span-8 p-space-xl rounded-xl bg-surface-container-lowest shadow-sm space-y-space-lg">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<div>
+<label class="block font-label-md text-label-md font-semibold text-on-surface mb-space-xs">Store Display Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-space-md top-2.5 text-[18px] text-secondary">store</span>
+<input class="w-full h-10 pl-10 pr-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none shadow-sm" id="storeName" type="text" value="LuxeWear E-Commerce"/>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md font-semibold text-on-surface mb-space-xs">Inbound Support Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-space-md top-2.5 text-[18px] text-secondary">mail</span>
+<input class="w-full h-10 pl-10 pr-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none shadow-sm" id="supportEmail" type="email" value="support@luxewear.store"/>
+</div>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md font-semibold text-on-surface mb-space-xs">Operating Timezone</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-space-md top-2.5 text-[18px] text-secondary">schedule</span>
+<select class="w-full h-10 pl-10 pr-space-lg rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none appearance-none shadow-sm cursor-pointer" id="storeTimezone">
+<option selected="" value="America/New_York">America/New_York (EST - Eastern Standard Time)</option>
+<option value="America/Chicago">America/Chicago (CST - Central Standard Time)</option>
+<option value="America/Los_Angeles">America/Los_Angeles (PST - Pacific Standard Time)</option>
+<option value="Europe/London">Europe/London (GMT - Greenwich Mean Time)</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-md top-2.5 text-[20px] text-secondary pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Operating Hours & Coverage Card -->
+<div class="p-space-lg rounded-xl bg-surface-container-low space-y-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<div>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">24/7 AI Autonomous Coverage</span>
+<p class="font-body-sm text-body-sm text-secondary">Zero-latency responses dispatched during off-hours and peak bursts.</p>
+</div>
+</div>
+<span class="px-space-md py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold tracking-wider self-start sm:self-auto">ALWAYS ACTIVE</span>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest p-space-md rounded-lg">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">group</span>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Human Tier-3 Shift Windows</div>
+<div class="font-body-sm text-body-sm text-secondary">Mon - Fri 08:00 - 20:00 EST</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="humanShiftToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant rounded-full peer peer-checked:bg-primary after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 2: AI Persona & Tone -->
+<div class="tab-pane flex flex-col gap-space-lg" id="pane-persona">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<div class="lg:col-span-4 flex flex-col justify-start">
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-space-md">
+<span class="material-symbols-outlined text-[24px]">forum</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Conversational Demeanor</h2>
+<p class="font-body-md text-body-md text-secondary mt-space-xs">Controls the prompt syntax temperature, contextual empathy framing, and multilingual translation heuristics.</p>
+<div class="mt-space-lg p-space-md rounded-lg bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">auto_awesome</span>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Adaptive Tone Calibration</span>
+<p class="font-body-sm text-body-sm text-secondary mt-1">If customer messages contain negative valence, the agent automatically pivots toward heightened remorse framing.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-8 p-space-xl rounded-xl bg-surface-container-lowest shadow-sm space-y-space-xl">
+<!-- Persona Tone Selector Cards -->
+<div>
+<label class="block font-label-md text-label-md font-semibold text-on-surface mb-space-sm">Primary Brand Tone</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md" id="toneSelectorGroup">
+<!-- Option 1 (Selected) -->
+<div class="tone-card cursor-pointer p-space-md rounded-xl bg-surface-container-low transition-all" data-tone="friendly">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">sentiment_satisfied</span>
+</span>
+<span class="radio-indicator w-4 h-4 rounded-full bg-primary flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary"></span>
+</span>
+</div>
+<span class="block font-label-lg text-label-lg font-semibold text-on-surface">Friendly &amp; Professional</span>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Warm, polite, brand-advocate greeting with explicit reassurance.</p>
+</div>
+<!-- Option 2 -->
+<div class="tone-card cursor-pointer p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all" data-tone="concise">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="w-8 h-8 rounded-lg bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">flash_on</span>
+</span>
+<span class="radio-indicator w-4 h-4 rounded-full bg-surface-variant flex items-center justify-center"></span>
+</div>
+<span class="block font-label-lg text-label-lg font-semibold text-on-surface">Concise &amp; Direct</span>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Surgical clarity, tabular order specs, minimal conversational pleasantries.</p>
+</div>
+<!-- Option 3 -->
+<div class="tone-card cursor-pointer p-space-md rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all" data-tone="formal">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="w-8 h-8 rounded-lg bg-surface-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+</span>
+<span class="radio-indicator w-4 h-4 rounded-full bg-surface-variant flex items-center justify-center"></span>
+</div>
+<span class="block font-label-lg text-label-lg font-semibold text-on-surface">Formal Enterprise</span>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Strict governance vocabulary, conservative clauses, audit-ready syntax.</p>
+</div>
+</div>
+</div>
+<!-- Empathy Level Slider -->
+<div class="p-space-lg rounded-xl bg-surface-container-low space-y-space-md">
+<div class="flex items-center justify-between">
+<div>
+<label class="block font-label-md text-label-md font-semibold text-on-surface">Empathy &amp; Apology Intensity</label>
+<p class="font-body-sm text-body-sm text-secondary">Expresses proactive apologies and goodwill validation for delivery anomalies.</p>
+</div>
+<span class="px-space-md py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold" id="empathyBadge">High Intensity</span>
+</div>
+<div class="space-y-space-xs">
+<input class="w-full accent-primary cursor-pointer h-2 bg-surface-container-highest rounded-lg" id="empathySlider" max="3" min="1" type="range" value="3"/>
+<div class="flex justify-between font-label-sm text-label-sm text-secondary pt-1">
+<span>Objective (Low)</span>
+<span>Balanced</span>
+<span class="text-primary font-semibold">High (Proactive Goodwill)</span>
+</div>
+</div>
+</div>
+<!-- Language & Translation Settings -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg items-center">
+<div>
+<label class="block font-label-md text-label-md font-semibold text-on-surface mb-space-xs">Base Response Language</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-space-md top-2.5 text-[18px] text-secondary">language</span>
+<select class="w-full h-10 pl-10 pr-space-lg rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none appearance-none shadow-sm cursor-pointer" id="languageSelect">
+<option selected="" value="en-US">English (US) - Default</option>
+<option value="en-GB">English (UK)</option>
+<option value="es-ES">Spanish (ES)</option>
+<option value="fr-FR">French (FR)</option>
+<option value="de-DE">German (DE)</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-md top-2.5 text-[20px] text-secondary pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">translate</span>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Auto-Translation Pipeline</div>
+<div class="font-body-sm text-body-sm text-secondary">Translate 40+ dialects instantly</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="autoTranslateToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant rounded-full peer peer-checked:bg-primary after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 3: Escalation & Guardrails -->
+<div class="tab-pane flex flex-col gap-space-lg" id="pane-guardrails">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<div class="lg:col-span-4 flex flex-col justify-start">
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-error mb-space-md">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Human Handover Gates</h2>
+<p class="font-body-md text-body-md text-secondary mt-space-xs">Strict deterministic triggers that forcibly stop autonomous execution and instantly tag tier-3 personnel.</p>
+<div class="mt-space-lg p-space-md rounded-lg bg-error-container/40 text-on-error-container">
+<div class="flex items-center gap-space-xs font-label-md text-label-md font-semibold mb-1">
+<span class="material-symbols-outlined text-[16px]">security</span>
+<span>Zero Hallucination Shield</span>
+</div>
+<p class="font-body-sm text-body-sm opacity-90">Refund requests and chargeback warnings freeze autonomous actions until verified by a signed human session.</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-8 p-space-xl rounded-xl bg-surface-container-lowest shadow-sm space-y-space-xl">
+<!-- Cap and Retry Numeric Inputs -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-center justify-between mb-space-xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Refund Autonomy Cap</label>
+<span class="material-symbols-outlined text-secondary text-[18px]">payments</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mb-space-sm">Values exceeding this mandate supervisor authorization.</p>
+<div class="relative">
+<span class="absolute left-space-md top-2 font-label-md text-label-md font-semibold text-secondary">$</span>
+<input class="w-full h-9 pl-7 pr-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md font-semibold focus:outline-none shadow-sm" id="refundCap" max="500" min="0" step="5" type="number" value="50.00"/>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low">
+<div class="flex items-center justify-between mb-space-xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">Repeated Failure Cap</label>
+<span class="material-symbols-outlined text-secondary text-[18px]">replay</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mb-space-sm">Maximum ungrounded clarifying attempts allowed.</p>
+<div class="relative">
+<input class="w-full h-9 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md font-semibold focus:outline-none shadow-sm" id="failureCap" max="5" min="1" type="number" value="2"/>
+<span class="absolute right-space-md top-2 font-label-sm text-label-sm text-secondary pointer-events-none">retries before handover</span>
+</div>
+</div>
+</div>
+<!-- Sentiment Threshold Slider -->
+<div class="p-space-lg rounded-xl bg-surface-container-low space-y-space-md">
+<div class="flex items-center justify-between">
+<div>
+<label class="block font-label-md text-label-md font-semibold text-on-surface">Frustration Sentiment Threshold</label>
+<p class="font-body-sm text-body-sm text-secondary">Escalate immediately if real-time sentiment score dips below target.</p>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm font-semibold text-error" id="sentimentDisplay">0.30</span>
+<span class="font-label-sm text-label-sm text-secondary">/ 1.00</span>
+</div>
+</div>
+<div class="space-y-space-xs">
+<input class="w-full accent-error cursor-pointer h-2 bg-surface-container-highest rounded-lg" id="sentimentSlider" max="80" min="10" type="range" value="30"/>
+<div class="flex justify-between font-label-sm text-label-sm text-secondary pt-1">
+<span>0.10 (Severe distress only)</span>
+<span class="text-error font-semibold">0.30 (Standard Protection - 70% confidence)</span>
+<span>0.80 (Early diversion)</span>
+</div>
+</div>
+</div>
+<!-- Urgent Keywords Multi-tag Pool -->
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<label class="block font-label-md text-label-md font-semibold text-on-surface">Instant Escalation Trigger Keywords</label>
+<span class="font-label-sm text-label-sm text-secondary">Exact match token parser</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary mb-space-sm">Any incoming query containing these tokens immediately circumvents AI generation and notifies on-call leads.</p>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-wrap items-center gap-space-sm" id="tagPool">
+<span class="keyword-tag inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-medium shadow-sm">
+<span>lawyer</span>
+<button class="tag-remove hover:opacity-75" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="keyword-tag inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-medium shadow-sm">
+<span>chargeback</span>
+<button class="tag-remove hover:opacity-75" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="keyword-tag inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-medium shadow-sm">
+<span>stolen package</span>
+<button class="tag-remove hover:opacity-75" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="keyword-tag inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-medium shadow-sm">
+<span>manager</span>
+<button class="tag-remove hover:opacity-75" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="keyword-tag inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-medium shadow-sm">
+<span>fraud</span>
+<button class="tag-remove hover:opacity-75" type="button"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<!-- Tag Adder Input -->
+<div class="inline-flex items-center gap-space-xs">
+<input class="h-7 px-space-sm rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none w-28" id="newTagInput" placeholder="+ Add trigger..." type="text"/>
+<button class="w-7 h-7 rounded-lg bg-surface-container hover:bg-surface-variant flex items-center justify-center text-on-surface" id="addTagBtn" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 4: Integrations (Demo) -->
+<div class="tab-pane flex flex-col gap-space-lg" id="pane-integrations">
+<!-- Safe Sandbox Note Banner -->
+<div class="p-space-md rounded-xl bg-secondary-container text-on-secondary-container flex items-start gap-space-md shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[22px] mt-0.5">science</span>
+<div>
+<span class="font-label-lg text-label-lg font-semibold block">Isolated Sandbox Mock Environment</span>
+<p class="font-body-sm text-body-sm mt-0.5">All integrations operate in isolated demo/sandbox mock mode. No actual external credentials or merchant keys are required or stored in this evaluation build.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<!-- Card 1: Shopify -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-[#008060]/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#008060] text-[28px]">shopping_bag</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Shopify / E-Commerce Store</h3>
+<p class="font-body-sm text-body-sm text-secondary">Product catalog &amp; line-item resolution</p>
+</div>
+</div>
+<span class="px-space-md py-0.5 rounded-full bg-[#ecfdf5] text-[#047857] font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#047857]"></span>
+                Connected (Demo)
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Synchronized catalog database allowing AI grounding over orders, inventory variants, and promotional gift cards.</p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-low rounded-lg p-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary">
+<span class="material-symbols-outlined text-[16px] text-primary">data_object</span>
+<span>1,240 synced products • 850 open demo orders</span>
+</div>
+<button class="font-label-sm text-label-sm font-semibold text-primary hover:underline" type="button">Re-index Store</button>
+</div>
+</div>
+<!-- Card 2: Carrier Webhook -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[28px]">local_shipping</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">FedEx / UPS Carrier API</h3>
+<p class="font-body-sm text-body-sm text-secondary">Live geolocation telemetry</p>
+</div>
+</div>
+<span class="px-space-md py-0.5 rounded-full bg-[#ecfdf5] text-[#047857] font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#047857]"></span>
+                Connected (Demo)
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time tracking webhook active. Ingests synthetic GPS waypoints, weather delays, and out-for-delivery stamps.</p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-low rounded-lg p-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-secondary">
+<span class="material-symbols-outlined text-[16px] text-primary">sensors</span>
+<span>Live Webhook: <code class="font-mono text-[11px] text-on-surface">https://api.luxewear.mock/v1/fedex</code></span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">Ping: 14ms</span>
+</div>
+</div>
+<!-- Card 3: Stripe / Payments -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-[28px]">credit_card</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Stripe / Payments Engine</h3>
+<p class="font-body-sm text-body-sm text-secondary">Automated dispute and refund dispatch</p>
+</div>
+</div>
+<span class="px-space-md py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                Sandbox Mode (Demo)
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Enables agent autonomous micro-refunds up to the prescribed $50.00 ceiling using synthetic payment intents.</p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-low rounded-lg p-space-md flex items-center justify-between">
+<div class="font-label-sm text-label-sm text-secondary font-mono">
+              Key: <span class="text-on-surface">pk_test_51MzDemoKeyLuxeWear99214X</span>
+</div>
+<button class="font-label-sm text-label-sm font-semibold text-tertiary hover:underline" type="button">Rotate Test Key</button>
+</div>
+</div>
+<!-- Card 4: Zendesk / Gorgias Sync -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">support_agent</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Zendesk / Gorgias Sync</h3>
+<p class="font-body-sm text-body-sm text-secondary">Enterprise ticketing pipeline bidirectional mirror</p>
+</div>
+</div>
+<span class="px-space-md py-0.5 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm font-semibold">
+                Inactive
+              </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Allows historical human ticket ingestion and legacy macro training. Currently unlinked in this demonstration environment.</p>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-low rounded-lg p-space-md flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-secondary">Connect Gorgias / Zendesk API</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="zendeskToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant rounded-full peer peer-checked:bg-primary after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-surface-container-lowest after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB 5: Team & Permissions -->
+<div class="tab-pane flex flex-col gap-space-lg" id="pane-team">
+<div class="p-space-xl rounded-xl bg-surface-container-lowest shadow-sm space-y-space-lg">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Active Roster &amp; AI Supervision</h2>
+<p class="font-body-md text-body-md text-secondary mt-0.5">Control which human specialists have override capabilities for autonomous tickets.</p>
+</div>
+<button class="h-9 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold flex items-center gap-space-xs transition-colors self-start sm:self-auto" type="button">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>Invite Operator</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-surface-container-low font-label-sm text-label-sm uppercase tracking-wider text-secondary">
+<th class="pb-space-sm font-semibold">Specialist</th>
+<th class="pb-space-sm font-semibold">Role</th>
+<th class="pb-space-sm font-semibold">Autonomous Override</th>
+<th class="pb-space-sm font-semibold">Status</th>
+<th class="pb-space-sm font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-sm text-body-sm">
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-space-md flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md font-semibold">AM</div>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface block">Alex Morgan</span>
+<span class="text-secondary text-[12px]">alex.m@luxewear.store</span>
+</div>
+</td>
+<td class="py-space-md text-on-surface font-medium">Lead Support Engineer</td>
+<td class="py-space-md">
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm font-semibold">Full Supervisor</span>
+</td>
+<td class="py-space-md">
+<span class="flex items-center gap-1.5 text-primary font-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span> On Duty
+                  </span>
+</td>
+<td class="py-space-md text-right">
+<button class="text-secondary hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50">
+<td class="py-space-md flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-md font-semibold">SK</div>
+<div>
+<span class="font-label-md text-label-md font-semibold text-on-surface block">Sarah Kim</span>
+<span class="text-secondary text-[12px]">sarah.k@luxewear.store</span>
+</div>
+</td>
+<td class="py-space-md text-on-surface font-medium">Tier-3 Escalations</td>
+<td class="py-space-md">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface font-label-sm font-semibold">Refund Approver</span>
+</td>
+<td class="py-space-md">
+<span class="flex items-center gap-1.5 text-secondary font-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span> Off Shift
+                  </span>
+</td>
+<td class="py-space-md text-right">
+<button class="text-secondary hover:text-on-surface" type="button"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- Persistent Sticky Configuration Action Bar -->
+<div class="fixed bottom-0 left-64 right-0 p-space-md bg-surface/90 backdrop-blur-xl shadow-lg z-30 flex items-center justify-between px-gutter">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">cloud_done</span>
+<span>All policy constraints verified against demo schema</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<button class="h-9 px-space-md rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md font-semibold transition-colors flex items-center gap-space-xs" id="resetBtn" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Reset to Defaults</span>
+</button>
+<button class="h-9 px-space-lg rounded-lg bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs shadow-sm transition-all transform active:scale-95" id="saveConfigBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Save Configuration</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Tab Switching Micro-interaction
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panes = document.querySelectorAll('.tab-pane');
+
+  function showTab(targetId) {
+    panes.forEach(pane => {
+      if (pane.id === 'pane-' + targetId) {
+        pane.classList.remove('hidden');
+        pane.classList.add('flex');
+      } else {
+        pane.classList.add('hidden');
+        pane.classList.remove('flex');
+      }
+    });
+
+    tabs.forEach(tab => {
+      const isTarget = tab.getAttribute('data-tab') === targetId;
+      if (isTarget) {
+        tab.classList.remove('text-secondary', 'bg-transparent', 'hover:bg-surface-container');
+        tab.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+      } else {
+        tab.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-semibold');
+        tab.classList.add('text-secondary', 'hover:bg-surface-container');
+      }
+    });
+  }
+
+  // Initialize initial visibility
+  showTab('general');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = tab.getAttribute('data-tab');
+      showTab(target);
+    });
+  });
+
+  // Tone Selector Cards
+  const toneCards = document.querySelectorAll('.tone-card');
+  toneCards.forEach(card => {
+    card.addEventListener('click', () => {
+      toneCards.forEach(c => {
+        c.classList.remove('bg-surface-container-low', 'shadow-none');
+        c.classList.add('bg-surface-container-lowest', 'shadow-sm');
+        const radio = c.querySelector('.radio-indicator');
+        if (radio) {
+          radio.className = 'radio-indicator w-4 h-4 rounded-full bg-surface-variant flex items-center justify-center';
+          radio.innerHTML = '';
+        }
+      });
+      card.classList.remove('bg-surface-container-lowest', 'shadow-sm');
+      card.classList.add('bg-surface-container-low');
+      const activeRadio = card.querySelector('.radio-indicator');
+      if (activeRadio) {
+        activeRadio.className = 'radio-indicator w-4 h-4 rounded-full bg-primary flex items-center justify-center';
+        activeRadio.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-on-primary"></span>';
+      }
+    });
+  });
+
+  // Empathy Slider Logic
+  const empathySlider = document.getElementById('empathySlider');
+  const empathyBadge = document.getElementById('empathyBadge');
+  if (empathySlider && empathyBadge) {
+    empathySlider.addEventListener('input', (e) => {
+      const val = parseInt(e.target.value, 10);
+      if (val === 1) {
+        empathyBadge.textContent = 'Objective Tone (Low)';
+        empathyBadge.className = 'px-space-md py-0.5 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm font-semibold';
+      } else if (val === 2) {
+        empathyBadge.textContent = 'Balanced Empathy';
+        empathyBadge.className = 'px-space-md py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold';
+      } else {
+        empathyBadge.textContent = 'High Intensity (Proactive Goodwill)';
+        empathyBadge.className = 'px-space-md py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold';
+      }
+    });
+  }
+
+  // Frustration Sentiment Threshold Slider
+  const sentimentSlider = document.getElementById('sentimentSlider');
+  const sentimentDisplay = document.getElementById('sentimentDisplay');
+  if (sentimentSlider && sentimentDisplay) {
+    sentimentSlider.addEventListener('input', (e) => {
+      const score = (parseInt(e.target.value, 10) / 100).toFixed(2);
+      sentimentDisplay.textContent = score;
+    });
+  }
+
+  // Keyword Tag Adding and Deletion
+  const tagPool = document.getElementById('tagPool');
+  const newTagInput = document.getElementById('newTagInput');
+  const addTagBtn = document.getElementById('addTagBtn');
+
+  function bindTagRemovals() {
+    document.querySelectorAll('.tag-remove').forEach(btn => {
+      btn.onclick = function() {
+        const parentTag = this.closest('.keyword-tag');
+        if (parentTag) parentTag.remove();
+      };
+    });
+  }
+  bindTagRemovals();
+
+  function addKeyword() {
+    const text = newTagInput.value.trim().toLowerCase();
+    if (text) {
+      const span = document.createElement('span');
+      span.className = 'keyword-tag inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-medium shadow-sm';
+      span.innerHTML = `<span>${text}</span><button type="button" class="tag-remove hover:opacity-75"><span class="material-symbols-outlined text-[14px]">close</span></button>`;
+      tagPool.insertBefore(span, newTagInput.parentElement);
+      newTagInput.value = '';
+      bindTagRemovals();
+    }
+  }
+
+  if (addTagBtn) {
+    addTagBtn.addEventListener('click', addKeyword);
+  }
+  if (newTagInput) {
+    newTagInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addKeyword();
+      }
+    });
+  }
+
+  // Save Configuration Toast Micro-interaction
+  const saveBtn = document.getElementById('saveConfigBtn');
+  const banner = document.getElementById('saveBanner');
+  if (saveBtn && banner) {
+    saveBtn.addEventListener('click', () => {
+      banner.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        banner.classList.add('hidden');
+      }, 5000);
+    });
+  }
+
+  // Reset to Defaults Trigger
+  const resetBtn = document.getElementById('resetBtn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      document.getElementById('storeName').value = "LuxeWear E-Commerce";
+      document.getElementById('supportEmail').value = "support@luxewear.store";
+      document.getElementById('storeTimezone').value = "America/New_York";
+      document.getElementById('refundCap').value = "50.00";
+      document.getElementById('failureCap').value = "2";
+      if (sentimentSlider) {
+        sentimentSlider.value = "30";
+        sentimentDisplay.textContent = "0.30";
+      }
+      if (empathySlider) {
+        empathySlider.value = "3";
+        empathyBadge.textContent = "High Intensity";
+      }
+      // Re-trigger visual flash
+      saveBtn.classList.add('ring-2', 'ring-primary');
+      setTimeout(() => saveBtn.classList.remove('ring-2', 'ring-primary'), 600);
+    });
+  }
+</script></main></div></body></html>
