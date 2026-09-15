@@ -77,3 +77,33 @@ class RequestRecord(Base):
     key: Mapped[str] = mapped_column(String, primary_key=True)
     fingerprint: Mapped[str] = mapped_column(String)
     response: Mapped[dict] = mapped_column(JSON)
+
+
+class Document(Base):
+    __tablename__ = "documents"
+    __table_args__ = (CheckConstraint("status IN ('processing','ready','needs_ocr','failed','deleting')", name="valid_document_status"),)
+    id: Mapped[str] = mapped_column(String, primary_key=True)
+    title: Mapped[str] = mapped_column(String)
+    filename: Mapped[str] = mapped_column(String)
+    storage_name: Mapped[str] = mapped_column(String, unique=True)
+    format: Mapped[str] = mapped_column(String)
+    size: Mapped[int] = mapped_column(Integer)
+    content_hash: Mapped[str] = mapped_column(String, unique=True)
+    status: Mapped[str] = mapped_column(String, index=True)
+    error: Mapped[str | None] = mapped_column(Text, nullable=True)
+    warning: Mapped[str | None] = mapped_column(Text, nullable=True)
+    created_at: Mapped[str] = mapped_column(String)
+    updated_at: Mapped[str] = mapped_column(String)
+    page_count: Mapped[int] = mapped_column(Integer, default=0)
+    segments: Mapped[list] = mapped_column(JSON, default=list)
+
+
+class DocumentChunk(Base):
+    __tablename__ = "document_chunks"
+    __table_args__ = (UniqueConstraint("document_id", "position"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    document_id: Mapped[str] = mapped_column(ForeignKey("documents.id", ondelete="CASCADE"), index=True)
+    position: Mapped[int] = mapped_column(Integer)
+    page: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    section: Mapped[str | None] = mapped_column(String, nullable=True)
+    text: Mapped[str] = mapped_column(Text)

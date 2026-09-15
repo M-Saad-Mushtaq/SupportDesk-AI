@@ -185,3 +185,31 @@
   .day-picker { gap: 8px; }
   .settings-fields input:not([type=checkbox]), .settings-fields select { font-size: 16px; }
 }
+
+/* Knowledge Base keeps the existing panels and typography. */
+.kb-upload { padding: 18px 20px; display: flex; flex-wrap: wrap; gap: 14px; align-items: end; }
+.kb-upload label { flex: 1; min-width: 0; font-size: 14px; font-weight: 500; }
+.kb-upload input { display: block; margin-top: 9px; width: 100%; max-width: 100%; font-size: 14px; }
+.kb-upload > p { flex-basis: 100%; font-size: 13px; line-height: 1.6; }
+.kb-search { margin-bottom: 22px; }
+.kb-search form { display: flex; gap: 12px; padding: 0 20px 20px; }
+.kb-search .search-field { flex: 1; min-width: 0; margin: 0; }
+.kb-results { padding: 0 20px 20px; }
+.kb-results > p { color: var(--muted); font-size: 14px; }
+.kb-error { background: #fff1ec; color: #8b3928; padding: 14px; margin: 14px 0; border-radius: 6px; font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+.kb-search > .kb-error { margin: 0 20px 20px; }
+.knowledge-page .policy-section p { white-space: pre-wrap; overflow-wrap: anywhere; }
+.knowledge-page .policy-section button { text-align: left; font-size: 14px; }
+.knowledge-page .document-row strong, .knowledge-page .document-body h2, .knowledge-page dd { overflow-wrap: anywhere; }
+.kb-delete { margin-top: 20px; color: #943d2b; }
+.kb-delete-confirm { padding: 22px; font-size: 15px; line-height: 1.7; overflow-wrap: anywhere; }
+.kb-delete-confirm > p { margin-bottom: 18px; }
+.kb-delete-confirm > div { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 760px) {
+  .kb-upload { padding: 16px; }
+  .kb-upload label { flex-basis: 100%; }
+  .kb-search form { flex-wrap: wrap; padding: 0 16px 16px; }
+  .kb-search .search-field { flex-basis: 100%; }
+  .kb-search input { font-size: 16px; }
+  .kb-results { padding: 0 16px 16px; }
+}

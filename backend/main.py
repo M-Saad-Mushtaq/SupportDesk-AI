@@ -9,6 +9,8 @@ from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import Session
 
 from backend.database import make_engine
+from backend.document_api import document_router
+from backend.documents import recover_documents, storage_root
 from backend.models import ActivityEvent, Conversation, Customer, SupportSettings
 from backend.schemas import ActivityOut, ConversationOut, HandlingMode, MessageInput, OverviewOut, SettingsInput, Status, StatusInput
 from backend.service import conversation_out, event_out, get_conversation, idempotent_write, mutate_ticket
@@ -22,16 +24,20 @@ ERRORS = {
 }
 
 
-def create_app(database=None):
+def create_app(database=None, upload_dir=None):
     engine = database if database is not None else make_engine()
+
+    uploads = storage_root(upload_dir)
 
     @asynccontextmanager
     async def lifespan(_app):
+        recover_documents(engine, uploads)
         yield
         engine.dispose()
 
-    app = FastAPI(title="SupportDesk AI local demo API", version="0.2.0", lifespan=lifespan, description="SQLite-backed support workspace. No external messages or real AI calls. All mutation endpoints require Idempotency-Key. Status (open/in_progress/resolved) is independent of handling mode (ai/human/awaiting_human). Internal notes remain permitted on resolved tickets; public replies, handling transitions, and simulated incoming messages require explicit reopening. No automatic migrations or seeding occur on startup.")
+    app = FastAPI(title="SupportDesk AI local demo API", version="0.3.0", lifespan=lifespan, description="SQLite-backed support workspace. No external messages or real AI calls. Conversation/settings mutation endpoints require Idempotency-Key. Document uploads deduplicate by content hash; document deletion is idempotent. Status (open/in_progress/resolved) is independent of handling mode (ai/human/awaiting_human). Internal notes remain permitted on resolved tickets; public replies, handling transitions, and simulated incoming messages require explicit reopening. No automatic migrations or seeding occur on startup.")
     app.state.engine = engine
+    app.include_router(document_router(engine, uploads))
 
     @app.exception_handler(OperationalError)
     async def database_error(_request, _error):

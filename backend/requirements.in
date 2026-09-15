@@ -5,3 +5,5 @@ sqlalchemy
 alembic
 pytest
 httpx
+pypdf
+python-multipart

@@ -29,9 +29,9 @@ class ApiError extends Error {
   constructor(message: string, status: number) { super(message); this.status = status }
 }
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
+export async function request<T>(path: string, init?: RequestInit, timeout = 20000): Promise<T> {
   const controller = new AbortController()
-  const timer = window.setTimeout(() => controller.abort(), 20000)
+  const timer = window.setTimeout(() => controller.abort(), timeout)
   try {
     const response = await fetch(`/api${path}`, { ...init, signal: controller.signal, cache: 'no-store' })
     if (!response.ok) {

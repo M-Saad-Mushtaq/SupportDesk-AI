@@ -1,4 +1,3 @@
-import knowledgeFixtures from './knowledge-fixtures.json' with { type: 'json' }
 import type { Source, Ticket } from './inbox.ts'
 
 export function handlingLabel(ticket: Ticket) {
@@ -8,22 +7,6 @@ export function handlingLabel(ticket: Ticket) {
 
 export function getTicketSources(ticket: Ticket): Source[] {
   return [...new Map(ticket.messages.flatMap((message) => message.sources ?? []).map((source) => [`${source.title}:${source.section}`, source])).values()]
-}
-
-export type KnowledgeDocument = {
-  id: string; title: string; category: string; status: 'Ready' | 'Processing'; format: string
-  sections: Source[]; added: string
-}
-
-// Knowledge Base ingestion remains a separate, explicitly simulated feature.
-export const initialDocuments = knowledgeFixtures as KnowledgeDocument[]
-
-export function makeSimulatedDocument(sequence: number): KnowledgeDocument {
-  return {
-    id: `DEMO-DOC-${sequence}`, title: `Holiday delivery guide${sequence > 1 ? ` (${sequence})` : ''}`,
-    category: 'Shipping', status: 'Processing', format: 'Simulated PDF', added: 'This session',
-    sections: [{ title: 'Holiday delivery guide', section: '§1 · Seasonal delivery', excerpt: 'During busy periods, confirm the latest carrier estimate before advising a customer. Ask a support specialist to review time-sensitive delivery requests.' }],
-  }
 }
 
 export const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as const
