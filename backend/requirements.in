@@ -7,3 +7,4 @@ pytest
 httpx
 pypdf
 python-multipart
+google-genai

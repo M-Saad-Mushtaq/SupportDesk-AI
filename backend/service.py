@@ -7,7 +7,7 @@ from fastapi import HTTPException
 from sqlalchemy import func, select
 
 from backend.database import write_session
-from backend.models import ActivityEvent, Conversation, Customer, Message, Order, RequestRecord
+from backend.models import AgentRun, ActivityEvent, Conversation, Customer, Message, Order, RequestRecord
 
 
 def now():
@@ -34,7 +34,7 @@ def conversation_out(session, ticket):
         **{key: getattr(ticket, key) for key in ("id", "subject", "preview", "channel", "priority", "status", "handling_mode", "created_at", "updated_at")},
         "customer": {**customer.profile, "id": customer.id, "name": customer.name, "email": customer.email},
         "order": {**order.details, "id": order.id},
-        "messages": [{key: getattr(message, key) for key in ("id", "kind", "text", "created_at", "sources")} for message in messages],
+        "messages": [{key: getattr(message, key) for key in ("id", "kind", "text", "created_at", "sources", "origin")} for message in messages],
         "activity": [event_out(event) for event in events],
     }
 
@@ -47,11 +47,23 @@ def add_event(session, ticket, title, result, input=None):
     session.add(ActivityEvent(id=str(uuid4()), conversation_id=ticket.id, position=position(session, ActivityEvent, ticket.id), title=title, result=result, input=input, created_at=now()))
 
 
-def add_message(session, ticket, kind, text):
-    session.add(Message(id=str(uuid4()), conversation_id=ticket.id, position=position(session, Message, ticket.id), kind=kind, text=text, created_at=now(), sources=[]))
+def add_message(session, ticket, kind, text, sources=None, origin="local"):
+    message = Message(id=str(uuid4()), conversation_id=ticket.id, position=position(session, Message, ticket.id), kind=kind, text=text, created_at=now(), sources=sources or [], origin=origin)
+    session.add(message)
     if kind != "note":
         ticket.preview = text
     ticket.updated_at = now()
+    return message
+
+
+def change_handling(session, ticket, mode, title, result):
+    if ticket.handling_mode == mode:
+        return False
+    ticket.handling_mode = mode
+    ticket.handling_revision += 1
+    ticket.updated_at = now()
+    add_event(session, ticket, title, result)
+    return True
 
 
 def require_active(ticket):
@@ -71,26 +83,25 @@ def mutate_ticket(session, ticket, operation, payload):
         if ticket.status != payload["status"]:
             previous = ticket.status
             ticket.status = payload["status"]
+            ticket.handling_revision += 1
             ticket.updated_at = now()
             add_event(session, ticket, "Status changed", f"Status changed from {previous} to {ticket.status}. No automatic reply was generated.")
     elif operation in ("takeover", "resume"):
         require_active(ticket)
         if operation == "takeover" and ticket.handling_mode != "human":
-            ticket.handling_mode = "human"
-            ticket.updated_at = now()
-            add_event(session, ticket, "You took over", "Human handling is active. Automatic AI replies are paused.")
+            change_handling(session, ticket, "human", "You took over", "Human handling is active. Automatic AI replies are paused.")
         elif operation == "resume" and ticket.handling_mode != "ai":
             if ticket.handling_mode != "human":
                 raise HTTPException(409, "Only a human-controlled conversation can resume AI. Take over first.")
-            ticket.handling_mode = "ai"
-            ticket.updated_at = now()
-            add_event(session, ticket, "AI resumed", "AI handling resumed. Waiting for the next customer message; no reply was generated. Messages and notes are preserved.")
+            change_handling(session, ticket, "ai", "AI resumed", "AI handling resumed. Waiting for the next customer message; no reply was generated. Messages and notes are preserved.")
     elif operation == "simulate-customer":
         require_active(ticket)
+        if session.scalar(select(AgentRun.id).where(AgentRun.conversation_id == ticket.id, AgentRun.status.in_(("pending", "running")))):
+            raise HTTPException(409, "An agent turn is active. Wait before using the legacy simulation.")
         add_message(session, ticket, "customer", "Hi, could you give me an update on my request?")
         if ticket.handling_mode == "ai":
             customer = session.get(Customer, ticket.customer_id)
-            add_message(session, ticket, "ai", f"Thanks for checking in, {customer.name.split()[0]}. Your request is still recorded. This is a simulated acknowledgment; no order changes have been made.")
+            add_message(session, ticket, "ai", f"Thanks for checking in, {customer.name.split()[0]}. Your request is still recorded. This is a simulated acknowledgment; no order changes have been made.", origin="mock")
         add_event(session, ticket, "Simulated customer message", "A sample customer message was stored. " + ("One fixed AI acknowledgment was added; no AI service was called." if ticket.handling_mode == "ai" else "Automatic AI replies remain paused."))
     session.flush()
     return conversation_out(session, ticket)

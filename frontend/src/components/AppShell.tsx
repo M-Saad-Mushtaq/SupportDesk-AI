@@ -2,6 +2,8 @@ import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { Icon } from './Icon'
 import { Drawer } from './Drawer'
+import { providerLabel } from '../agentApi'
+import type { AIStatus } from '../agentApi'
 import { BackendHealth } from './BackendHealth'
 
 const pages = [
@@ -25,14 +27,14 @@ function Navigation({ page, onNavigate, count }: { page: Page; onNavigate: (page
   ))}</nav>
 }
 
-export function AppShell({ page, onNavigate, count, children, onRefresh, refreshing }: { page: Page; onNavigate: (page: Page) => void; count: number; children: ReactNode; onRefresh: () => void; refreshing: boolean }) {
+export function AppShell({ aiStatus, page, onNavigate, count, children, onRefresh, refreshing }: { aiStatus: AIStatus | null; page: Page; onNavigate: (page: Page) => void; count: number; children: ReactNode; onRefresh: () => void; refreshing: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false)
   return (
     <div className="app-shell">
       <aside className="sidebar">
         <Brand />
         <Navigation page={page} onNavigate={onNavigate} count={count} />
-        <div className="sidebar-footer"><div className="demo-agent"><img src="/supportdesk-logo.svg" alt="" width="26" height="26" /><div>AI assistant<span>Simulation mode</span></div></div><div className="profile"><span className="avatar avatar--agent">AM</span><div>Alex Morgan<span>Support specialist · Demo</span></div></div></div>
+        <div className="sidebar-footer"><div className="demo-agent"><img src="/supportdesk-logo.svg" alt="" width="26" height="26" /><div>AI assistant<span>{providerLabel(aiStatus)}</span></div></div><div className="profile"><span className="avatar avatar--agent">AM</span><div>Alex Morgan<span>Support specialist · Demo</span></div></div></div>
       </aside>
       <div className="workspace">
         <header className="app-header">

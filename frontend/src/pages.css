@@ -213,3 +213,24 @@
   .kb-search input { font-size: 16px; }
   .kb-results { padding: 0 16px 16px; }
 }
+
+/* Agent integration uses the existing panel rhythm and mobile panel navigation. */
+.test-customer-panel { margin: 14px 0 6px; padding: 12px; border: 1px solid #d7e4e9; border-radius: 10px; background: #f7fafc; font-size: 14px; }
+.test-customer-panel summary { cursor: pointer; font-weight: 600; }
+.test-customer-panel summary span { display: block; font-size: 12px; color: #566576; margin-top: 4px; font-weight: 400; }
+.test-customer-panel form { display: grid; gap: 8px; }
+.test-customer-panel textarea { width: 100%; min-height: 72px; resize: vertical; padding: 10px; border: 1px solid #becdd4; border-radius: 6px; background: white; color: #172838; font: inherit; }
+.test-customer-panel p { margin: 8px 0; overflow-wrap: anywhere; }
+.test-customer-panel button { justify-self: start; }
+.agent-run-status { display: grid; gap: 5px; margin-top: 10px; overflow-wrap: anywhere; }
+.agent-run-status > span { color: #566576; }
+.run-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0; }
+.run-facts dt { color: #5e6b7a; font-size: 13px; }
+.run-facts dd { margin: 4px 0 0; font-weight: 600; }
+.run-body, .run-summary, .run-row, .event-payload { overflow-wrap: anywhere; min-width: 0; }
+.event-payload pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.legacy-history { margin-top: 20px; }
+.legacy-history > summary { cursor: pointer; padding: 14px; background: #eff4f9; border-radius: 8px; }
+.legacy-history .content-page { padding: 12px 0; }
+.demo-agent > div { min-width: 0; }
+.demo-agent span { overflow-wrap: anywhere; }

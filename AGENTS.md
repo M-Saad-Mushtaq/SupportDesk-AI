@@ -2,8 +2,10 @@
 
 SupportDesk AI is a local customer-support portfolio demo with Inbox, Overview,
 Knowledge Base, Agent Activity, and Settings sharing the navy/teal Stitch shell.
-Its current milestone includes FastAPI/SQLite persistence and local document ingestion/search. No real AI or
-external messaging is integrated.
+Its current milestone adds a provider-neutral agent with optional Gemini to
+FastAPI/SQLite persistence and local document ingestion/search. Default mode is
+explicit offline mock. Live Gemini verification is pending; external messaging
+is not integrated.
 
 ## Stack and structure
 
@@ -155,3 +157,53 @@ API behavior and errors are documented at `http://127.0.0.1:8000/docs`.
   Never report success until cleanup completes; keep errors actionable.
 - Use isolated upload directories AND databases for tests. Existing Inbox
   records and source references must remain intact through migrations.
+
+
+## Agent integration rules
+
+- `backend/agent/types.py`: application-owned model/tool contracts; `gemini.py`:
+  official Google SDK adapter only; `fake.py`: offline mock/test provider;
+  `runner.py`: bounded orchestration; `tools.py`: validated local tools;
+  `api.py`: test-message, safe provider status, runs and explicit retry endpoints.
+- `frontend/src/agentApi.ts`, `components/TestCustomer.tsx`, and Agent Activity
+  expose persisted runs; `ConversationHistory.tsx` separates seeded examples.
+- Migration head is `c901bfe20a13`, adding handling revision, message origin,
+  agent_runs, and agent_tools. Preserve earlier migrations, SQLite data, uploads,
+  and local .env files. Check current/heads before upgrade; never auto-reseed.
+- Real integration is authorized, but this milestone explicitly forbids live
+  API calls during implementation. Keep fake-provider/SDK-stub tests offline.
+  Do not enable billing, buy credits, switch providers as fallback, or print keys.
+- AI_PROVIDER defaults to mock; Gemini requires backend-only GEMINI_API_KEY,
+  AI_MODEL (documented gemini-2.5-flash), and GEMINI_FREE_TIER_CONFIRMED=true after
+  the user verifies an unpaid project. The flag cannot verify Google billing.
+  .env files are NOT auto-loaded. README contains private PowerShell setup.
+- Configuration alone is unverified. Mark connection verified only after an
+  actual successful provider request; show safe missing-key/quota/error states.
+- Only public messages (including human replies) enter bounded context; exclude
+  internal notes. Pass settings/tone and treat all customer/document/tool text as
+  untrusted. Never persist private thoughts or opaque provider signatures.
+- Validate policy citation IDs and exact quotes against run retrieval; preserve
+  excerpts with the saved reply. Order access is server-scoped to the current
+  customer and always labeled stored sample shipping data, not live tracking.
+- Public API customer messages persist before generation. AI runs only while
+  active and AI-handled. Human/awaiting-human stores without a run; resolved
+  requires reopening. Resume waits for the next message.
+- One active turn per conversation. Reject new AI-mode messages mid-turn with
+  409 and retain UI drafts. Handling/status revisions invalidate in-flight work,
+  including takeover then resume. Agent handover plus truthful acknowledgement
+  commit together and stop the turn. No ordinary AI reply follows handover.
+- Writes and retry responses are atomic. No write transaction spans provider
+  I/O. Cache successful tool outcomes by run and arguments. SDK auto-execution
+  and automatic retry are disabled. Explicit retries obey attempt/cooldown limits
+  and reject stale customer/handling context. Preserve attempt metadata.
+- Single backend process only: startup marks pending/running turns interrupted
+  without silently repeating provider calls. Review and retry manually. No worker
+  fleet, agent framework, external delivery, or deployment.
+- Limits in backend/.env.example bound requests, tools, context, output, time,
+  and attempts. Whole continuation messages stay paired inside the adapter.
+- Never fabricate usage, cost, confidence, historical metrics, or model quality.
+  Show provider-reported usage only; label mock runs and seeded activity clearly.
+- `backend/tests/test_agent.py` uses real isolated SQLite/tools plus fake models;
+  `test_gemini_adapter.py` uses a stub SDK transport. Run them with the full
+  existing suite, frontend lint/tests/build, and isolated browser checks. Fake
+  tests prove application rules, not live model quality or prompt-injection immunity.

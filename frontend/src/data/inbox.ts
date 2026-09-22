@@ -1,9 +1,10 @@
 export type TicketStatus = 'Open' | 'In progress' | 'Resolved'
 export type Handling = 'Needs handover' | 'AI handling' | 'You are handling'
 export type MessageKind = 'customer' | 'ai' | 'reply' | 'note'
-export type Source = { title: string; section: string; excerpt: string }
+export type Source = { title: string; section: string; excerpt: string; source_id?: string | null; document_id?: string | null; page?: number | null; quote?: string | null }
 export type Message = {
   id: string
+  origin?: string
   kind: MessageKind
   text: string
   time: string
@@ -58,6 +59,8 @@ export type TicketAction =
   | { type: 'takeover'; time: string; id: string }
   | { type: 'resume'; time: string; id: string }
   | { type: 'customer-message'; time: string; id: string }
+  | { type: 'test-customer'; text: string; time: string; id: string }
+  | { type: 'retry-agent'; runId: string; time: string; id: string }
   | { type: 'status'; status: TicketStatus; time: string; id: string }
   | { type: 'message'; kind: 'reply' | 'note'; text: string; time: string; id: string }
 

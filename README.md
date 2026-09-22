@@ -2,27 +2,29 @@
 
 A local customer-support portfolio demo using React, TypeScript, Vite, FastAPI,
 SQLAlchemy, Alembic, and SQLite. The existing navy/teal Stitch workspace includes
-Inbox, Overview, Knowledge Base, Agent Activity, and Settings. No real AI calls
-or messages leave this demo.
+Inbox, Overview, Knowledge Base, Agent Activity, and Settings. AI defaults to
+explicit offline mock mode. Optional Gemini integration is implemented but live
+verification is pending; no live API calls were made during implementation.
+No customer messages are delivered externally.
 
 ## What persists
 
 The default database is `backend/supportdesk.db`. Customers, orders,
 conversations, public replies, internal notes, ticket status, handling mode,
 activity events, non-sensitive support settings, document metadata, extracted text,
-and passages are stored there. Original uploads are stored privately under
+passages, agent runs, tool results, and reply citation snapshots are stored there. Original uploads are stored privately under
 `backend/uploads/`. Saved
 changes survive browser refresh and backend restart. Overview counts and
 handover lists come from the same stored conversations as Inbox; Agent Activity
-shows their recorded events. Overview links open the corresponding conversation.
+separates actual agent runs from original sample conversation events. Overview links open the corresponding conversation.
 
 The frontend waits for API acknowledgment before showing success. It provides
 loading, empty, saving, and actionable error states. Failed saves retain the
 input for retry. After an uncertain network failure, retry the same action so
 the existing request key can prevent duplicate writes. Unsent drafts and pending
 browser retry keys last only for the current tab session; saved data is in SQLite.
-Use **Refresh stored workspace data** in the header to reload changes made in
-another tab. There is no live subscription or multi-user editing coordination.
+The workspace polls while runs are active and refreshes periodically. The header
+refresh button is also available. There is no multi-user editing coordination.
 
 The real `GET /api/health` endpoint remains `{"status":"ok"}`. This checks server
 liveness, not database readiness; database errors are reported separately by the
@@ -46,7 +48,7 @@ if (-not (Test-Path backend/.venv/Scripts/python.exe)) { py -3.14 -m venv backen
 npm.cmd --prefix frontend ci
 ```
 
-No API keys or `.env` file are needed. `.env.example` documents an optional
+Mock mode needs no key or `.env` file. `backend/.env.example` documents AI limits and an optional
 `DATABASE_URL` environment override. Environment files are not loaded
 automatically. The API, migrations, and seed command all use the same variable
 when set; otherwise they use the absolute default database path. Never expose
@@ -64,8 +66,8 @@ Set-Location "C:\Users\Saad\Desktop\portfolio\ai-support-agent"
 .\backend\.venv\Scripts\python.exe -m alembic -c backend/alembic.ini upgrade head
 ```
 
-The Knowledge Base migration `b7139a42c801` is now applied to this workspace.
-The previously applied `872fd5de88cd` migration was not edited. A private backup
+The current schema head is `c901bfe20a13` (agent runs and handling revisions).
+Previously applied migrations `872fd5de88cd` and `b7139a42c801` are unchanged. A private backup
 was made under `.verification/`, and every pre-existing customer, order, ticket,
 message, event, setting, and retry record was checked unchanged afterward.
 Neither migration nor seeding runs at server startup.
@@ -93,6 +95,7 @@ Terminal 1, backend:
 
 ```powershell
 Set-Location "C:\Users\Saad\Desktop\portfolio\ai-support-agent"
+$env:AI_PROVIDER = 'mock' # Default; optional Gemini setup below
 .\backend\.venv\Scripts\python.exe -m uvicorn backend.main:app --reload --reload-dir backend --host 127.0.0.1 --port 8000
 ```
 
@@ -217,9 +220,10 @@ Ticket status and handling mode are independent:
 - Resolved tickets reject public replies, takeover, resume, and simulated incoming
   messages with HTTP 409 until explicitly reopened. Reopening preserves handling
   mode and generates no reply. Repeating the current status/handling is a no-op.
-- **Simulate next customer message**, under View activity, stores one fixed
-  customer message. Only active AI handling also adds a fixed acknowledgment.
-  Human and awaiting-human modes add no automatic reply. This is not an AI service.
+- **Send test customer message** stores your text first, then starts a bounded
+  agent turn only in active AI handling. Human/awaiting-human stores the message
+  without a run. The old `/simulate-customer` endpoint remains an explicitly
+  fixed legacy simulation for compatibility; the UI uses the new endpoint.
 - Every conversation/settings mutation requires `Idempotency-Key` (8-128 letters, digits, `.`, `_`, `:`,
   or `-`; UUIDs work). Reuse the same key and payload for a retry, and a new key
   for a new intentional action. The write and saved response commit together.
@@ -263,17 +267,19 @@ this API is intended only for this local demo.
 
 ## Still simulated or deferred
 
-- AI acknowledgments, carrier/order tool outputs, source policy excerpts, and
-  external message delivery remain simulated and visibly labeled.
-- Uploaded Knowledge Base excerpts are real extracted text. Existing Inbox policy
-  citations remain part of the original sample scenarios; document search does
-  not automatically generate Inbox replies. No OCR or embeddings are implemented.
-- Historical conversation volume and performance analytics are explicitly
-  unavailable. Four imported tickets are not used to invent historical trends.
-- Saved support hours, tone, and escalation preferences do not schedule replies,
-  route messages, or change the fixed AI simulation.
-- Old browser-only settings from the previous milestone are neither imported
-  nor deleted; the Settings page now reads SQLite. Unsent drafts are not stored.
+- Default mock responses are deterministic examples. Gemini is opt-in; live
+  connectivity, model quality, and live resistance to instruction attacks are
+  unverified. Fake-provider tests cannot establish those properties.
+- Orders and carrier updates are stored sample data, never live tracking.
+  Human replies and handover acknowledgements are saved locally, not delivered.
+- Original seeded AI messages/policy excerpts remain labeled samples. New agent
+  citations reference actual retrieved uploads with saved historical excerpts.
+- Historical analytics remain unavailable; no invented confidence, costs, or
+  token counts. No OCR, embeddings, refunds, external messaging, authentication,
+  billing integration, or deployment is included.
+- Settings inform new model turns; support hours do not run a scheduler. Mock
+  mode remains a simple deterministic test provider, not a real support agent.
+- Unsent drafts are local to the tab; saved state is in SQLite.
 
 ## Verification
 
@@ -340,7 +346,7 @@ software keyboard. Ignored browser artifacts are under `.verification/`.
 A local Git repository was initialized with the configured identity. Checkpoint
 `2fd5364` preserves the source before ingestion implementation. Nothing was pushed.
 
-The complete suite passes **25 backend tests** and **3 frontend tests**, frontend
+At the Knowledge Base checkpoint, the suite passed **25 backend tests** and **3 frontend tests**, frontend
 lint, TypeScript/build, dependency checks, and Alembic model/schema agreement.
 Backend tests use isolated databases/upload folders and fresh migrations. They
 cover valid PDF/TXT/Markdown, unsupported and oversized files, duplicate races,
@@ -355,3 +361,171 @@ and Inbox takeover/resume. Desktop 1366x768 and mobile 390x844/320x568 layouts
 passed. Files and search also survived an actual test-backend process restart.
 Browser files stayed in `.verification/`; no test documents were inserted into
 the normal workspace library.
+
+
+## Agent integration: configuration and zero-spend use
+
+Checkpoint `646c131` preserved the completed Knowledge Base before this milestone.
+The official `google-genai` SDK is pinned in the existing environment. No live
+Gemini request, billing change, secret-file change, reseed, or remote push is
+part of setup. This application cannot inspect or enforce your Google billing
+account: **use an unpaid free-tier project and never enable billing**.
+
+As checked on September 19, 2026, Google's [pricing page](https://ai.google.dev/gemini-api/docs/pricing)
+lists a free API tier for **`gemini-2.5-flash`**. It supports
+[function calling](https://ai.google.dev/gemini-api/docs/function-calling).
+Availability and [quotas](https://ai.google.dev/gemini-api/docs/rate-limits) vary
+by project/model; inspect your active limits in AI Studio. If no free quota is
+available, keep mock mode or wait. Never enable billing to get this demo working.
+Google's free-tier pricing states that content can be used to improve products:
+use **fictional customer text and non-sensitive test documents only**. Relevant
+public history, configured support preferences, order results, and document
+excerpts are sent to Google only when you explicitly enable Gemini and send a
+new test message or manually retry a failed run. Internal notes are excluded.
+
+Configure privately in **backend Terminal 1**, from the repository root:
+
+```powershell
+# In Google AI Studio, select/create an unpaid project and create an API key.
+# Check its free quota and leave billing disabled. Never paste the key in chat.
+$geminiSecret = Read-Host 'Gemini API key (hidden)' -AsSecureString
+$geminiPointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($geminiSecret)
+try { $env:GEMINI_API_KEY = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($geminiPointer) }
+finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($geminiPointer) }
+Remove-Variable geminiSecret, geminiPointer
+$env:AI_PROVIDER = 'gemini'
+$env:AI_MODEL = 'gemini-2.5-flash'
+$env:GEMINI_FREE_TIER_CONFIRMED = 'true'
+.\backend\.venv\Scripts\python.exe -m uvicorn backend.main:app --reload --reload-dir backend --host 127.0.0.1 --port 8000
+```
+
+
+See Google's [private API-key setup](https://ai.google.dev/gemini-api/docs/api-key).
+The key above lasts for this PowerShell process and its child server; it is not
+written to a file or command history. Do not print environment variables. Local
+`.env` files are preserved but **not automatically loaded**. Restart the backend
+after configuration changes. Keep all credentials out of Vite variables and Git.
+`GEMINI_FREE_TIER_CONFIRMED=true` is your explicit acknowledgment, not a billing
+check. The provider label remains **not yet verified** until a request succeeds;
+a key alone never establishes connectivity. Failed requests never silently fall
+back to mock or another provider. Return to offline mode with:
+
+```powershell
+$env:AI_PROVIDER = 'mock'
+$env:AI_MODEL = 'mock-support-v1'
+# Restart the backend using the normal localhost command.
+```
+
+Terminal 2 remains:
+
+```powershell
+npm.cmd --prefix frontend run dev
+```
+
+### Manual tests after private Gemini configuration
+
+1. Upload a fictional `returns.md` through Knowledge Base, for example:
+   `# Returns` followed by `Unused items may be returned within 30 days with proof of purchase.`
+2. Open Michael's active conversation (or take over another active ticket and
+   Resume AI). Expand **Send test customer message** and ask "What is the returns
+   policy?" Review the pending/completed/error state, reply, **View sources**, and
+   Agent Activity search inputs/results. Quotes must match the uploaded passage.
+3. Ask "What is the stored status of my order ORD-9104?" in Michael's conversation.
+   The reply must label this sample stored information, not live carrier tracking.
+   Asking for Sarah's `ORD-8492` must not expose her order.
+4. Ask "Please connect me with a person." Expect awaiting-human handling and a
+   local acknowledgement, with one recorded handover. Further customer messages
+   are stored without AI. Take over, add a note/public reply, then Resume AI:
+   history is retained and no response is generated until the next new message.
+5. Review actual provider/model, duration, reported tokens, tool results, and
+   saved sources in Agent Activity. Refresh/restart to check persistence. With a
+   failed/quota-limited run, review the error, wait for the displayed time, and
+   select **Retry agent turn** explicitly. Do not enable billing or repeatedly
+   retry exhausted free quota. Live quality and connectivity remain pending until
+   you perform these tests yourself.
+
+### Agent behavior, limits, and extension points
+
+`backend/agent/types.py` owns provider-neutral request/result/tool/session types.
+`gemini.py` alone converts Google SDK objects and errors, pairs function calls
+with results, and retains opaque continuation signatures in memory. Private
+thought text/signatures never enter the activity database or UI. `fake.py` is
+an offline scriptable provider. `runner.py` owns orchestration; `tools.py` owns
+validated tools, reusing existing handling and retrieval services. A future
+provider needs an adapter, selection in `AgentRunner.provider()`, and contract
+tests; application/Inbox/tool contracts need not change.
+
+- Public customer/AI/human replies form bounded recent context. Internal notes
+  are excluded. Settings and evidence are separated from application rules;
+  customer/doc/tool content is untrusted data. Model claims are not proof of a
+  completed action. Handover is acknowledged by application code only after its
+  state/event transaction succeeds. No other external actions exist.
+- Policy answers need source IDs retrieved during that run and exact quote
+  matches. Order answers need a successful customer-scoped lookup. Unsupported
+  or malformed outputs are not published. Excerpts stay with historical replies
+  after document deletion. Citation validation checks provenance and quotes; it
+  is not a semantic proof of every sentence. Review live answers before relying
+  on them; offline tests are not a live model quality evaluation.
+- Default bounds: 16 whole public messages, 24,000 context characters (including
+  tool continuations), 1,024 output tokens/request, 4 requests, 6 tool calls,
+  20 seconds/request, 60 seconds/turn, and 3 total attempts including explicit
+  retries. Validated overrides are in `backend/.env.example`. Whole continuations
+  stay paired; oversize context fails rather than trimming function metadata.
+- Automatic SDK function execution/retries are disabled. Quota/connection/tool
+  failures preserve the incoming message and expose an actionable run error.
+  Retry delays default to 60 seconds for quota errors and are capped at 24 hours
+  for malformed/extreme provider delays. An explicit retry can make another API
+  request; previous attempt metadata and successful tool results are retained.
+- One active run per conversation is enforced in SQLite. A second customer
+  message during an AI turn gets 409 **without being saved**; its UI draft is
+  retained. Human handling can accept incoming messages during an invalidated
+  turn. A handling/status revision prevents an old response from publishing
+  after takeover/resume or resolve/reopen, even when the final mode matches.
+- Idempotency keys prevent duplicate incoming messages, runs, replies, and
+  handovers. Tool results deduplicate within a run, including explicit retries.
+  Writes use short transactions; no SQLite write transaction spans model I/O.
+- **Run one backend process (no workers)**. Startup marks interrupted active
+  turns for review and never automatically replays an uncertain provider call.
+  Explicit retry is allowed only while handling/customer context is still current.
+  Hot reload can interrupt a turn; avoid source edits during a live request.
+
+New endpoints (all prefixed `/api`):
+
+| Endpoint | Behavior |
+| --- | --- |
+| `GET /ai/status` | Safe provider configuration/last request status, no live probe |
+| `POST /conversations/{id}/customer-messages` | `{ "text": "..." }`, 1-3,000 trimmed characters; Idempotency-Key required; returns saved snapshot and pending run ID |
+| `GET /agent/runs` | Latest 200 runs by default; optional conversation_id/status/limit (max 500) |
+| `GET /agent/runs/{id}` | Actual run, attempts, safe tool inputs/results, reported usage |
+| `POST /agent/runs/{id}/retry` | Explicit bounded retry; Idempotency-Key required; 409 for stale/finished work, 429 while cooling down |
+
+Run the checks in the verification section using new temporary test directories.
+All agent tests use a fake provider or SDK stub transport, isolated SQLite files,
+and temporary uploads. They exercise citation validation, missing evidence,
+customer isolation, handover, concurrency, stale reply cancellation, retries,
+limits, errors, public-only context, persistence, and interrupted-run recovery.
+
+
+### Completed agent milestone verification
+
+The complete current suite passes **63 backend tests** and **4 frontend tests**,
+frontend lint, TypeScript/production build, `pip check`, and Alembic schema
+agreement. Three third-party deprecation warnings remain (Starlette/httpx,
+AnyIO, and the Google SDK on Python 3.14); they do not fail the checks.
+
+Headless Chrome verified mock policy citations, customer-scoped order lookup,
+handover, human-only incoming messages, resume waiting, individual handling
+state, actual run filters/timeline, retained input and retry after a network
+failure, browser refresh, and the Vite health proxy. Layout checks passed at
+1366x768, 390x844, and 320x568 with no page-level horizontal overflow and the
+composer within the viewport. A physical phone keyboard was not tested.
+Actual backend process restart preserved the isolated test conversations,
+messages, citations, runs, tool results, and documents unchanged.
+
+Migration `c901bfe20a13` is applied to the existing workspace database. A private
+backup is under `.verification/pre-agent-802f5ec7af4840eb97a7c98330c3f2d8.db`.
+Every pre-existing table value and uploaded file hash was compared unchanged
+afterward. No seed command was run against the existing workspace. Browser
+artifacts and all test files/databases remain ignored under `.verification/`.
+Live Gemini calls, connectivity, model quality, and live injection resistance
+remain deliberately unverified. No billing or paid service was enabled.

@@ -49,7 +49,7 @@ export async function request<T>(path: string, init?: RequestInit, timeout = 200
 // Retain the key after uncertain network/server failure. Repeating the same
 // action uses the original key until acknowledged, preventing duplicate writes.
 const pendingKeys = new Map<string, string>()
-async function write<T>(path: string, method: string, body?: unknown, preferredKey?: string) {
+export async function write<T>(path: string, method: string, body?: unknown, preferredKey?: string) {
   const signature = JSON.stringify([path, method, body ?? null])
   const key = pendingKeys.get(signature) ?? preferredKey ?? crypto.randomUUID()
   pendingKeys.set(signature, key)
@@ -71,6 +71,11 @@ export const api = {
   saveSettings: (settings: DemoSettings) => write<DemoSettings>('/settings', 'PUT', settings),
   action: async (id: string, action: TicketAction) => {
     const base = `/conversations/${encodeURIComponent(id)}`
+    if (action.type === 'test-customer') return toTicket((await write<{ conversation: ApiConversation; run_id: string | null }>(`${base}/customer-messages`, 'POST', { text: action.text }, action.id)).conversation)
+    if (action.type === 'retry-agent') {
+      await write(`/agent/runs/${encodeURIComponent(action.runId)}/retry`, 'POST', undefined, action.id)
+      return api.conversation(id)
+    }
     if (action.type === 'message') return toTicket(await write<ApiConversation>(`${base}/messages`, 'POST', { kind: action.kind, text: action.text }, action.id))
     if (action.type === 'status') return toTicket(await write<ApiConversation>(`${base}/status`, 'PATCH', { status: statuses[action.status] }, action.id))
     return toTicket(await write<ApiConversation>(`${base}/${action.type === 'customer-message' ? 'simulate-customer' : action.type}`, 'POST', undefined, action.id))

@@ -46,3 +46,25 @@ test('demo settings validate same-day hours and supported preferences', () => {
   assert.ok(validateSettings(defaultSettings))
   for (const input of [null, {}, { ...defaultSettings, days: [] }, { ...defaultSettings, start: '19:00', end: '09:00' }, { ...defaultSettings, email: 'invalid' }]) assert.equal(validateSettings(input), false)
 })
+
+
+test('agent test-message retries keep their key and preserve provider/citation metadata', async (t) => {
+  const originalFetch = globalThis.fetch
+  Object.defineProperty(globalThis, 'window', { value: globalThis, configurable: true })
+  t.after(() => { globalThis.fetch = originalFetch })
+  const calls: { path: string; key: string }[] = []
+  const message = { ...stored.messages[0], kind: 'ai', origin: 'gemini', sources: [{ source_id: 'doc:1:passage:2', document_id: '1', title: 'Returns', section: 'Page 2', page: 2, excerpt: 'Returns accepted.', quote: 'Returns accepted.' }] }
+  const response = { ...stored, messages: [...stored.messages, message] }
+  globalThis.fetch = async (input, init) => {
+    calls.push({ path: String(input), key: new Headers(init?.headers).get('Idempotency-Key') ?? '' })
+    if (calls.length === 1) throw new Error('Lost after commit')
+    return new Response(JSON.stringify({ conversation: response, run_id: 'saved-run' }), { status: 200 })
+  }
+  const action = { type: 'test-customer', text: 'Policy question', time: '12:00', id: 'customer-intent-key' } as const
+  await assert.rejects(api.action(fixture.id, action))
+  const saved = await api.action(fixture.id, { ...action, id: 'retry-click-key' })
+  assert.equal(calls[0].key, calls[1].key)
+  assert.ok(calls[1].path.endsWith('/customer-messages'))
+  assert.equal(saved.messages.at(-1)?.origin, 'gemini')
+  assert.equal(saved.messages.at(-1)?.sources?.[0].source_id, 'doc:1:passage:2')
+})

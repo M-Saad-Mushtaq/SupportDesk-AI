@@ -24,19 +24,25 @@ ERRORS = {
 }
 
 
-def create_app(database=None, upload_dir=None):
+def create_app(database=None, upload_dir=None, ai_config=None, ai_provider=None):
     engine = database if database is not None else make_engine()
 
+    from backend.agent.runner import AgentRunner
+    from backend.agent.api import agent_router
+    runner = AgentRunner(engine, ai_config, ai_provider)
     uploads = storage_root(upload_dir)
 
     @asynccontextmanager
     async def lifespan(_app):
         recover_documents(engine, uploads)
+        runner.recover()
         yield
         engine.dispose()
 
-    app = FastAPI(title="SupportDesk AI local demo API", version="0.3.0", lifespan=lifespan, description="SQLite-backed support workspace. No external messages or real AI calls. Conversation/settings mutation endpoints require Idempotency-Key. Document uploads deduplicate by content hash; document deletion is idempotent. Status (open/in_progress/resolved) is independent of handling mode (ai/human/awaiting_human). Internal notes remain permitted on resolved tickets; public replies, handling transitions, and simulated incoming messages require explicit reopening. No automatic migrations or seeding occur on startup.")
+    app = FastAPI(title="SupportDesk AI local demo API", version="0.4.0", lifespan=lifespan, description="SQLite-backed support workspace. No external messages. Explicit mock mode by default; optional privately configured Gemini. Conversation/settings mutation endpoints require Idempotency-Key. Document uploads deduplicate by content hash; document deletion is idempotent. Status (open/in_progress/resolved) is independent of handling mode (ai/human/awaiting_human). Internal notes remain permitted on resolved tickets; public replies, handling transitions, and simulated incoming messages require explicit reopening. No automatic migrations or seeding occur on startup.")
     app.state.engine = engine
+    app.state.agent = runner
+    app.include_router(agent_router(runner))
     app.include_router(document_router(engine, uploads))
 
     @app.exception_handler(OperationalError)

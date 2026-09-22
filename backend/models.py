@@ -1,4 +1,4 @@
-from sqlalchemy import JSON, CheckConstraint, ForeignKey, Integer, String, Text, UniqueConstraint
+from sqlalchemy import Index, text, JSON, CheckConstraint, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
 from backend.database import Base
@@ -34,6 +34,7 @@ class Conversation(Base):
     priority: Mapped[str] = mapped_column(String)
     status: Mapped[str] = mapped_column(String, index=True)
     handling_mode: Mapped[str] = mapped_column(String, index=True)
+    handling_revision: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     created_at: Mapped[str] = mapped_column(String)
     updated_at: Mapped[str] = mapped_column(String)
 
@@ -51,6 +52,7 @@ class Message(Base):
     text: Mapped[str] = mapped_column(Text)
     created_at: Mapped[str] = mapped_column(String)
     sources: Mapped[list] = mapped_column(JSON)
+    origin: Mapped[str] = mapped_column(String, default="local", server_default="sample")
 
 
 class ActivityEvent(Base):
@@ -107,3 +109,45 @@ class DocumentChunk(Base):
     page: Mapped[int | None] = mapped_column(Integer, nullable=True)
     section: Mapped[str | None] = mapped_column(String, nullable=True)
     text: Mapped[str] = mapped_column(Text)
+
+
+class AgentRun(Base):
+    __tablename__ = "agent_runs"
+    __table_args__ = (
+        CheckConstraint("status IN ('pending','running','completed','failed','cancelled','interrupted')", name="valid_run_status"),
+        Index("one_active_agent_run", "conversation_id", unique=True, sqlite_where=text("status IN ('pending','running')")),
+    )
+    id: Mapped[str] = mapped_column(String, primary_key=True)
+    conversation_id: Mapped[str] = mapped_column(ForeignKey("conversations.id"), index=True)
+    customer_message_id: Mapped[str] = mapped_column(ForeignKey("messages.id"), unique=True)
+    response_message_id: Mapped[str | None] = mapped_column(ForeignKey("messages.id"), unique=True, nullable=True)
+    provider: Mapped[str] = mapped_column(String)
+    model: Mapped[str] = mapped_column(String)
+    status: Mapped[str] = mapped_column(String)
+    handling_revision: Mapped[int] = mapped_column(Integer)
+    attempt: Mapped[int] = mapped_column(Integer, default=1)
+    created_at: Mapped[str] = mapped_column(String)
+    started_at: Mapped[str | None] = mapped_column(String, nullable=True)
+    finished_at: Mapped[str | None] = mapped_column(String, nullable=True)
+    retry_at: Mapped[str | None] = mapped_column(String, nullable=True)
+    error_code: Mapped[str | None] = mapped_column(String, nullable=True)
+    error: Mapped[str | None] = mapped_column(Text, nullable=True)
+    duration_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    request_count: Mapped[int] = mapped_column(Integer, default=0)
+    tool_count: Mapped[int] = mapped_column(Integer, default=0)
+    usage: Mapped[dict] = mapped_column(JSON, default=dict)
+    sources: Mapped[list] = mapped_column(JSON, default=list)
+    attempts: Mapped[list] = mapped_column(JSON, default=list)
+
+
+class AgentTool(Base):
+    __tablename__ = "agent_tools"
+    __table_args__ = (UniqueConstraint("run_id", "fingerprint"),)
+    id: Mapped[str] = mapped_column(String, primary_key=True)
+    run_id: Mapped[str] = mapped_column(ForeignKey("agent_runs.id"), index=True)
+    fingerprint: Mapped[str] = mapped_column(String)
+    name: Mapped[str] = mapped_column(String)
+    arguments: Mapped[dict] = mapped_column(JSON)
+    result: Mapped[dict] = mapped_column(JSON)
+    created_at: Mapped[str] = mapped_column(String)
+    attempt: Mapped[int] = mapped_column(Integer)

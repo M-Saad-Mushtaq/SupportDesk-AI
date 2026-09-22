@@ -46,6 +46,10 @@ class SettingsInput(InputModel):
 
 
 class SourceOut(BaseModel):
+    source_id: str | None = None
+    document_id: str | None = None
+    page: int | None = None
+    quote: str | None = None
     title: str
     section: str
     excerpt: str
@@ -82,6 +86,7 @@ class OrderOut(BaseModel):
 
 
 class MessageOut(BaseModel):
+    origin: str = "sample"
     id: str
     kind: Literal["customer", "ai", "reply", "note"]
     text: str
