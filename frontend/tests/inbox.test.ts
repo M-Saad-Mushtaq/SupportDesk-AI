@@ -1,4 +1,5 @@
-﻿import assert from 'node:assert/strict'
+import { customerApi } from '../src/customerApi.ts'
+import assert from 'node:assert/strict'
 import test from 'node:test'
 import { readFileSync } from 'node:fs'
 import { api, toTicket } from '../src/api.ts'
@@ -48,7 +49,7 @@ test('demo settings validate same-day hours and supported preferences', () => {
 })
 
 
-test('agent test-message retries keep their key and preserve provider/citation metadata', async (t) => {
+test('staff public replies keep retry keys and preserve provider/citation metadata', async (t) => {
   const originalFetch = globalThis.fetch
   Object.defineProperty(globalThis, 'window', { value: globalThis, configurable: true })
   t.after(() => { globalThis.fetch = originalFetch })
@@ -58,13 +59,33 @@ test('agent test-message retries keep their key and preserve provider/citation m
   globalThis.fetch = async (input, init) => {
     calls.push({ path: String(input), key: new Headers(init?.headers).get('Idempotency-Key') ?? '' })
     if (calls.length === 1) throw new Error('Lost after commit')
-    return new Response(JSON.stringify({ conversation: response, run_id: 'saved-run' }), { status: 200 })
+    return new Response(JSON.stringify(response), { status: 200 })
   }
-  const action = { type: 'test-customer', text: 'Policy question', time: '12:00', id: 'customer-intent-key' } as const
+  const action = { type: 'message', kind: 'reply', text: 'I can help with your policy question.', time: '12:00', id: 'staff-intent-key' } as const
   await assert.rejects(api.action(fixture.id, action))
   const saved = await api.action(fixture.id, { ...action, id: 'retry-click-key' })
   assert.equal(calls[0].key, calls[1].key)
-  assert.ok(calls[1].path.endsWith('/customer-messages'))
+  assert.ok(calls[1].path.endsWith('/messages'))
   assert.equal(saved.messages.at(-1)?.origin, 'gemini')
   assert.equal(saved.messages.at(-1)?.sources?.[0].source_id, 'doc:1:passage:2')
+})
+
+
+test('customer writes use only public-scoped endpoints and reuse uncertain send keys', async (t) => {
+  const originalFetch = globalThis.fetch
+  Object.defineProperty(globalThis, 'window', { value: globalThis, configurable: true })
+  t.after(() => { globalThis.fetch = originalFetch })
+  const calls: { path: string; key: string; body: unknown }[] = []
+  globalThis.fetch = async (input, init) => {
+    calls.push({ path: String(input), key: new Headers(init?.headers).get('Idempotency-Key') ?? '', body: JSON.parse(String(init?.body ?? '{}')) })
+    if (calls.length === 1) throw new Error('Lost after commit')
+    return new Response(JSON.stringify({ id: 'ticket', messages: [], run: null }), { status: 200 })
+  }
+  await assert.rejects(customerApi.send('customer', 'ticket', 'Hello', 'customer-send-key'))
+  await customerApi.send('customer', 'ticket', 'Hello', 'new-click-key')
+  assert.equal(calls[0].key, calls[1].key)
+  assert.equal(calls[1].path, '/api/demo/customers/customer/conversations/ticket/messages')
+  assert.deepEqual(calls[1].body, { text: 'Hello' })
+  await customerApi.retry('customer', 'ticket', 'run')
+  assert.equal(calls[2].path, '/api/demo/customers/customer/conversations/ticket/runs/run/retry')
 })

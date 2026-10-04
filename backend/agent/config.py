@@ -22,7 +22,7 @@ class AIConfig:
     @classmethod
     def from_env(cls):
         provider = os.getenv("AI_PROVIDER", "mock").strip().lower()
-        model = os.getenv("AI_MODEL", "gemini-2.5-flash" if provider == "gemini" else "mock-support-v1").strip()
+        model = os.getenv("AI_MODEL", "gemini-3.8-flash" if provider == "gemini" else "mock-support-v1").strip()
         values = {"provider": provider, "model": model, "key": os.getenv("GEMINI_API_KEY", ""), "free_tier_confirmed": os.getenv("GEMINI_FREE_TIER_CONFIRMED", "").lower() == "true"}
         if provider not in ("mock", "gemini"):
             values.update(provider="invalid", error="Set AI_PROVIDER to mock or gemini. No fallback provider was used.")

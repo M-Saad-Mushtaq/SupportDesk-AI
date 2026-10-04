@@ -10,8 +10,8 @@ export type AgentRun = {
   tools: AgentTool[]; attempts: Record<string, unknown>[]
 }
 export const agentApi = {
-  status: () => request<AIStatus>('/ai/status'),
-  runs: () => request<AgentRun[]>('/agent/runs'),
+  status: (signal?: AbortSignal) => request<AIStatus>('/ai/status', { signal }),
+  runs: (signal?: AbortSignal) => request<AgentRun[]>('/agent/runs', { signal }),
 }
 export function providerLabel(status: AIStatus | null) {
   if (!status) return 'Provider status unavailable'

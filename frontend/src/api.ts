@@ -31,6 +31,9 @@ class ApiError extends Error {
 
 export async function request<T>(path: string, init?: RequestInit, timeout = 20000): Promise<T> {
   const controller = new AbortController()
+  const cancel = () => controller.abort()
+  init?.signal?.addEventListener('abort', cancel, { once: true })
+  if (init?.signal?.aborted) controller.abort()
   const timer = window.setTimeout(() => controller.abort(), timeout)
   try {
     const response = await fetch(`/api${path}`, { ...init, signal: controller.signal, cache: 'no-store' })
@@ -43,7 +46,7 @@ export async function request<T>(path: string, init?: RequestInit, timeout = 200
   } catch (error) {
     if (error instanceof ApiError) throw error
     throw new Error('Could not reach the backend or the request timed out. Your input is kept. Check port 8000, then retry the same action safely.')
-  } finally { window.clearTimeout(timer) }
+  } finally { window.clearTimeout(timer); init?.signal?.removeEventListener('abort', cancel) }
 }
 
 // Retain the key after uncertain network/server failure. Repeating the same
@@ -64,20 +67,19 @@ export async function write<T>(path: string, method: string, body?: unknown, pre
 }
 
 export const api = {
-  conversations: async () => (await request<ApiConversation[]>('/conversations')).map(toTicket),
+  conversations: async (signal?: AbortSignal) => (await request<ApiConversation[]>('/conversations', { signal })).map(toTicket),
   conversation: async (id: string) => toTicket(await request<ApiConversation>(`/conversations/${encodeURIComponent(id)}`)),
-  overview: () => request<OverviewMetrics>('/overview'),
+  overview: (signal?: AbortSignal) => request<OverviewMetrics>('/overview', { signal }),
   settings: () => request<DemoSettings>('/settings'),
   saveSettings: (settings: DemoSettings) => write<DemoSettings>('/settings', 'PUT', settings),
   action: async (id: string, action: TicketAction) => {
     const base = `/conversations/${encodeURIComponent(id)}`
-    if (action.type === 'test-customer') return toTicket((await write<{ conversation: ApiConversation; run_id: string | null }>(`${base}/customer-messages`, 'POST', { text: action.text }, action.id)).conversation)
     if (action.type === 'retry-agent') {
       await write(`/agent/runs/${encodeURIComponent(action.runId)}/retry`, 'POST', undefined, action.id)
       return api.conversation(id)
     }
     if (action.type === 'message') return toTicket(await write<ApiConversation>(`${base}/messages`, 'POST', { kind: action.kind, text: action.text }, action.id))
     if (action.type === 'status') return toTicket(await write<ApiConversation>(`${base}/status`, 'PATCH', { status: statuses[action.status] }, action.id))
-    return toTicket(await write<ApiConversation>(`${base}/${action.type === 'customer-message' ? 'simulate-customer' : action.type}`, 'POST', undefined, action.id))
+    return toTicket(await write<ApiConversation>(`${base}/${action.type}`, 'POST', undefined, action.id))
   },
 }

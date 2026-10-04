@@ -29,6 +29,7 @@ def create_app(database=None, upload_dir=None, ai_config=None, ai_provider=None)
 
     from backend.agent.runner import AgentRunner
     from backend.agent.api import agent_router
+    from backend.customer_demo import customer_router
     runner = AgentRunner(engine, ai_config, ai_provider)
     uploads = storage_root(upload_dir)
 
@@ -43,6 +44,7 @@ def create_app(database=None, upload_dir=None, ai_config=None, ai_provider=None)
     app.state.engine = engine
     app.state.agent = runner
     app.include_router(agent_router(runner))
+    app.include_router(customer_router(runner))
     app.include_router(document_router(engine, uploads))
 
     @app.exception_handler(OperationalError)

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import type { Ticket } from '../data/inbox'
 import type { AgentRun, AIStatus } from '../agentApi'
-import { providerLabel } from '../agentApi'
 import { PageHeading } from '../components/PageHeading'
 import { Icon } from '../components/Icon'
 import { ConversationHistory } from './ConversationHistory'
@@ -16,10 +15,10 @@ export function AgentActivity({ tickets, runs, aiStatus, openTicket }: { tickets
   const ticket = tickets.find((ticket) => ticket.id === selected?.conversation_id)
   const sources = ticket?.messages.find((message) => message.id === selected?.response_message_id)?.sources ?? []
   return <main className="content-page activity-page">
-    <PageHeading title="Agent Activity" description="Actual agent turns and observable tool results. Mock runs are labeled; seeded examples are kept separately below." action={<span className="page-period">{providerLabel(aiStatus)}</span>} />
+    <PageHeading title="Agent Activity" description="Actual agent turns and observable tool results. Mock runs are labeled; seeded examples are kept separately below." />
     {aiStatus?.error && <p className="action-error" role="alert">{aiStatus.error}</p>}
     <div className="page-filters"><div className="search-field"><Icon name="search" size={17} /><input type="search" aria-label="Search agent runs" placeholder="Search customer, ticket, provider, or run" value={query} onChange={(event) => setQuery(event.target.value)} /></div><select aria-label="Filter agent runs" value={filter} onChange={(event) => setFilter(event.target.value)}>{['all', 'pending', 'running', 'completed', 'failed', 'cancelled', 'interrupted'].map((value) => <option key={value} value={value}>{value === 'all' ? 'All statuses' : value}</option>)}</select><span className="muted">{visible.length} runs / Latest 200 loaded</span></div>
-    {!runs.length && <div className="panel page-empty"><h2>No agent runs yet</h2><p>Open an active conversation in AI handling mode, then send a test customer message. Existing sample replies do not count as real runs.</p></div>}
+    {!runs.length && <div className="panel page-empty"><h2>No agent runs yet</h2><p>Send a message from customer chat while its conversation is active and AI handling is enabled. Existing sample replies do not count as real runs.</p></div>}
     {!!runs.length && <div className={`activity-columns ${mobileTimeline ? 'show-timeline' : ''}`}>
       <section className="panel run-list"><div className="panel-heading"><h2>Agent runs</h2></div>{visible.map((run) => <button key={run.id} className={`run-row ${run.id === selected?.id ? 'is-selected' : ''}`} aria-pressed={run.id === selected?.id} onClick={() => { setSelectedId(run.id); setMobileTimeline(true) }}><div><strong>{run.conversation_id}</strong><span>{run.status}</span></div><h3>{tickets.find((ticket) => ticket.id === run.conversation_id)?.customer.name ?? 'Customer'}</h3><p>{run.model}</p><span className="badge badge--neutral">{run.provider === 'mock' ? 'Mock simulation' : run.provider} / {new Date(run.created_at).toLocaleTimeString()}</span></button>)}{!visible.length && <p className="page-empty">No matching runs. Try another search or status.</p>}</section>
       {selected && <section className="panel run-detail"><button className="text-button preview-back" onClick={() => setMobileTimeline(false)}><Icon name="back" size={16} />Back to runs</button><div className="panel-heading"><div><h2>{ticket?.customer.name ?? selected.conversation_id}</h2><p>{selected.status} / Attempt {selected.attempt}</p></div><button className="secondary-button" onClick={() => openTicket(selected.conversation_id)}>Open conversation</button></div><div className="run-body">

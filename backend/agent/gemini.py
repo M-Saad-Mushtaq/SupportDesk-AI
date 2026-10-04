@@ -1,12 +1,26 @@
 """Only this module handles Google SDK objects and continuation metadata."""
 from email.utils import parsedate_to_datetime
 from datetime import datetime, timezone
+import logging
 import math
+import re
 from uuid import uuid4
 import httpx
 from google import genai
 from google.genai import types, errors
 from backend.agent.types import ModelResult, ProviderError, ToolCall
+
+logger = logging.getLogger(__name__)
+
+
+def log_api_error(error, model, sanitize):
+    """Server-side only: HTTP status, provider status and a sanitized, bounded
+    message. Never logs keys, headers, URLs, request bodies or customer text."""
+    message = sanitize(str(getattr(error, "message", None) or ""))
+    message = re.sub(r"https?://\S+", "[url]", message)
+    message = re.sub(r"(?i)(key|token|authorization)\s*[=:]\s*\S+", r"\1=[redacted]", message)
+    message = " ".join(message.split())[:300]
+    logger.warning("Gemini API error: http_status=%s provider_status=%s model=%s message=%s", getattr(error, "code", None), sanitize(str(getattr(error, "status", None) or "")), model, message)
 
 
 def retry_delay(error):
@@ -43,12 +57,12 @@ class GeminiProvider:
         # Explicit Developer API: no Vertex credentials, paid fallback, built-in
         # web grounding, automatic function execution, or automatic retries.
         client = self.client_factory(api_key=self.config.key, vertexai=False, http_options=types.HttpOptions(timeout=int(self.config.request_timeout * 1000), retry_options=types.HttpRetryOptions(attempts=1)))
-        return GeminiSession(client, self.config.model, request)
+        return GeminiSession(client, self.config.model, request, self.config.sanitize)
 
 
 class GeminiSession:
-    def __init__(self, client, model, request):
-        self.client, self.model, self.request = client, model, request
+    def __init__(self, client, model, request, sanitize=lambda value: value):
+        self.client, self.model, self.request, self.sanitize = client, model, request, sanitize
         self.contents = [types.Content(role="user" if message["role"] == "user" else "model", parts=[types.Part(text=message["text"])]) for message in request.history]
         self.pending = {}
 
@@ -66,6 +80,7 @@ class GeminiSession:
             response = await self.client.aio.models.generate_content(model=self.model, contents=self.contents, config=types.GenerateContentConfig(system_instruction=self.request.system, tools=[types.Tool(function_declarations=declarations)], automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True), max_output_tokens=self.request.max_output_tokens, http_options=types.HttpOptions(timeout=max(1, int(timeout * 1000)), retry_options=types.HttpRetryOptions(attempts=1))))
         except errors.APIError as error:
             code = getattr(error, "code", 0)
+            log_api_error(error, self.model, self.sanitize)
             if code == 429:
                 raise ProviderError("quota", "Gemini free quota or rate limit reached. Check AI Studio and wait before an explicit retry. No paid fallback was used.", retry_delay(error)) from None
             if code in (401, 403):

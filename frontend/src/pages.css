@@ -215,13 +215,11 @@
 }
 
 /* Agent integration uses the existing panel rhythm and mobile panel navigation. */
-.test-customer-panel { margin: 14px 0 6px; padding: 12px; border: 1px solid #d7e4e9; border-radius: 10px; background: #f7fafc; font-size: 14px; }
-.test-customer-panel summary { cursor: pointer; font-weight: 600; }
-.test-customer-panel summary span { display: block; font-size: 12px; color: #566576; margin-top: 4px; font-weight: 400; }
-.test-customer-panel form { display: grid; gap: 8px; }
-.test-customer-panel textarea { width: 100%; min-height: 72px; resize: vertical; padding: 10px; border: 1px solid #becdd4; border-radius: 6px; background: white; color: #172838; font: inherit; }
-.test-customer-panel p { margin: 8px 0; overflow-wrap: anywhere; }
-.test-customer-panel button { justify-self: start; }
+.agent-status-panel { margin: 14px 0 6px; padding: 12px; border: 1px solid #d7e4e9; border-radius: 10px; background: #f7fafc; font-size: 14px; }
+.agent-status-panel summary { cursor: pointer; font-weight: 600; }
+.agent-status-panel summary span { display: block; font-size: 12px; color: #566576; margin-top: 4px; font-weight: 400; }
+.agent-status-panel p { margin: 8px 0; overflow-wrap: anywhere; }
+.agent-status-panel button { justify-self: start; }
 .agent-run-status { display: grid; gap: 5px; margin-top: 10px; overflow-wrap: anywhere; }
 .agent-run-status > span { color: #566576; }
 .run-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 20px 0; }
@@ -234,3 +232,6 @@
 .legacy-history .content-page { padding: 12px 0; }
 .demo-agent > div { min-width: 0; }
 .demo-agent span { overflow-wrap: anywhere; }
+
+.message-thread { overflow-anchor: none; }
+.new-message-button { align-self: center; padding: 7px 12px; background: #ecfaf5; color: #066e62; border: 1px solid #b4dcd5; border-radius: 18px; font-size: 12px; cursor: pointer; }

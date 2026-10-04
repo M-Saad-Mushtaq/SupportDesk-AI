@@ -40,7 +40,6 @@ export function AppShell({ aiStatus, page, onNavigate, count, children, onRefres
         <header className="app-header">
           <button className="icon-button mobile-menu" aria-label="Open navigation" onClick={() => setMenuOpen(true)}><Icon name="menu" /></button>
           <div className="breadcrumb"><span>Workspace</span><Icon name="chevron" size={14} /><strong>{page}</strong></div>
-          <span className="demo-label"><span className="dot" />Demo — sample data</span>
           <BackendHealth />
           <button className="icon-button" aria-label="Refresh stored workspace data" title="Refresh stored workspace data" disabled={refreshing} onClick={onRefresh}><Icon name="activity" size={17} /></button>
         </header>

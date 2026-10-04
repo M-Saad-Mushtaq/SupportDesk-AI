@@ -44,3 +44,5 @@ Thumbs.db
 backend/uploads/
 uploads/
 
+# Local browser recordings
+/recordings/

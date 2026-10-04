@@ -3,7 +3,8 @@ import type { Message, Ticket, TicketAction } from '../data/inbox'
 import { ticketStatuses } from '../data/inbox'
 import type { TicketStatus } from '../data/inbox'
 import type { AgentRun, AIStatus } from '../agentApi'
-import { TestCustomer } from './TestCustomer'
+import { AgentRunStatus } from './AgentRunStatus'
+import { useChatScroll } from '../hooks/useChatScroll'
 import { Icon } from './Icon'
 
 export type Drafts = { reply: string; note: string; mode: 'reply' | 'note' }
@@ -26,7 +27,7 @@ export function Conversation({ runs, aiStatus, ticket, drafts, onDrafts, onActio
   runs: AgentRun[]; aiStatus: AIStatus | null; ticket: Ticket; drafts: Drafts; onDrafts: (drafts: Drafts) => void
   onAction: (action: TicketAction) => Promise<void>; saving: boolean; onBack: () => void; onDetails: () => void; detailsOpen: boolean
 }) {
-  const thread = useRef<HTMLDivElement>(null)
+  const { thread, unread, jump, onScroll } = useChatScroll(ticket.messages.length)
   const heading = useRef<HTMLHeadingElement>(null)
   const [feedback, setFeedback] = useState('')
   const [actionError, setActionError] = useState('')
@@ -52,10 +53,6 @@ export function Conversation({ runs, aiStatus, ticket, drafts, onDrafts, onActio
   const canReply = ticket.status !== 'Resolved' && ticket.handling === 'You are handling'
   const disabled = !isNote && !canReply
 
-  useEffect(() => {
-    const element = thread.current
-    if (element) element.scrollTop = element.scrollHeight
-  }, [ticket.messages.length])
   useEffect(() => { heading.current?.focus({ preventScroll: true }) }, [ticket.id])
 
   function context() {
@@ -78,17 +75,18 @@ export function Conversation({ runs, aiStatus, ticket, drafts, onDrafts, onActio
         {ticket.handling !== 'You are handling' && ticket.status !== 'Resolved' && <button className="takeover-button" disabled={saving} onClick={() => { void perform({ type: 'takeover', ...context() }, 'Takeover saved. AI replies are paused.') }}><Icon name="hand" size={15} />Take over from AI</button>}
         {ticket.handling === 'You are handling' && ticket.status !== 'Resolved' && <button className="takeover-button resume-button" disabled={saving} onClick={() => { void perform({ type: 'resume', ...context() }, 'AI handling saved. Waiting for the next customer message; no reply generated.') }}><Icon name="activity" size={15} />Resume AI</button>}
       </div>
-      <div className="message-thread" ref={thread} tabIndex={0} aria-label="Message history">
+      <div className="message-thread" ref={thread} onScroll={onScroll} tabIndex={0} aria-label="Message history">
         <div className="thread-date"><span>Stored demo conversation · Times shown locally</span></div>
         {ticket.messages.map((message) => <MessageBubble key={message.id} message={message} ticket={ticket} />)}
         <details className="activity-panel"><summary><Icon name="activity" size={16} />View activity<span>{ticket.activity.length} events</span></summary><div className="activity-content"><p className="muted">Recorded actions from SQLite. Original sample events remain examples. New agent turns appear in Agent Activity.</p>{ticket.activity.map((event) => <details className="activity-event" key={event.id}><summary>{event.title}<time>{event.time}</time></summary>{event.input && <div><span className="section-label">Sample input</span><pre>{JSON.stringify(event.input, null, 2)}</pre></div>}<span className="section-label">Recorded result</span><p>{event.result}</p></details>)}</div></details>
-        <TestCustomer ticket={ticket} runs={runs} aiStatus={aiStatus} onAction={onAction} saving={saving} />
+        <AgentRunStatus ticket={ticket} runs={runs} aiStatus={aiStatus} onAction={onAction} saving={saving} />
       </div>
+      {unread > 0 && <button className="new-message-button" onClick={jump}>{unread} new message{unread === 1 ? '' : 's'} - jump to latest</button>}
       <form className={`composer ${isNote ? 'composer--note' : ''}`} onSubmit={(event) => { event.preventDefault(); submit() }}>
         <fieldset disabled={saving}><div className="composer-modes" role="group" aria-label="Message type"><button type="button" aria-pressed={!isNote} onClick={() => { onDrafts({ ...drafts, mode: 'reply' }); setFeedback('') }}>Public reply</button><button type="button" aria-pressed={isNote} onClick={() => { onDrafts({ ...drafts, mode: 'note' }); setFeedback('') }}><Icon name="lock" size={14} />Internal note</button></div>
         <label className="sr-only" htmlFor="reply-text">{isNote ? 'Internal note' : 'Public reply'}</label>
-        <textarea id="reply-text" rows={2} maxLength={5000} value={drafts[drafts.mode]} disabled={disabled} onChange={(event) => onDrafts({ ...drafts, [drafts.mode]: event.target.value })} placeholder={disabled ? ticket.status === 'Resolved' ? 'Reopen this ticket to write a reply.' : 'Take over from AI to write a reply.' : isNote ? 'Add context for your team…' : `Reply to ${ticket.customer.name.split(' ')[0]}…`} aria-describedby="composer-help" />
-        <div className="composer-footer"><span id="composer-help">{isNote ? 'Team note · Local demo only' : 'Simulated reply · Not sent externally'}</span><button type="submit" className="primary-button" disabled={disabled || !drafts[drafts.mode].trim()}>{isNote ? 'Add note' : 'Send demo reply'}<Icon name={isNote ? 'lock' : 'send'} size={16} /></button></div>
+        <textarea id="reply-text" rows={2} maxLength={5000} value={drafts[drafts.mode]} disabled={disabled} onChange={(event) => onDrafts({ ...drafts, [drafts.mode]: event.target.value })} placeholder={disabled ? ticket.status === 'Resolved' ? 'Reopen this ticket to write a reply.' : 'Take over from AI to write a reply.' : isNote ? 'Add context for your team…' : `Reply to ${ticket.customer.name.split(' ')[0]}…`} aria-describedby={isNote ? 'composer-help' : undefined} />
+        <div className="composer-footer">{isNote && <span id="composer-help">Team note · Local demo only</span>}<button type="submit" className="primary-button" disabled={disabled || !drafts[drafts.mode].trim()}>{isNote ? 'Add note' : 'Send demo reply'}<Icon name={isNote ? 'lock' : 'send'} size={16} /></button></div>
         <p className="action-feedback" role="status">{saving ? 'Saving to SQLite...' : feedback || 'Saved messages persist. Unsent drafts stay in this tab.'}</p></fieldset>{actionError && <div className="action-error" role="alert"><p>{actionError}</p>{failed && <button type="button" className="text-button" disabled={saving} onClick={() => { void perform(failed.action, failed.success, failed.clearMode) }}>Retry action</button>}</div>}
       </form>
     </section>

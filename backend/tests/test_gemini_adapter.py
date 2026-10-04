@@ -91,6 +91,19 @@ def test_provider_errors_are_safe_and_not_retried(code, expected):
         assert result.value.retry_after == 17
 
 
+def test_rejected_request_logs_sanitized_status_server_side(caplog):
+    payload = {'error': {'code': 404, 'status': 'NOT_FOUND', 'message': 'models/gemini-2.5-flash is not found for key=test-only-key AIzaSyA0123456789abcdefghijklmno see https://example.invalid/v1?key=test-only-key'}}
+    session, _, _ = setup([errors.APIError(404, payload, httpx.Response(404))])
+    with caplog.at_level('WARNING', logger='backend.agent.gemini'), pytest.raises(ProviderError) as result:
+        asyncio.run(session.complete([], 10))
+    assert result.value.code == 'configuration' and 'NOT_FOUND' not in str(result.value)
+    logged = caplog.text
+    assert 'http_status=404' in logged and 'provider_status=NOT_FOUND' in logged and 'model=gemini-2.5-flash' in logged
+    assert 'is not found' in logged
+    for secret in ('test-only-key', 'AIzaSy', 'https://', 'Follow up', 'Application rules'):
+        assert secret not in logged
+
+
 @pytest.mark.parametrize('failure, code', [(httpx.ReadTimeout('private details'), 'timeout'), (RuntimeError('secret'), 'connection')])
 def test_transport_error_mapping(failure, code):
     session, _, _ = setup([failure])
@@ -104,6 +117,15 @@ def test_truncated_tool_call_is_not_executed_and_retry_delay_is_bounded():
     assert asyncio.run(session.complete([], 10)).finish_reason == 'length'
     assert retry_delay(SimpleNamespace(code=429, response=None, details=[{'retryDelay': '12s'}])) == 12
     assert retry_delay(SimpleNamespace(code=429, response=None, details=[])) == 60
+
+
+def test_default_gemini_model_is_available_to_new_projects(monkeypatch):
+    # gemini-2.5-flash returned 404 NOT_FOUND ("no longer available to new users").
+    monkeypatch.setenv('AI_PROVIDER', 'gemini')
+    monkeypatch.delenv('AI_MODEL', raising=False)
+    assert AIConfig.from_env().model == 'gemini-3.8-flash'
+    monkeypatch.setenv('AI_MODEL', 'gemini-2.5-flash')
+    assert AIConfig.from_env().model == 'gemini-2.5-flash'  # explicit choice is still honoured
 
 
 def test_configuration_does_not_fallback_or_expose_keys(monkeypatch):

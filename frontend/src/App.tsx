@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { AppShell } from './components/AppShell'
 import type { Page } from './components/AppShell'
 import { Inbox } from './components/Inbox'
@@ -12,6 +12,7 @@ import { api } from './api'
 import { agentApi } from './agentApi'
 import type { AgentRun, AIStatus } from './agentApi'
 import type { OverviewMetrics } from './api'
+import { useVisiblePolling } from './hooks/useVisiblePolling'
 import './App.css'
 import './pages.css'
 
@@ -26,35 +27,28 @@ function App() {
   const [saving, setSaving] = useState(false)
   const writing = useRef(false)
   const loadVersion = useRef(0)
-  const [inboxView, setInboxView] = useState<InboxView>({ selectedId: '', query: '', filter: 'All', mobileConversation: false })
+  const [inboxView, setInboxView] = useState<InboxView>({ selectedId: new URLSearchParams(window.location.search).get('conversation') ?? '', query: '', filter: 'All', mobileConversation: false })
 
-  const refresh = useCallback(async () => {
+  const refresh = useCallback(async (signal?: AbortSignal) => {
     const version = ++loadVersion.current
     try {
-      const [stored, overview, activity, provider] = await Promise.all([api.conversations(), api.overview(), agentApi.runs(), agentApi.status()])
-      if (version !== loadVersion.current) return
+      const [stored, overview, activity, provider] = await Promise.all([api.conversations(signal), api.overview(signal), agentApi.runs(signal), agentApi.status(signal)])
+      if (signal?.aborted || version !== loadVersion.current) return
       setTickets(stored)
       setMetrics(overview)
       setRuns(activity)
       setAIStatus(provider)
       setError('')
     } catch (error) {
-      if (version === loadVersion.current) setError(error instanceof Error ? error.message : 'Could not load stored data.')
+      if (!signal?.aborted && version === loadVersion.current) setError(error instanceof Error ? error.message : 'Could not load stored data.')
     } finally {
-      if (version === loadVersion.current) setLoading(false)
+      if (!signal?.aborted && version === loadVersion.current) setLoading(false)
     }
   }, [])
 
-  const invalidateLoad = useCallback(() => { loadVersion.current++ }, [])
-  // The read callback updates state only after awaited API I/O.
-  // oxlint-disable-next-line react/set-state-in-effect
-  useEffect(() => { void refresh(); return invalidateLoad }, [refresh, invalidateLoad])
-
   const activeRun = runs.some((run) => run.status === 'pending' || run.status === 'running')
-  useEffect(() => {
-    const timer = window.setInterval(() => { if (!writing.current) void refresh() }, activeRun ? 1500 : 5000)
-    return () => window.clearInterval(timer)
-  }, [activeRun, refresh])
+  const poll = useCallback(async (signal: AbortSignal) => { if (!writing.current) await refresh(signal) }, [refresh])
+  useVisiblePolling(poll, ['Support Inbox', 'Overview', 'Agent Activity'].includes(page), activeRun ? 1500 : 5000)
 
   function openTicket(id: string) {
     setInboxView({ selectedId: id, query: '', filter: 'All', mobileConversation: true })

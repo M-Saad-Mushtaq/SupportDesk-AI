@@ -165,7 +165,7 @@ API behavior and errors are documented at `http://127.0.0.1:8000/docs`.
   official Google SDK adapter only; `fake.py`: offline mock/test provider;
   `runner.py`: bounded orchestration; `tools.py`: validated local tools;
   `api.py`: test-message, safe provider status, runs and explicit retry endpoints.
-- `frontend/src/agentApi.ts`, `components/TestCustomer.tsx`, and Agent Activity
+- `frontend/src/agentApi.ts`, `components/AgentRunStatus.tsx`, and Agent Activity
   expose persisted runs; `ConversationHistory.tsx` separates seeded examples.
 - Migration head is `c901bfe20a13`, adding handling revision, message origin,
   agent_runs, and agent_tools. Preserve earlier migrations, SQLite data, uploads,
@@ -174,9 +174,9 @@ API behavior and errors are documented at `http://127.0.0.1:8000/docs`.
   API calls during implementation. Keep fake-provider/SDK-stub tests offline.
   Do not enable billing, buy credits, switch providers as fallback, or print keys.
 - AI_PROVIDER defaults to mock; Gemini requires backend-only GEMINI_API_KEY,
-  AI_MODEL (documented gemini-2.5-flash), and GEMINI_FREE_TIER_CONFIRMED=true after
+  AI_MODEL (documented gemini-3.8-flash; 2.5 returns 404 for new users), and GEMINI_FREE_TIER_CONFIRMED=true after
   the user verifies an unpaid project. The flag cannot verify Google billing.
-  .env files are NOT auto-loaded. README contains private PowerShell setup.
+  .env files are NOT auto-loaded. docs/development.md contains private PowerShell setup.
 - Configuration alone is unverified. Mark connection verified only after an
   actual successful provider request; show safe missing-key/quota/error states.
 - Only public messages (including human replies) enter bounded context; exclude
@@ -207,3 +207,62 @@ API behavior and errors are documented at `http://127.0.0.1:8000/docs`.
   `test_gemini_adapter.py` uses a stub SDK transport. Run them with the full
   existing suite, frontend lint/tests/build, and isolated browser checks. Fake
   tests prove application rules, not live model quality or prompt-injection immunity.
+
+
+## Customer-facing local demo
+
+- `/demo/customer` renders `frontend/src/pages/CustomerDemo.tsx` independently
+  of the staff App; `/` remains the staff Inbox. Preserve the navy/teal design.
+  Customer chat must never fetch the staff snapshot and hide fields with CSS.
+- `backend/customer_demo.py` owns strict public response schemas, fictional
+  identity selection, scope checks, and start/continue. Reuse AgentRunner.accept
+  and retry; do not duplicate generation or handling logic. No new migration.
+- Restrict the picker to existing original fictional identities from seed_data.
+  Picker fields are ID/name only. Conversation/order/run lookups must verify
+  selected customer ownership, including retries. Demo selection is not auth;
+  the unauthenticated localhost staff APIs are still accessible intentionally.
+- Public responses contain public messages and minimal status only. SQL must
+  exclude notes; never return private events/tool inputs/results/settings/emails,
+  raw provider errors, or full document/source payloads. Staff ingestion replay
+  snapshots must always be projected again before a customer response.
+- Starting support for a stored order continues an existing conversation,
+  including resolved ones. Never bypass explicit staff reopening by resetting
+  history or creating a replacement for a resolved thread. Missing threads may
+  be created for an existing own order; never seed customers/orders implicitly.
+- `frontend/src/customerApi.ts` calls only customer endpoints. The route keeps
+  identity/conversation selection in the URL and drafts/uncertain send keys in
+  per-tab sessionStorage where available. No credentials in browser storage.
+- `hooks/useVisiblePolling.ts` serializes bounded polling, aborts on hidden tabs,
+  and cleans timers/listeners on unmount. Use it for both customer and relevant
+  staff pages. `hooks/useChatScroll.ts` follows only readers near the bottom;
+  otherwise show a new-message indicator. Never reset drafts on a poll.
+- Demo scenario buttons only populate prompts, using actual stored order IDs.
+  `demo-fixtures/shipping-returns.md` is optional fictional policy content; it
+  stays outside the active library until explicitly uploaded. Preserve returns.md.
+- Test public-field allowlists and scope at the API level, including replayed
+  staff retry keys, duplicate sends, persistence, failure/retry, and two-sided
+  handover. `backend/tests/test_customer_demo.py` uses isolated fake-provider
+  fixtures. Never call live Gemini during automated verification or change the
+  user's provider environment, secrets, existing SQLite data, or uploaded files.
+
+
+## Portfolio documentation
+
+- `README.md` is the concise entry point; `docs/development.md` preserves detailed
+  setup, migration, API, provider, and historical verification instructions.
+- `docs/portfolio/` contains the case study, recording script, architecture,
+  portfolio copy, and screenshot plan. Keep claims grounded in implemented code.
+- Distinguish prior verification from newly performed checks. Disclose mock
+  recordings; never present fictional shipping data as live tracking.
+- Customer chat shows public reply text; structured citations and tool details
+  are inspected in staff views. The demo identity picker is not authentication.
+
+
+## Staff UI cleanup
+
+- The shared breadcrumb demo badge and customer-demo navigation links are removed.
+  Customer chat stays available directly at `/demo/customer`; keep its selector
+  and Staff view link. Per-message/provider and fictional shipping labels remain.
+- Staff Inbox has no test-customer composer or send action. Preserve normal public
+  replies, internal notes, and the separate AgentRunStatus retry/status control.
+  Shared backend ingestion and customer APIs remain in place.

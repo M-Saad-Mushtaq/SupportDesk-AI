@@ -58,8 +58,6 @@ export function filterTickets(tickets: Ticket[], query: string, filter: InboxFil
 export type TicketAction =
   | { type: 'takeover'; time: string; id: string }
   | { type: 'resume'; time: string; id: string }
-  | { type: 'customer-message'; time: string; id: string }
-  | { type: 'test-customer'; text: string; time: string; id: string }
   | { type: 'retry-agent'; runId: string; time: string; id: string }
   | { type: 'status'; status: TicketStatus; time: string; id: string }
   | { type: 'message'; kind: 'reply' | 'note'; text: string; time: string; id: string }
