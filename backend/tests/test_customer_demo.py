@@ -39,7 +39,7 @@ def assert_public(value):
         assert set(message) == {'id', 'kind', 'text', 'created_at', 'origin'}
         assert message['kind'] in ('customer', 'ai', 'reply')
     if value['run']:
-        assert set(value['run']) == {'id', 'status', 'retry_allowed', 'retry_at', 'message'}
+        assert set(value['run']) == {'id', 'status', 'retry_allowed', 'retrying', 'retry_at', 'message'}
 
 
 def test_public_whitelist_includes_no_private_fields_even_on_replayed_writes(agent):

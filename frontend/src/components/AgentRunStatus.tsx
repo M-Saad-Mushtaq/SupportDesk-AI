@@ -26,8 +26,9 @@ export function AgentRunStatus({ ticket, runs, aiStatus, onAction, saving }: { t
   if (!latest && !aiStatus?.error) return null
   return <details className="agent-status-panel"><summary>Agent run status <span>{latest ? `Latest run: ${latest.status} / ` : ''}{providerLabel(aiStatus)}</span></summary>
     {aiStatus?.error && <p className="action-error" role="alert">{aiStatus.error}</p>}
+    {active && latest?.retrying_until && <p role="status">AI temporarily unavailable - retrying automatically ({latest.transient_retries} of the configured limit). Takeover still stops the reply.</p>}
     {active && <p role="status">Agent turn pending/running. AI-handled conversations accept the next message after this turn finishes. Takeover remains available.</p>}
-    {latest && <div className="agent-run-status"><strong>Latest run: {latest.status}</strong><span>{latest.provider} / {latest.model} / Attempt {latest.attempt}</span>{latest.error && <p role="alert">{latest.error}</p>}{latest.retry_at && <p>Retry after {new Date(latest.retry_at).toLocaleString()}</p>}{['failed', 'interrupted'].includes(latest.status) && ticket.handling === 'AI handling' && <button className="text-button" disabled={blocked} onClick={() => { void retry() }}>Retry agent turn</button>}</div>}
+    {latest && <div className="agent-run-status"><strong>Latest run: {latest.status}</strong><span>{latest.provider} / {latest.model} / Attempt {latest.attempt}</span>{latest.error && <p role="alert">{latest.error}</p>}{latest.error_detail && <p>Provider detail: {latest.error_detail}</p>}{latest.transient_retries > 0 && <p>Automatic transient retries this attempt: {latest.transient_retries}</p>}{latest.retry_at && <p>Retry after {new Date(latest.retry_at).toLocaleString()}</p>}{['failed', 'interrupted'].includes(latest.status) && ticket.handling === 'AI handling' && <button className="text-button" disabled={blocked} onClick={() => { void retry() }}>Retry agent turn</button>}</div>}
     <p role="status">{notice}</p>{error && <p className="action-error" role="alert">{error}</p>}
   </details>
 }

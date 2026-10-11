@@ -5,7 +5,7 @@ export type CustomerHome = { customer: DemoIdentity; order_ids: string[]; conver
 export type PublicConversation = PublicTicket & {
   customer: DemoIdentity; handling_mode: 'ai' | 'human' | 'awaiting_human'
   messages: { id: string; kind: 'customer' | 'ai' | 'reply'; text: string; created_at: string; origin: 'customer' | 'human' | 'ai' | 'mock' | 'sample' }[]
-  run: { id: string; status: 'pending' | 'running' | 'completed' | 'failed' | 'cancelled' | 'interrupted'; retry_allowed: boolean; retry_at: string | null; message: string | null } | null
+  run: { id: string; status: 'pending' | 'running' | 'completed' | 'failed' | 'cancelled' | 'interrupted'; retry_allowed: boolean; retrying: boolean; retry_at: string | null; message: string | null } | null
 }
 const base = (customer: string) => `/demo/customers/${encodeURIComponent(customer)}`
 const conversationPath = (customer: string, ticket: string) => `${base(customer)}/conversations/${encodeURIComponent(ticket)}`

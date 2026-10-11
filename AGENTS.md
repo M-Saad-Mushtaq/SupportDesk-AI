@@ -148,6 +148,9 @@ API behavior and errors are documented at `http://127.0.0.1:8000/docs`.
   Alembic reflection excludes FTS shadow tables, which the migration owns.
 - Label retrieval Document search. Tokenize and bind user input; never pass raw
   query syntax to SQL/FTS. Use parameterized keyword fallback if FTS5 is absent.
+  Revision `d5f0c7a9e214` rebuilds FTS5 with `porter unicode61` from existing
+  chunks. Strict all-terms first, then ranked partial-term fallback (2+ shared
+  terms for long questions). Still keyword search; never hardcode answers.
   Keep retrieval behind PassageRetriever for future embedding integration.
 - Failed/OCR files stay recorded; duplicate uploads return the existing status.
   Delete and re-upload to retry. Stale processing (90 seconds) becomes Failed
@@ -167,8 +170,9 @@ API behavior and errors are documented at `http://127.0.0.1:8000/docs`.
   `api.py`: test-message, safe provider status, runs and explicit retry endpoints.
 - `frontend/src/agentApi.ts`, `components/AgentRunStatus.tsx`, and Agent Activity
   expose persisted runs; `ConversationHistory.tsx` separates seeded examples.
-- Migration head is `c901bfe20a13`, adding handling revision, message origin,
-  agent_runs, and agent_tools. Preserve earlier migrations, SQLite data, uploads,
+- Migration head is `d5f0c7a9e214` (stemmed FTS, run retry fields) after
+  `c901bfe20a13` (handling revision, message origin, agent_runs, agent_tools).
+  Preserve earlier migrations, SQLite data, uploads,
   and local .env files. Check current/heads before upgrade; never auto-reseed.
 - Real integration is authorized, but this milestone explicitly forbids live
   API calls during implementation. Keep fake-provider/SDK-stub tests offline.
@@ -193,9 +197,14 @@ API behavior and errors are documented at `http://127.0.0.1:8000/docs`.
   including takeover then resume. Agent handover plus truthful acknowledgement
   commit together and stop the turn. No ordinary AI reply follows handover.
 - Writes and retry responses are atomic. No write transaction spans provider
-  I/O. Cache successful tool outcomes by run and arguments. SDK auto-execution
-  and automatic retry are disabled. Explicit retries obey attempt/cooldown limits
-  and reject stale customer/handling context. Preserve attempt metadata.
+  I/O or backoff waits. Cache read-only tool results per attempt and arguments;
+  handover once per run. SDK auto-execution and SDK retries stay disabled; the
+  runner alone retries transient 5xx/per-minute-429 failures (default 2 per
+  request, backoff + jitter, Retry-After, turn deadline), resending only the
+  failed step. Never auto-retry auth/request/model/exhausted-quota errors or
+  timeouts. Takeover cancels during waits. Explicit retries obey attempt/cooldown
+  limits and reject stale context. Preserve attempt metadata and sanitized
+  staff-only error_detail; never expose it to customers.
 - Single backend process only: startup marks pending/running turns interrupted
   without silently repeating provider calls. Review and retry manually. No worker
   fleet, agent framework, external delivery, or deployment.

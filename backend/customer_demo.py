@@ -41,6 +41,7 @@ class PublicRun(BaseModel):
     id: str
     status: Literal['pending', 'running', 'completed', 'failed', 'cancelled', 'interrupted']
     retry_allowed: bool
+    retrying: bool
     retry_at: str | None
     message: str | None
 
@@ -86,7 +87,10 @@ def public_conversation(session, ticket, runner):
         retry_allowed = (run.status in ('failed', 'interrupted') and run.attempt < runner.config.max_attempts and ticket.status != 'resolved' and ticket.handling_mode == 'ai' and ticket.handling_revision == run.handling_revision and last_customer == run.customer_message_id and not active and (not run.retry_at or now() >= run.retry_at))
         # Never pass raw staff/provider/tool diagnostics through this API.
         labels = {'failed': 'The AI reply could not be completed. Retry when available, or ask the demo staff for help.', 'interrupted': 'The reply was interrupted. It was not retried automatically.', 'cancelled': 'Automatic reply stopped because support handling changed.'}
-        public_run = {'id': run.id, 'status': run.status, 'retry_allowed': bool(retry_allowed), 'retry_at': run.retry_at, 'message': labels.get(run.status)}
+        # True only during an active automatic backoff wait for a running turn.
+        retrying = run.status in ACTIVE and bool(run.retrying_until)
+        message = 'AI temporarily unavailable - retrying automatically.' if retrying else labels.get(run.status)
+        public_run = {'id': run.id, 'status': run.status, 'retry_allowed': bool(retry_allowed), 'retrying': retrying, 'retry_at': run.retry_at, 'message': message}
     return {**summary(ticket), 'customer': {'id': customer.id, 'name': customer.name}, 'handling_mode': ticket.handling_mode, 'messages': [{'id': message.id, 'kind': message.kind, 'text': message.text, 'created_at': message.created_at, 'origin': 'customer' if message.kind == 'customer' else 'human' if message.kind == 'reply' else 'mock' if message.origin == 'mock' else 'ai' if message.origin == 'gemini' else 'sample'} for message in messages], 'run': public_run}
 
 

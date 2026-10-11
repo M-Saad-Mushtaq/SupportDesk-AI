@@ -138,6 +138,12 @@ class AgentRun(Base):
     usage: Mapped[dict] = mapped_column(JSON, default=dict)
     sources: Mapped[list] = mapped_column(JSON, default=list)
     attempts: Mapped[list] = mapped_column(JSON, default=list)
+    # Automatic transient-failure retries in the current attempt, the end of an
+    # active backoff wait (shown as "retrying"), and a sanitized staff-only
+    # provider diagnostic such as "HTTP 503 UNAVAILABLE".
+    transient_retries: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    retrying_until: Mapped[str | None] = mapped_column(String, nullable=True)
+    error_detail: Mapped[str | None] = mapped_column(Text, nullable=True)
 
 
 class AgentTool(Base):

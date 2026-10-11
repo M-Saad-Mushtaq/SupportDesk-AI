@@ -51,7 +51,15 @@ class ToolRegistry:
             session.add(AgentTool(id=str(uuid4()), run_id=run.id, fingerprint=str(uuid4()), name="rejected_call", arguments={}, result=result, created_at=now(), attempt=run.attempt))
             session.flush()
             return ToolResult(call.id, call.name, result)
-        fingerprint = hashlib.sha256(json.dumps([call.name, arguments], sort_keys=True).encode()).hexdigest()
+        if call.name == "search_knowledge_base":
+            # Case/spacing variants of one query are the same search.
+            arguments["query"] = " ".join(arguments["query"].lower().split())
+        # Identical calls within an attempt reuse the saved result (no repeated
+        # search). Read-only lookups are scoped to the attempt so an explicit
+        # retry sees current documents/orders; the side-effecting handover is
+        # run-wide and can never execute twice for one customer message.
+        scope = None if call.name == "request_human_handover" else run.attempt
+        fingerprint = hashlib.sha256(json.dumps([call.name, arguments] + ([] if scope is None else [scope]), sort_keys=True).encode()).hexdigest()
         existing = session.scalar(select(AgentTool).where(AgentTool.run_id == run.id, AgentTool.fingerprint == fingerprint))
         if existing:
             return ToolResult(call.id, call.name, existing.result)

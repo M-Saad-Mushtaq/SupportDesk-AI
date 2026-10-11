@@ -8,6 +8,7 @@ export type AgentRun = {
   retry_at: string | null; error: string | null; error_code: string | null; duration_ms: number | null
   request_count: number; tool_count: number; usage: { input_tokens?: number; output_tokens?: number; total_tokens?: number }
   tools: AgentTool[]; attempts: Record<string, unknown>[]
+  transient_retries: number; retrying_until: string | null; error_detail: string | null
 }
 export const agentApi = {
   status: (signal?: AbortSignal) => request<AIStatus>('/ai/status', { signal }),

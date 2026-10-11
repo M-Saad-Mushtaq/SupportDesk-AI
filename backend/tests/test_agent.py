@@ -204,7 +204,9 @@ def test_quota_delay_explicit_retry_and_tool_dedup(agent):
     asyncio.run(runner.execute(result['id']))
     saved = agent[0].get('/api/agent/runs/' + result['id']).json()
     assert saved['attempt'] == 2 and saved['status'] == 'completed'
-    assert len(saved['tools']) == 1 and saved['attempts'][0]['error'] == 'Free quota exhausted'
+    # Read-only lookups are scoped per attempt: the explicit retry ran one fresh
+    # lookup (current data); attempt 1's record is preserved, nothing duplicated within an attempt.
+    assert sorted(t['attempt'] for t in saved['tools']) == [1, 2] and saved['attempts'][0]['error'] == 'Free quota exhausted'
     assert len([m for m in current(agent)['messages'] if m['text'] == 'Please explain returns']) == 1
     with pytest.raises(HTTPException):
         runner.retry(result['id'], str(uuid4()))

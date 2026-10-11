@@ -76,7 +76,9 @@ Set-Location "C:\Users\Saad\Desktop\portfolio\ai-support-agent"
 .\backend\.venv\Scripts\python.exe -m alembic -c backend/alembic.ini upgrade head
 ```
 
-The current schema head is `c901bfe20a13` (agent runs and handling revisions).
+The current schema head is `d5f0c7a9e214` (Porter-stemmed FTS5 index rebuilt from
+existing chunks, plus transient-retry fields on agent runs). Earlier head:
+`c901bfe20a13` (agent runs and handling revisions).
 Previously applied migrations `872fd5de88cd` and `b7139a42c801` are unchanged. A private backup
 was made under `.verification/`, and every pre-existing customer, order, ticket,
 message, event, setting, and retry record was checked unchanged afterward.
@@ -187,11 +189,23 @@ Retrieval behavior:
   escaped keyword substring matching. The actual mode is shown under Advanced
   search details. Fallback ordering follows passage IDs, lacks FTS relevance, and
   SQLite case folding is limited for non-ASCII text.
-- Input is converted to at most 16 distinct word tokens joined with AND. Raw SQL
-  and unrestricted FTS syntax are not accepted. Empty queries, punctuation-only
-  queries, and no matches have explicit messages. The UI shows up to 20 excerpts
-  (API limit up to 50). This is keyword retrieval, without synonyms, semantics,
+- Input is converted to at most 16 distinct lower-case word tokens. Raw SQL and
+  unrestricted FTS syntax are not accepted: each token is a quoted, bound FTS
+  string. Empty queries, punctuation-only queries, and no matches have explicit
+  messages. The UI shows up to 20 excerpts (API limit up to 50).
+- **Stemming and fallback (migration `d5f0c7a9e214`).** The FTS5 index uses the
+  Porter stemmer (`porter unicode61`), so `return`, `returns`, `returned`, and
+  `returning` match each other. Search first requires every word (`match:
+  all_terms`). If nothing matches, it ranks passages by how many non-stopword
+  query words they share, then by BM25 (`match: partial_terms`); questions with
+  four or more useful words need at least two shared words, so one incidental
+  word is not treated as evidence. The keyword fallback (no FTS5) uses light
+  suffix stripping and the same strategy. This is still **keyword** retrieval:
+  no synonyms (for example "window" does not imply "30 days"), semantics,
   vectors, embeddings, or generated answers. Large libraries have no pagination yet.
+- The migration rebuilt the index from existing `document_chunks`; document IDs,
+  chunk IDs, page/section locations, and saved citations are unchanged, and no
+  file was re-uploaded.
 - Retrieval is behind `PassageRetriever` in `backend/retrieval.py`; future retrieval
   implementations can return the same passage/citation structure to the UI.
 
@@ -486,18 +500,44 @@ tests; application/Inbox/tool contracts need not change.
   20 seconds/request, 60 seconds/turn, and 3 total attempts including explicit
   retries. Validated overrides are in `backend/.env.example`. Whole continuations
   stay paired; oversize context fails rather than trimming function metadata.
-- Automatic SDK function execution/retries are disabled. Quota/connection/tool
-  failures preserve the incoming message and expose an actionable run error.
-  Retry delays default to 60 seconds for quota errors and are capped at 24 hours
-  for malformed/extreme provider delays. An explicit retry can make another API
-  request; previous attempt metadata and successful tool results are retained.
+- Automatic SDK function execution and SDK-level retries stay disabled
+  (`HttpRetryOptions(attempts=1)`), so retries never multiply across layers.
+- **Bounded automatic retries for temporary Gemini failures.** HTTP 500/502/503/504
+  (for example `503 UNAVAILABLE`, "high demand") and per-minute `429` rate limits
+  that include a `RetryInfo` delay are retried **up to 2 more times per model
+  request** (`AI_TRANSIENT_RETRIES`, 0-3). Waits use exponential backoff with
+  jitter (about 1-2 s, then 2-4 s) or the provider's `Retry-After`/`retryDelay`
+  when longer. A wait above `AI_MAX_RETRY_DELAY` (default 20 s) or one that would
+  pass the 60-second turn deadline is not attempted. Only the failed model step
+  is resent with the same tool results and Gemini continuation metadata;
+  completed searches, lookups, and handovers are not executed again.
+- **Each automatic retry is another API request and consumes free-tier quota.**
+  Never retried automatically: invalid keys (401/403), invalid requests or
+  unavailable models (400/404), exhausted daily/free-tier quota or any 429
+  without per-minute retry details, and request timeouts (Google may already have
+  processed a timed-out request; exactly-once provider execution is not claimed).
+- While a backoff wait is active, staff and customer views show "AI temporarily
+  unavailable - retrying". Takeover, resume, or resolve during the wait cancels
+  the turn; no reply is published. Waits hold no SQLite write transaction.
+- After the final failure the run records the safe error, a sanitized staff-only
+  `error_detail` (for example `HTTP 503 UNAVAILABLE: ... (after 2 automatic
+  retries)`), and `transient_retries`. The customer API never returns the detail.
+  Rejected requests are also logged on the backend console as a sanitized
+  `Gemini API error:` line. Quota retry delays default to 60 seconds and are
+  capped at 24 hours for malformed/extreme provider delays.
+- A manual **Retry agent turn** starts a new attempt and a new Gemini
+  conversation (opaque continuation metadata is never persisted). Read-only
+  lookups (document search, order details) run again for that attempt so they
+  reflect current documents; identical calls within one attempt reuse the saved
+  result. `request_human_handover` is recorded once per run and never repeats.
+  Previous attempt metadata, including retries and error detail, is retained.
 - One active run per conversation is enforced in SQLite. A second customer
   message during an AI turn gets 409 **without being saved**; its UI draft is
   retained. Human handling can accept incoming messages during an invalidated
   turn. A handling/status revision prevents an old response from publishing
   after takeover/resume or resolve/reopen, even when the final mode matches.
 - Idempotency keys prevent duplicate incoming messages, runs, replies, and
-  handovers. Tool results deduplicate within a run, including explicit retries.
+  handovers. Tool results deduplicate within an attempt; handovers within a run.
   Writes use short transactions; no SQLite write transaction spans model I/O.
 - **Run one backend process (no workers)**. Startup marks interrupted active
   turns for review and never automatically replays an uncertain provider call.

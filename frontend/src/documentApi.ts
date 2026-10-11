@@ -9,7 +9,7 @@ export type StoredDocument = {
 export type Segment = { text: string; page: number | null; section: string | null }
 export type DocumentPreview = StoredDocument & { segments: Segment[] }
 export type SearchHit = Segment & { id: number; document_id: string; position: number; title: string; location: string }
-export type SearchResults = { query: string; mode: 'fts5' | 'keyword'; results: SearchHit[]; message: string }
+export type SearchResults = { query: string; mode: 'fts5' | 'keyword'; match: 'all_terms' | 'partial_terms' | 'none'; results: SearchHit[]; message: string }
 export const documentStatusLabels: Record<DocumentStatus, string> = { processing: 'Processing', ready: 'Ready', needs_ocr: 'Requires OCR', failed: 'Failed', deleting: 'Deletion pending' }
 
 export const documentApi = {

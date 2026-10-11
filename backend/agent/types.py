@@ -33,11 +33,15 @@ class ModelRequest:
 
 
 class ProviderError(Exception):
-    """Only application-owned safe messages cross the adapter boundary."""
-    def __init__(self, code: str, message: str, retry_after: float | None = None):
+    """Only application-owned safe messages cross the adapter boundary.
+    transient: the same model request may be retried automatically (bounded).
+    detail: sanitized staff-only diagnostic (HTTP/provider status), never shown to customers."""
+    def __init__(self, code: str, message: str, retry_after: float | None = None, transient: bool = False, detail: str | None = None):
         super().__init__(message)
         self.code = code
         self.retry_after = retry_after
+        self.transient = transient
+        self.detail = detail
 
 
 class ModelSession(Protocol):

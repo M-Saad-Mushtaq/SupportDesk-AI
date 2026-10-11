@@ -17,6 +17,8 @@ class AIConfig:
     max_context_chars: int = 24000
     max_history_messages: int = 16
     max_attempts: int = 3
+    transient_retries: int = 2
+    max_retry_delay: int = 20
     error: str | None = None
 
     @classmethod
@@ -28,7 +30,7 @@ class AIConfig:
             values.update(provider="invalid", error="Set AI_PROVIDER to mock or gemini. No fallback provider was used.")
         if not re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9._/-]{0,99}", model) or model.startswith("AIza"):
             values.update(model="invalid", error="AI_MODEL is not a valid model identifier.")
-        limits = {"request_timeout": ("AI_REQUEST_TIMEOUT", 20, 1, 60), "turn_timeout": ("AI_TURN_TIMEOUT", 60, 5, 180), "max_output_tokens": ("AI_MAX_OUTPUT_TOKENS", 1024, 128, 4096), "max_requests": ("AI_MAX_REQUESTS", 4, 1, 8), "max_tool_calls": ("AI_MAX_TOOL_CALLS", 6, 1, 12), "max_context_chars": ("AI_MAX_CONTEXT_CHARS", 24000, 8000, 48000), "max_history_messages": ("AI_MAX_HISTORY_MESSAGES", 16, 1, 30), "max_attempts": ("AI_MAX_ATTEMPTS", 3, 1, 5)}
+        limits = {"request_timeout": ("AI_REQUEST_TIMEOUT", 20, 1, 60), "turn_timeout": ("AI_TURN_TIMEOUT", 60, 5, 180), "max_output_tokens": ("AI_MAX_OUTPUT_TOKENS", 1024, 128, 4096), "max_requests": ("AI_MAX_REQUESTS", 4, 1, 8), "max_tool_calls": ("AI_MAX_TOOL_CALLS", 6, 1, 12), "max_context_chars": ("AI_MAX_CONTEXT_CHARS", 24000, 8000, 48000), "max_history_messages": ("AI_MAX_HISTORY_MESSAGES", 16, 1, 30), "max_attempts": ("AI_MAX_ATTEMPTS", 3, 1, 5), "transient_retries": ("AI_TRANSIENT_RETRIES", 2, 0, 3), "max_retry_delay": ("AI_MAX_RETRY_DELAY", 20, 1, 60)}
         for attr, (name, default, minimum, maximum) in limits.items():
             try:
                 value = int(os.getenv(name, str(default)))

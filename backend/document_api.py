@@ -53,6 +53,7 @@ class SearchHit(SegmentOut):
 class SearchOut(BaseModel):
     query: str
     mode: Literal["fts5", "keyword"]
+    match: Literal["all_terms", "partial_terms", "none"]
     results: list[SearchHit]
     message: str
 
@@ -81,7 +82,7 @@ def document_router(engine, root, retriever: PassageRetriever | None = None):
 
     @router.get("/search", response_model=SearchOut)
     def search(q: Annotated[str, Query(max_length=200)] = "", limit: Annotated[int, Query(ge=1, le=50)] = 20, document_id: str | None = None):
-        """Document search, not semantic search. First 16 distinct word tokens are matched with AND. User FTS operators are not accepted as syntax. Returns up to limit passages with source locations, never AI answers or confidence scores. Empty/no-match queries return clear messages. FTS5 when available; otherwise escaped keyword substring matching."""
+        """Document search (keyword), not semantic search. Up to 16 distinct word tokens. FTS5 uses Porter stemming (return/returns/returned match). Passages containing every word are returned first (match=all_terms); if none exist, passages sharing the most non-stopword terms are ranked (match=partial_terms; long questions need 2+ shared terms). User FTS operators and punctuation are never accepted as syntax. Returns up to limit passages with source locations, never AI answers or confidence scores. Empty/no-match queries return clear messages. FTS5 when available; otherwise escaped keyword substring matching."""
         with Session(engine) as session:
             return retrieval.search(session, q, limit, document_id)
 
